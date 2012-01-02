@@ -138,7 +138,7 @@
 <http://aers.data2semantics.org/provenance/aers_4store_database> rdf:type <http://www.data2semantics.org/provenance-ontology/4StoreDatabase> ,
                                                                           owl:NamedIndividual ;
                                                                  
-                                                                 rdfs:label "aers_4store_database"@en .
+                                                                 rdfs:label "AERS 4Store Database"@en .
 
 
 
@@ -158,7 +158,7 @@
 <http://aers.data2semantics.org/provenance/aers_database> rdf:type <http://www.data2semantics.org/provenance/MySQLDatabase> ,
                                                                    owl:NamedIndividual ;
                                                           
-                                                          rdfs:label "database"@en ;
+                                                          rdfs:label "AERS Database"@en ;
                                                           
                                                           rdfs:comment """Database for storing the adverse event reports
 """@en ;
@@ -196,7 +196,7 @@
 <http://aers.data2semantics.org/provenance/create_database_script> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
                                                                             owl:NamedIndividual ;
                                                                    
-                                                                   rdfs:label "create_database_script"@en ;
+                                                                   rdfs:label "Script for creating the AERS database"@en ;
                                                                    
                                                                    <http://www.data2semantics.org/provenance/sqlScript> """delimiter $$
 
@@ -536,6 +536,43 @@ LOAD DATA INFILE 'THER11Q1.TXT' INTO TABLE aers.ther FIELDS TERMINATED BY '$' IG
                                                              owl:NamedIndividual ;
                                                     
                                                     rdfs:label "D2RQ Mapping Specification for the Adverse Event Reporting System"@en .
+
+
+
+###  http://aers.data2semantics.org/provenance/set_empty_dates_to_zero
+
+<http://aers.data2semantics.org/provenance/set_empty_dates_to_zero> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
+                                                                             owl:NamedIndividual ;
+                                                                    
+                                                                    rdfs:label "Set empty dates to zero"@en ;
+                                                                    
+                                                                    <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/aers_database> ;
+                                                                    
+                                                                    <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/set_empty_dates_to_zero_recipe> ;
+                                                                    
+                                                                    <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
+
+
+
+###  http://aers.data2semantics.org/provenance/set_empty_dates_to_zero_recipe
+
+<http://aers.data2semantics.org/provenance/set_empty_dates_to_zero_recipe> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
+                                                                                    owl:NamedIndividual ;
+                                                                           
+                                                                           rdfs:label "Recipe for setting empty dates to 0000-00-00"@en ;
+                                                                           
+                                                                           <http://www.data2semantics.org/provenance/sqlScript> """UPDATE aers.demo SET death_dt=NULL WHERE death_dt='0000-00-00';
+UPDATE aers.demo SET event_dt=NULL WHERE event_dt='0000-00-00';
+UPDATE aers.demo SET mfr_dt=NULL WHERE mfr_dt='0000-00-00';
+UPDATE aers.demo SET fda_dt=NULL WHERE fda_dt='0000-00-00';
+UPDATE aers.demo SET rept_dt=NULL WHERE rept_dt='0000-00-00';
+
+UPDATE aers.drug SET exp_dt=NULL WHERE exp_dt='0000-00-00';
+"""^^xsd:string ;
+                                                                           
+                                                                           <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:anyURI ;
+                                                                           
+                                                                           <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
 
 
 
