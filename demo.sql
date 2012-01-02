@@ -1,0 +1,3 @@
+TRUNCATE TABLE aers.demo ;
+
+LOAD DATA INFILE '/tmp/demo11q1_step1.txt' INTO TABLE aers.demo FIELDS TERMINATED BY '$' IGNORE 1 LINES

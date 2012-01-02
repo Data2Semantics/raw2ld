@@ -1,0 +1,566 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix : <http://www.data2semantics.org/provenance-ontology/#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.data2semantics.org/provenance-ontology/> .
+
+<http://www.data2semantics.org/provenance-ontology/> rdf:type owl:Ontology ;
+                                                     
+                                                     owl:imports <http://www.w3.org/ns/prov-o/> .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.data2semantics.org/provenance-ontology/database
+
+<http://www.data2semantics.org/provenance-ontology/database> rdf:type owl:ObjectProperty ;
+                                                             
+                                                             rdfs:label "database"@en .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/fileToImport
+
+<http://www.data2semantics.org/provenance-ontology/fileToImport> rdf:type owl:ObjectProperty ;
+                                                                 
+                                                                 rdfs:label "fileToImport"@en ;
+                                                                 
+                                                                 rdfs:range <http://www.data2semantics.org/provenance/File> .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/model
+
+<http://www.data2semantics.org/provenance-ontology/model> rdf:type owl:ObjectProperty ;
+                                                          
+                                                          rdfs:label "model"@en ;
+                                                          
+                                                          rdfs:range <http://www.data2semantics.org/provenance-ontology/Graph> .
+
+
+
+###  http://www.data2semantics.org/provenance/mapping
+
+<http://www.data2semantics.org/provenance/mapping> rdf:type owl:ObjectProperty ;
+                                                   
+                                                   rdfs:label "mapping"@en .
+
+
+
+###  http://www.data2semantics.org/provenance/outfile
+
+<http://www.data2semantics.org/provenance/outfile> rdf:type owl:ObjectProperty ;
+                                                   
+                                                   rdfs:label "outfile"@en .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.data2semantics.org/provenance/baseURI
+
+<http://www.data2semantics.org/provenance/baseURI> rdf:type owl:DatatypeProperty ;
+                                                   
+                                                   rdfs:label "baseURI"@en ;
+                                                   
+                                                   rdfs:range xsd:anyURI .
+
+
+
+###  http://www.data2semantics.org/provenance/driverclass
+
+<http://www.data2semantics.org/provenance/driverclass> rdf:type owl:DatatypeProperty ;
+                                                       
+                                                       rdfs:label "driverclass"@en .
+
+
+
+###  http://www.data2semantics.org/provenance/fetchSize
+
+<http://www.data2semantics.org/provenance/fetchSize> rdf:type owl:DatatypeProperty ;
+                                                     
+                                                     rdfs:label "fetchSize"@en ;
+                                                     
+                                                     rdfs:range xsd:integer .
+
+
+
+###  http://www.data2semantics.org/provenance/format
+
+<http://www.data2semantics.org/provenance/format> rdf:type owl:DatatypeProperty ;
+                                                  
+                                                  rdfs:label "format"@en .
+
+
+
+###  http://www.data2semantics.org/provenance/jdbcURL
+
+<http://www.data2semantics.org/provenance/jdbcURL> rdf:type owl:DatatypeProperty ;
+                                                   
+                                                   rdfs:label "jdbcURL"@en ;
+                                                   
+                                                   rdfs:range xsd:anyURI .
+
+
+
+###  http://www.data2semantics.org/provenance/linkSpecification
+
+<http://www.data2semantics.org/provenance/linkSpecification> rdf:type owl:DatatypeProperty ;
+                                                             
+                                                             rdfs:label "linkSpecification"@en ;
+                                                             
+                                                             rdfs:range rdf:XMLLiteral .
+
+
+
+###  http://www.data2semantics.org/provenance/password
+
+<http://www.data2semantics.org/provenance/password> rdf:type owl:DatatypeProperty ;
+                                                    
+                                                    rdfs:label "password"@en ;
+                                                    
+                                                    rdfs:range xsd:string .
+
+
+
+###  http://www.data2semantics.org/provenance/sqlScript
+
+<http://www.data2semantics.org/provenance/sqlScript> rdf:type owl:DatatypeProperty ;
+                                                     
+                                                     rdfs:label "SQL Script"@en ;
+                                                     
+                                                     rdfs:range xsd:string .
+
+
+
+###  http://www.data2semantics.org/provenance/username
+
+<http://www.data2semantics.org/provenance/username> rdf:type owl:DatatypeProperty ;
+                                                    
+                                                    rdfs:label "username"@en ;
+                                                    
+                                                    rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.data2semantics.org/provenance-ontology/4StoreActivity
+
+<http://www.data2semantics.org/provenance-ontology/4StoreActivity> rdf:type owl:Class ;
+                                                                   
+                                                                   rdfs:label "4Store Activity"@en ;
+                                                                   
+                                                                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty <http://www.w3.org/ns/prov-o/hadRecipe> ;
+                                                                                         owl:someValuesFrom <http://www.data2semantics.org/provenance-ontology/4StoreRecipe>
+                                                                                       ] ;
+                                                                   
+                                                                   rdfs:subClassOf <http://www.w3.org/ns/prov-o/Activity> ;
+                                                                   
+                                                                   rdfs:comment "An activity which involves the 4Store triple store"@en .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/4StoreDatabase
+
+<http://www.data2semantics.org/provenance-ontology/4StoreDatabase> rdf:type owl:Class ;
+                                                                   
+                                                                   rdfs:label "4StoreDatabase"@en ;
+                                                                   
+                                                                   rdfs:subClassOf <http://www.w3.org/ns/prov-o/Entity> .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/4StoreImportRecipe
+
+<http://www.data2semantics.org/provenance-ontology/4StoreImportRecipe> rdf:type owl:Class ;
+                                                                       
+                                                                       rdfs:label "4Store Load RDF Recipe"@en ;
+                                                                       
+                                                                       owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                             owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                    owl:onProperty <http://www.data2semantics.org/provenance-ontology/database> ;
+                                                                                                                    owl:someValuesFrom <http://www.data2semantics.org/provenance-ontology/4StoreDatabase>
+                                                                                                                  ]
+                                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                                    owl:onProperty <http://www.data2semantics.org/provenance-ontology/fileToImport> ;
+                                                                                                                    owl:someValuesFrom <http://www.data2semantics.org/provenance/File>
+                                                                                                                  ]
+                                                                                                                )
+                                                                                           ] ;
+                                                                       
+                                                                       rdfs:subClassOf <http://www.data2semantics.org/provenance-ontology/4StoreRecipe> ,
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty <http://www.data2semantics.org/provenance-ontology/database> ;
+                                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                       ] ,
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty <http://www.data2semantics.org/provenance-ontology/fileToImport> ;
+                                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                       ] ,
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty <http://www.data2semantics.org/provenance-ontology/model> ;
+                                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                       ] ,
+                                                                                       [ rdf:type owl:Restriction ;
+                                                                                         owl:onProperty <http://www.data2semantics.org/provenance/format> ;
+                                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                       ] ;
+                                                                       
+                                                                       rdfs:comment "An recipe for using the '4s-import' script of 4Store to import RDF data from a file into a 4Store triple store"@en ;
+                                                                       
+                                                                       rdfs:isDefinedBy <http://4store.org/trac/wiki/ImportData> .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/4StoreRecipe
+
+<http://www.data2semantics.org/provenance-ontology/4StoreRecipe> rdf:type owl:Class ;
+                                                                 
+                                                                 rdfs:label "4Store Recipe"@en ;
+                                                                 
+                                                                 rdfs:subClassOf <http://www.w3.org/ns/prov-o/Recipe> .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/Download
+
+<http://www.data2semantics.org/provenance-ontology/Download> rdf:type owl:Class ;
+                                                             
+                                                             rdfs:label "Download"@en ;
+                                                             
+                                                             rdfs:subClassOf <http://www.w3.org/ns/prov-o/Activity> ;
+                                                             
+                                                             rdfs:comment "Activity that downloads a file from the web"@en .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/Graph
+
+<http://www.data2semantics.org/provenance-ontology/Graph> rdf:type owl:Class ;
+                                                          
+                                                          rdfs:label "Graph"@en ;
+                                                          
+                                                          rdfs:subClassOf <http://www.w3.org/ns/prov-o/Entity> .
+
+
+
+###  http://www.data2semantics.org/provenance-ontology/Unzip
+
+<http://www.data2semantics.org/provenance-ontology/Unzip> rdf:type owl:Class ;
+                                                          
+                                                          rdfs:label "Unzip"@en ;
+                                                          
+                                                          rdfs:subClassOf <http://www.w3.org/ns/prov-o/Activity> ;
+                                                          
+                                                          rdfs:comment "Activity that unzips a binary zipped-file"@en .
+
+
+
+###  http://www.data2semantics.org/provenance/AutomatedD2RQDumpRDFRecipe
+
+<http://www.data2semantics.org/provenance/AutomatedD2RQDumpRDFRecipe> rdf:type owl:Class ;
+                                                                      
+                                                                      rdfs:label "Automated D2RQ Dump RDF Recipe"@en ;
+                                                                      
+                                                                      owl:equivalentClass [ rdf:type owl:Class ;
+                                                                                            owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                                   owl:onProperty <http://www.data2semantics.org/provenance/driverclass> ;
+                                                                                                                   owl:someValuesFrom xsd:string
+                                                                                                                 ]
+                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                   owl:onProperty <http://www.data2semantics.org/provenance/jdbcURL> ;
+                                                                                                                   owl:someValuesFrom xsd:anyURI
+                                                                                                                 ]
+                                                                                                                 [ rdf:type owl:Restriction ;
+                                                                                                                   owl:onProperty <http://www.data2semantics.org/provenance/username> ;
+                                                                                                                   owl:someValuesFrom xsd:string
+                                                                                                                 ]
+                                                                                                               )
+                                                                                          ] ;
+                                                                      
+                                                                      rdfs:subClassOf <http://www.data2semantics.org/provenance/D2RQDumpRDFRecipe> ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <http://www.data2semantics.org/provenance/jdbcURL> ;
+                                                                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <http://www.data2semantics.org/provenance/password> ;
+                                                                                        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                        owl:onDataRange xsd:string
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <http://www.data2semantics.org/provenance/username> ;
+                                                                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                      ] ,
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty <http://www.data2semantics.org/provenance/driverclass> ;
+                                                                                        owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                      ] ;
+                                                                      
+                                                                      rdfs:comment "An automated D2RQ dump RDF recipe uses the built in 'generate-mapping' script for generating the RDF from a specified database"@en .
+
+
+
+###  http://www.data2semantics.org/provenance/D2RQDumpRDF
+
+<http://www.data2semantics.org/provenance/D2RQDumpRDF> rdf:type owl:Class ;
+                                                       
+                                                       rdfs:label "D2RQ Dump RDF"@en ;
+                                                       
+                                                       owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty <http://www.w3.org/ns/prov-o/hadRecipe> ;
+                                                                             owl:someValuesFrom <http://www.data2semantics.org/provenance/D2RQDumpRDFRecipe>
+                                                                           ] ;
+                                                       
+                                                       rdfs:subClassOf <http://www.w3.org/ns/prov-o/Activity> ;
+                                                       
+                                                       rdfs:comment "An activity in which the 'dump-rdf' script of D2RQ Server is used to create an RDF dump of a database, given a mapping specification and an output format. The required information is provided in a D2RQDumpRDFRecipe"@en ;
+                                                       
+                                                       rdfs:isDefinedBy <http://www4.wiwiss.fu-berlin.de/bizer/d2rq/spec/#dumprdf> .
+
+
+
+###  http://www.data2semantics.org/provenance/D2RQDumpRDFRecipe
+
+<http://www.data2semantics.org/provenance/D2RQDumpRDFRecipe> rdf:type owl:Class ;
+                                                             
+                                                             rdfs:label "D2RQ Dump RDF Recipe"@en ;
+                                                             
+                                                             rdfs:subClassOf <http://www.w3.org/ns/prov-o/Recipe> ,
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://www.data2semantics.org/provenance/format> ;
+                                                                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                               owl:onDataRange [ rdf:type rdfs:Datatype ;
+                                                                                                 owl:oneOf [ rdf:type rdf:List ;
+                                                                                                             rdf:first "N-TRIPLE" ;
+                                                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                                                        rdf:first "N3" ;
+                                                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                   rdf:first "RDF/XML" ;
+                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                              rdf:first "RDF/XML-ABBREV" ;
+                                                                                                                                              rdf:rest rdf:nil
+                                                                                                                                            ]
+                                                                                                                                 ]
+                                                                                                                      ]
+                                                                                                           ]
+                                                                                               ]
+                                                                             ] ,
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://www.data2semantics.org/provenance/baseURI> ;
+                                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                             ] ,
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://www.data2semantics.org/provenance/outfile> ;
+                                                                               owl:onClass <http://www.data2semantics.org/provenance/File> ;
+                                                                               owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger
+                                                                             ] ;
+                                                             
+                                                             owl:disjointUnionOf ( <http://www.data2semantics.org/provenance/AutomatedD2RQDumpRDFRecipe>
+                                                                                   <http://www.data2semantics.org/provenance/MappingBasedD2RQDumpRDFRecipe>
+                                                                                 ) .
+
+
+
+###  http://www.data2semantics.org/provenance/D2RQMapping
+
+<http://www.data2semantics.org/provenance/D2RQMapping> rdf:type owl:Class ;
+                                                       
+                                                       rdfs:label "D2RQ Mapping"@en ;
+                                                       
+                                                       rdfs:subClassOf <http://www.w3.org/ns/prov-o/Entity> ;
+                                                       
+                                                       rdfs:isDefinedBy <http://www4.wiwiss.fu-berlin.de/bizer/d2rq/spec/#specification> .
+
+
+
+###  http://www.data2semantics.org/provenance/File
+
+<http://www.data2semantics.org/provenance/File> rdf:type owl:Class ;
+                                                
+                                                rdfs:label "File"@en ;
+                                                
+                                                rdfs:subClassOf <http://www.w3.org/ns/prov-o/Entity> .
+
+
+
+###  http://www.data2semantics.org/provenance/MappingBasedD2RQDumpRDFRecipe
+
+<http://www.data2semantics.org/provenance/MappingBasedD2RQDumpRDFRecipe> rdf:type owl:Class ;
+                                                                         
+                                                                         rdfs:label "Mapping Based D2RQ Dump RDF Recipe"@en ;
+                                                                         
+                                                                         owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty <http://www.data2semantics.org/provenance/mapping> ;
+                                                                                               owl:someValuesFrom <http://www.data2semantics.org/provenance/D2RQMapping>
+                                                                                             ] ;
+                                                                         
+                                                                         rdfs:subClassOf <http://www.data2semantics.org/provenance/D2RQDumpRDFRecipe> ,
+                                                                                         [ rdf:type owl:Restriction ;
+                                                                                           owl:onProperty <http://www.data2semantics.org/provenance/mapping> ;
+                                                                                           owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                                         ] ;
+                                                                         
+                                                                         rdfs:comment "The mapping must be specified in accordance with the D2RQ mapping language specification (http://www4.wiwiss.fu-berlin.de/bizer/d2rq/spec/#specification)"@en ;
+                                                                         
+                                                                         rdfs:seeAlso <http://www4.wiwiss.fu-berlin.de/bizer/d2rq/spec/#specification> .
+
+
+
+###  http://www.data2semantics.org/provenance/MySQLActivity
+
+<http://www.data2semantics.org/provenance/MySQLActivity> rdf:type owl:Class ;
+                                                         
+                                                         rdfs:label "MySQL Activity"@en ;
+                                                         
+                                                         owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://www.w3.org/ns/prov-o/hadRecipe> ;
+                                                                               owl:someValuesFrom <http://www.data2semantics.org/provenance/MySQLRecipe>
+                                                                             ] ;
+                                                         
+                                                         rdfs:subClassOf <http://www.w3.org/ns/prov-o/Activity> .
+
+
+
+###  http://www.data2semantics.org/provenance/MySQLDatabase
+
+<http://www.data2semantics.org/provenance/MySQLDatabase> rdf:type owl:Class ;
+                                                         
+                                                         rdfs:label "MySQLDatabase"@en ;
+                                                         
+                                                         rdfs:subClassOf <http://www.w3.org/ns/prov-o/Entity> .
+
+
+
+###  http://www.data2semantics.org/provenance/MySQLRecipe
+
+<http://www.data2semantics.org/provenance/MySQLRecipe> rdf:type owl:Class ;
+                                                       
+                                                       rdfs:label "MySQL  Recipe"@en ;
+                                                       
+                                                       owl:equivalentClass [ rdf:type owl:Class ;
+                                                                             owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty <http://www.data2semantics.org/provenance/driverclass> ;
+                                                                                                    owl:someValuesFrom xsd:string
+                                                                                                  ]
+                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty <http://www.data2semantics.org/provenance/jdbcURL> ;
+                                                                                                    owl:someValuesFrom xsd:anyURI
+                                                                                                  ]
+                                                                                                  [ rdf:type owl:Restriction ;
+                                                                                                    owl:onProperty <http://www.data2semantics.org/provenance/sqlScript> ;
+                                                                                                    owl:someValuesFrom xsd:string
+                                                                                                  ]
+                                                                                                )
+                                                                           ] ;
+                                                       
+                                                       rdfs:subClassOf <http://www.w3.org/ns/prov-o/Recipe> ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.data2semantics.org/provenance/sqlScript> ;
+                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                       ] ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.data2semantics.org/provenance/username> ;
+                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                       ] ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.data2semantics.org/provenance/password> ;
+                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                       ] ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.data2semantics.org/provenance/driverclass> ;
+                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                       ] ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <http://www.data2semantics.org/provenance/jdbcURL> ;
+                                                                         owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                       ] .
+
+
+
+###  http://www.data2semantics.org/provenance/SilkLinkingRecipe
+
+<http://www.data2semantics.org/provenance/SilkLinkingRecipe> rdf:type owl:Class ;
+                                                             
+                                                             rdfs:label "Silk Linking Recipe"@en ;
+                                                             
+                                                             owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                   owl:onProperty <http://www.data2semantics.org/provenance/linkSpecification> ;
+                                                                                   owl:someValuesFrom rdf:XMLLiteral
+                                                                                 ] ;
+                                                             
+                                                             rdfs:subClassOf <http://www.w3.org/ns/prov-o/Recipe> ,
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty <http://www.data2semantics.org/provenance/linkSpecification> ;
+                                                                               owl:maxCardinality "1"^^xsd:nonNegativeInteger
+                                                                             ] ;
+                                                             
+                                                             rdfs:comment "The linkSpecification XMLLiteral must be formatted in accordance with the link specification language (http://www.assembla.com/spaces/silk/wiki/Link_Specification_Language)"@en ;
+                                                             
+                                                             rdfs:seeAlso <http://www.assembla.com/spaces/silk/wiki/Link_Specification_Language> .
+
+
+
+###  http://www.data2semantics.org/provenance/SilkLinkingTask
+
+<http://www.data2semantics.org/provenance/SilkLinkingTask> rdf:type owl:Class ;
+                                                           
+                                                           rdfs:label "Silk Linking Task"@en ;
+                                                           
+                                                           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty <http://www.w3.org/ns/prov-o/hadRecipe> ;
+                                                                                 owl:someValuesFrom <http://www.data2semantics.org/provenance/SilkLinkingRecipe>
+                                                                               ] ;
+                                                           
+                                                           rdfs:subClassOf <http://www.w3.org/ns/prov-o/Activity> ;
+                                                           
+                                                           rdfs:comment "An activity in which the SILK Link Discovery Framework is used to generate link between resources in the Linked Data Cloud, based on a link specification file specified by a SilkLinkingRecipe"@en ;
+                                                           
+                                                           rdfs:isDefinedBy <http://www.assembla.com/spaces/silk/tab_tool> .
+
+
+
+
+###  Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net
+
