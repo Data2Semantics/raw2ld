@@ -50,7 +50,7 @@ class GetHandler(BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     from BaseHTTPServer import HTTPServer
-    server = HTTPServer(('localhost', 5021), GetHandler)
+    server = HTTPServer(('', 5021), GetHandler)
     print 'Starting server, use <Ctrl-C> to stop'
     (ip,port) = server.server_address
     print 'Server address: {0}:{1}'.format(ip,port)
