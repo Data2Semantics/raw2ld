@@ -1,0 +1,942 @@
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ns1:	<http://purl.org/cpr/0.75#> .
+<AD_PCHR_4-tmo.trig>	rdf:type	ns1:patient-record .
+<AD_PCHR_2-tmo.trig>	rdf:type	ns1:patient-record .
+<AD_PCHR_3-tmo.trig>	rdf:type	ns1:patient-record .
+<AD_PCHR_6-tmo.trig>	rdf:type	ns1:patient-record .
+<AD_PCHR_1-tmo.trig>	rdf:type	ns1:patient-record .
+<AD_PCHR_5-tmo.trig>	rdf:type	ns1:patient-record .
+<AD_PCHR_7-tmo.trig>	rdf:type	ns1:patient-record .
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+_:vb10121	foaf:givenName	"George" ;
+	ns1:subjectOfDescription	<AD_PCHR_1-tmo.trig> .
+@prefix ns3:	<tag:eric@w3.org:2009/tmo/translator#> .
+_:vb10121	ns3:demographics	_:vb10123 ;
+	ns3:hasCondition	_:vb10134 ,
+		_:vb10135 ,
+		_:vb10136 ,
+		_:vb10137 ,
+		_:vb10138 .
+_:vb10124	ns1:startsNoEarlierThan	"2009-05-15" ;
+	ns3:prescribedTo	_:vb10121 .
+@prefix ns4:	<http://www.obofoundry.org/ro/ro.owl#> .
+_:vb10124	ns4:has_participant	_:vb10125 .
+_:vb10125	rdf:type	ns1:medication ;
+	ns3:genericName	"COREG TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/00007414020> .
+_:vb10126	ns1:startsNoEarlierThan	"2009-05-20" ;
+	ns3:prescribedTo	_:vb10121 ;
+	ns4:has_participant	_:vb10127 .
+_:vb10127	rdf:type	ns1:medication ;
+	ns3:genericName	"LIPITOR TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/00071015540> .
+_:vb10128	ns1:startsNoEarlierThan	"2009-05-20" ;
+	ns3:prescribedTo	_:vb10121 ;
+	ns4:has_participant	_:vb10129 .
+_:vb10129	rdf:type	ns1:medication ;
+	ns3:genericName	"COUMADIN TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/66105051810> .
+_:vb10130	ns1:startsNoEarlierThan	"2009-08-10" ;
+	ns3:prescribedTo	_:vb10121 ;
+	ns4:has_participant	_:vb10131 .
+_:vb10131	rdf:type	ns1:medication ;
+	ns3:genericName	"DONEPEZIL HYDROCHLORIDE TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/11071084101> .
+_:vb10132	ns1:startsNoEarlierThan	"2009-08-15" ;
+	ns3:prescribedTo	_:vb10121 ;
+	ns4:has_participant	_:vb10133 .
+_:vb10133	rdf:type	ns1:medication ;
+	ns3:genericName	"ARICEPT TABLETS ORALLY DISINTEGRATING" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/62856083130> .
+_:vb10134	ns1:startsNoLaterThan	"2009-05-15T12:00:00" ;
+	ns3:ICD9	"410" ;
+	ns3:diagnosedWith	ns3:hypertension .
+_:vb10135	ns1:startsNoLaterThan	"2009-05-20T12:00:00" ;
+	ns3:ICD9	"272" ;
+	ns3:diagnosedWith	ns3:hypercholesterolaemia .
+_:vb10136	ns1:startsNoLaterThan	"2009-05-17T12:00:00" ;
+	ns3:ICD9	"427" ;
+	ns3:diagnosedWith	ns3:atrial_fibrillation .
+_:vb10137	ns1:startsNoLaterThan	"2009-07-15T12:00:00" ;
+	ns3:ICD9	"331" ;
+	ns3:diagnosedWith	ns3:dementia .
+_:vb10138	ns1:startsNoLaterThan	"2009-07-16T12:00:00" ;
+	ns3:ICD9	"331" ;
+	ns3:diagnosedWith	ns3:alzheimers_disease .
+_:vb10139	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10140 ,
+		_:vb10141 ,
+		_:vb10142 ,
+		_:vb10143 ,
+		_:vb10144 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-05-15" .
+_:vb10140	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10141	ns3:testName	"Lipid panel" .
+_:vb10142	ns3:testName	"Hepatic function panel" .
+_:vb10143	ns3:testName	"Renal function panel" .
+_:vb10144	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10145	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"atrial fibrillation" ;
+	ns3:test	_:vb10146 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-05-17" .
+_:vb10146	ns3:testName	"Rhythm ECG" .
+_:vb10147	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"atrial fibrillation" ;
+	ns3:test	_:vb10148 ,
+		_:vb10150 ;
+	ns3:reportedSymptoms	"irregular pulse" ;
+	ns3:dateOfEncounter	"2009-05-18" .
+_:vb10148	rdf:type	ns3:Warfarin_Sensitivity ;
+	ns3:result	_:vb10149 .
+_:vb10149	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_VKOR .
+_:vb10150	rdf:type	ns3:Warfarin_Sensitivity ;
+	ns3:result	_:vb10151 .
+_:vb10151	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_CPC9 .
+_:vb10152	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"none" ;
+	ns3:reportedSymptoms	"none" ;
+	ns3:dateOfEncounter	"2009-05-20" .
+_:vb10153	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"none" ;
+	ns3:test	_:vb10154 ;
+	ns3:reportedSymptoms	"none" ;
+	ns3:dateOfEncounter	"2009-06-03" .
+_:vb10154	ns3:testName	"Lipid panel" .
+_:vb10155	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"none" ;
+	ns3:test	_:vb10156 ;
+	ns3:reportedSymptoms	"none" ;
+	ns3:dateOfEncounter	"2009-07-03" .
+_:vb10156	ns3:testName	"Lipid panel" .
+_:vb10157	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:reportedSymptoms	"Confusion, Declining memory" ;
+	ns3:dateOfEncounter	"2009-07-15" .
+_:vb10158	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:test	_:vb10160 ,
+		_:vb10161 ,
+		_:vb10162 ,
+		_:vb10159 ;
+	ns3:reportedSymptoms	" Confusion, Declining memory " ;
+	ns3:dateOfEncounter	"2009-07-16" .
+_:vb10159	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10160	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10161	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10162	rdf:type	ns3:ADmark_Alzheimers_Evaluation ;
+	ns3:result	_:vb10163 .
+_:vb10163	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_APOE4 .
+_:vb10164	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10165 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-08-03" .
+_:vb10165	ns3:testName	"Lipid panel" .
+_:vb10166	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"adverse event to Donepezil" ;
+	ns3:reportedSymptoms	"nausea" ;
+	ns3:dateOfEncounter	"2009-08-15" .
+_:vb10167	ns3:patient	_:vb10121 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10168 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-11-03" .
+_:vb10168	ns3:testName	"Lipid panel" .
+_:vb10169	foaf:givenName	"Monica" ;
+	ns1:subjectOfDescription	<AD_PCHR_2-tmo.trig> ;
+	ns3:demographics	_:vb10171 ;
+	ns3:hasCondition	_:vb10186 ,
+		_:vb10187 ,
+		_:vb10188 ,
+		_:vb10189 ,
+		_:vb10190 .
+_:vb10172	ns1:startsNoEarlierThan	"2007-07-20" ;
+	ns3:prescribedTo	_:vb10169 ;
+	ns4:has_participant	_:vb10173 .
+_:vb10173	rdf:type	ns1:medication ;
+	ns3:genericName	"ATORVASTATIN TABLET" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/26053006601> .
+_:vb10174	ns1:startsNoEarlierThan	"2007-07-20" ;
+	ns3:prescribedTo	_:vb10169 ;
+	ns4:has_participant	_:vb10175 .
+_:vb10175	rdf:type	ns1:medication ;
+	ns3:genericName	"CHEWABLE ORANGE ASPIRIN TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/63739043401> .
+_:vb10176	ns1:startsNoEarlierThan	"2008-03-20" ;
+	ns3:prescribedTo	_:vb10169 ;
+	ns4:has_participant	_:vb10177 .
+_:vb10177	rdf:type	ns1:medication ;
+	ns3:genericName	"CLOPIDOGREL TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/55111019690> .
+_:vb10178	ns1:startsNoEarlierThan	"2008-03-20" ;
+	ns3:prescribedTo	_:vb10169 ;
+	ns4:has_participant	_:vb10179 .
+_:vb10179	rdf:type	ns1:medication ;
+	ns3:genericName	"CARVEDILOL TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/54569597500> .
+_:vb10180	ns1:startsNoEarlierThan	"2008-05-18" ;
+	ns3:prescribedTo	_:vb10169 ;
+	ns4:has_participant	_:vb10181 .
+_:vb10181	rdf:type	ns1:medication ;
+	ns3:genericName	"FLUOXETINE CAPSULES" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/54569529101> .
+_:vb10182	ns1:startsNoEarlierThan	"2008-05-18" ;
+	ns3:prescribedTo	_:vb10169 ;
+	ns4:has_participant	_:vb10183 .
+_:vb10183	rdf:type	ns1:medication ;
+	ns3:genericName	"DIAZEPAM TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/54569476401> .
+_:vb10184	ns1:startsNoEarlierThan	"2009-10-15" ;
+	ns3:prescribedTo	_:vb10169 ;
+	ns4:has_participant	_:vb10185 .
+_:vb10185	rdf:type	ns1:medication ;
+	ns3:genericName	"MEMANTINE HYDROCHLORIDE" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/54907010101> .
+_:vb10186	ns1:startsNoLaterThan	"2004-07-10T12:00:00" ;
+	ns3:ICD9	"290.0" ;
+	ns3:diagnosedWith	ns3:mild_cognitive_impairment .
+_:vb10187	ns1:startsNoLaterThan	"2007-07-20T12:00:00" ;
+	ns3:ICD9	"272" ;
+	ns3:diagnosedWith	ns3:hypercholesterolaemia .
+_:vb10188	ns1:startsNoLaterThan	"2008-03-18T12:00:00" ;
+	ns3:ICD9	"410.3" ;
+	ns3:diagnosedWith	ns3:myocardial_infarction .
+_:vb10189	ns1:startsNoLaterThan	"2008-05-16T12:00:00" ;
+	ns3:ICD9	"300.4" ;
+	ns3:diagnosedWith	ns3:anxiety_depression .
+_:vb10190	ns1:startsNoLaterThan	"2009-10-15T12:00:00" ;
+	ns3:ICD9	"331" ;
+	ns3:diagnosedWith	ns3:alzheimers_disease .
+_:vb10191	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2004-07-10" .
+_:vb10192	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:test	_:vb10193 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2004-07-17" .
+_:vb10193	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10194	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10196 ,
+		_:vb10197 ,
+		_:vb10198 ,
+		_:vb10199 ,
+		_:vb10195 ,
+		_:vb10200 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2004-07-20" .
+_:vb10195	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10196	ns3:testName	"Lipid panel" .
+_:vb10197	ns3:testName	"Hepatic function panel" .
+_:vb10198	ns3:testName	"Renal function panel" .
+_:vb10199	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10200	ns3:testName	"Syphilis test; quantitative" .
+_:vb10201	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:test	_:vb10202 ,
+		_:vb10204 ,
+		_:vb10205 ,
+		_:vb10206 ,
+		_:vb10207 ,
+		_:vb10208 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2004-10-01" .
+_:vb10202	rdf:type	ns3:ADmark_Alzheimers_Evaluation ;
+	ns3:result	_:vb10203 .
+_:vb10203	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_APOE4 .
+_:vb10204	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10205	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10206	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10207	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10208	ns3:testName	"Spinal tap" .
+_:vb10209	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:test	_:vb10210 ,
+		_:vb10211 ,
+		_:vb10212 ,
+		_:vb10213 ,
+		_:vb10214 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2005-04-01" .
+_:vb10210	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10211	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10212	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10213	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10214	ns3:testName	"Spinal tap" .
+_:vb10215	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10216 ,
+		_:vb10217 ,
+		_:vb10218 ,
+		_:vb10219 ,
+		_:vb10220 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2005-07-20" .
+_:vb10216	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10217	ns3:testName	"Lipid panel" .
+_:vb10218	ns3:testName	"Hepatic function panel" .
+_:vb10219	ns3:testName	"Renal function panel" .
+_:vb10220	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10221	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:test	_:vb10224 ,
+		_:vb10225 ,
+		_:vb10226 ,
+		_:vb10222 ,
+		_:vb10223 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2005-10-01" .
+_:vb10222	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10223	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10224	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10225	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10226	ns3:testName	"Spinal tap" .
+_:vb10227	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:test	_:vb10228 ,
+		_:vb10229 ,
+		_:vb10230 ,
+		_:vb10231 ,
+		_:vb10232 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2006-04-01" .
+_:vb10228	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10229	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10230	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10231	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10232	ns3:testName	"Spinal tap" .
+_:vb10233	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10234 ,
+		_:vb10235 ,
+		_:vb10236 ,
+		_:vb10237 ,
+		_:vb10238 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2006-07-20" .
+_:vb10234	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10235	ns3:testName	"Lipid panel" .
+_:vb10236	ns3:testName	"Hepatic function panel" .
+_:vb10237	ns3:testName	"Renal function panel" .
+_:vb10238	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10239	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:test	_:vb10240 ,
+		_:vb10241 ,
+		_:vb10242 ,
+		_:vb10243 ,
+		_:vb10244 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2006-10-01" .
+_:vb10240	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10241	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10242	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10243	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10244	ns3:testName	"Spinal tap" .
+_:vb10245	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10248 ,
+		_:vb10249 ,
+		_:vb10250 ,
+		_:vb10246 ,
+		_:vb10247 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2007-07-18" .
+_:vb10246	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10247	ns3:testName	"Lipid panel" .
+_:vb10248	ns3:testName	"Hepatic function panel" .
+_:vb10249	ns3:testName	"Renal function panel" .
+_:vb10250	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10251	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"mild cognitive impairment" ;
+	ns3:test	_:vb10252 ,
+		_:vb10253 ,
+		_:vb10254 ,
+		_:vb10255 ,
+		_:vb10256 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2007-10-01" .
+_:vb10252	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10253	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10254	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10255	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10256	ns3:testName	"Spinal tap" .
+_:vb10257	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"none" ;
+	ns3:test	_:vb10258 ;
+	ns3:reportedSymptoms	"none" ;
+	ns3:dateOfEncounter	"2007-10-18" .
+_:vb10258	ns3:testName	"Lipid panel" .
+_:vb10259	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"none" ;
+	ns3:test	_:vb10260 ;
+	ns3:reportedSymptoms	"none" ;
+	ns3:dateOfEncounter	"2008-01-18" .
+_:vb10260	ns3:testName	"Lipid panel" .
+_:vb10261	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"myocardial infarction" ;
+	ns3:test	_:vb10264 ,
+		_:vb10265 ,
+		_:vb10266 ,
+		_:vb10267 ,
+		_:vb10268 ,
+		_:vb10269 ,
+		_:vb10270 ,
+		_:vb10271 ,
+		_:vb10262 ,
+		_:vb10263 ;
+	ns3:reportedSymptoms	"chest pains" ;
+	ns3:dateOfEncounter	"2008-03-18" .
+_:vb10262	ns3:testName	"Rhythm ECG" .
+_:vb10263	ns3:testName	"Rhythm ECG" .
+_:vb10264	ns3:testName	"Rhythm ECG" .
+_:vb10265	ns3:testName	"TNI Biomarker" .
+_:vb10266	ns3:testName	"PT INR APTT Fibrogen" .
+_:vb10267	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10268	ns3:testName	"Hepatic function panel" .
+_:vb10269	ns3:testName	"Renal function panel" .
+_:vb10270	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10271	ns3:testName	"Lipid panel" .
+_:vb10272	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"myocardial infarction" ;
+	ns3:test	_:vb10273 ;
+	ns3:reportedSymptoms	"myocardial infarction" ;
+	ns3:dateOfEncounter	"2008-03-19" .
+_:vb10273	rdf:type	ns3: ;
+	ns3:result	_:vb10274 .
+_:vb10274	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_CYP2C19 .
+_:vb10275	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"anxiety depression" ;
+	ns3:test	_:vb10276 ;
+	ns3:reportedSymptoms	"Depression" ;
+	ns3:dateOfEncounter	"2005-05-16" .
+_:vb10276	ns3:testName	"Depression Questionnaire" .
+_:vb10277	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"myocardial infarction" ;
+	ns3:test	_:vb10278 ;
+	ns3:reportedSymptoms	"depression" ;
+	ns3:dateOfEncounter	"2008-05-17" .
+_:vb10278	rdf:type	ns3: ;
+	ns3:result	_:vb10279 .
+_:vb10279	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_RP4-669P10_2 .
+_:vb10280	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"anxiety depression" ;
+	ns3:test	_:vb10281 ;
+	ns3:reportedSymptoms	"Depression" ;
+	ns3:dateOfEncounter	"2005-05-18" .
+_:vb10281	ns3:testName	"Depression Questionnaire" .
+_:vb10282	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"anxiety depression" ;
+	ns3:test	_:vb10283 ;
+	ns3:reportedSymptoms	"Depression" ;
+	ns3:dateOfEncounter	"2005-06-18" .
+_:vb10283	ns3:testName	"Depression Questionnaire" .
+_:vb10284	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10288 ,
+		_:vb10289 ,
+		_:vb10285 ,
+		_:vb10286 ,
+		_:vb10287 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2008-07-20" .
+_:vb10285	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10286	ns3:testName	"Lipid panel" .
+_:vb10287	ns3:testName	"Hepatic function panel" .
+_:vb10288	ns3:testName	"Renal function panel" .
+_:vb10289	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10290	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:reportedSymptoms	"Confusion, Declining memory" ;
+	ns3:dateOfEncounter	"2009-07-15" .
+_:vb10291	ns3:patient	_:vb10169 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10292 ,
+		_:vb10293 ,
+		_:vb10294 ,
+		_:vb10295 ,
+		_:vb10296 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-07-20" .
+_:vb10292	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10293	ns3:testName	"Lipid panel" .
+_:vb10294	ns3:testName	"Hepatic function panel" .
+_:vb10295	ns3:testName	"Renal function panel" .
+_:vb10296	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10297	foaf:givenName	"Benny" ;
+	ns1:subjectOfDescription	<AD_PCHR_3-tmo.trig> ;
+	ns3:demographics	_:vb10299 ;
+	ns3:hasCondition	_:vb10312 ,
+		_:vb10313 ,
+		_:vb10314 .
+_:vb10300	ns1:startsNoEarlierThan	"2005-07-09" ;
+	ns3:prescribedTo	_:vb10297 ;
+	ns4:has_participant	_:vb10301 .
+_:vb10301	rdf:type	ns1:medication ;
+	ns3:genericName	"CODEINE TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/63856-223-40> .
+_:vb10302	ns1:startsNoEarlierThan	"2005-07-09" ;
+	ns3:prescribedTo	_:vb10297 ;
+	ns4:has_participant	_:vb10303 .
+_:vb10303	rdf:type	ns1:medication ;
+	ns3:genericName	"CELECOXIB CAPSULES" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/0025-1525-31> .
+_:vb10304	ns1:startsNoEarlierThan	"2006-11-11" ;
+	ns3:prescribedTo	_:vb10297 ;
+	ns4:has_participant	_:vb10305 .
+_:vb10305	rdf:type	ns1:medication ;
+	ns3:genericName	"DOCUSATE SODIUM CAPSULES" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/67618-106-60> .
+_:vb10306	ns1:startsNoEarlierThan	"2007-11-09" ;
+	ns3:prescribedTo	_:vb10297 ;
+	ns4:has_participant	_:vb10307 .
+_:vb10307	rdf:type	ns1:medication ;
+	ns3:genericName	"LACTULOSE" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/0054-8486-16> .
+_:vb10308	ns1:startsNoEarlierThan	"2007-11-09" ;
+	ns3:prescribedTo	_:vb10297 ;
+	ns4:has_participant	_:vb10309 .
+_:vb10309	rdf:type	ns1:medication ;
+	ns3:genericName	"OMEPRAZOLE CAPSULES" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/0179-0016-70-30> .
+_:vb10310	ns1:startsNoEarlierThan	"2009-11-09" ;
+	ns3:prescribedTo	_:vb10297 ;
+	ns4:has_participant	_:vb10311 .
+_:vb10311	rdf:type	ns1:medication ;
+	ns3:genericName	"DONEPEZIL HYDROCHLORIDE TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/0000> .
+_:vb10312	ns1:startsNoLaterThan	"2001-01-03T12:00:00" ;
+	ns3:ICD9	"715.04" ;
+	ns3:diagnosedWith	ns3:osteoarthrosis_generalized_involving_hand .
+_:vb10313	ns1:startsNoLaterThan	"2005-11-03T12:00:00" ;
+	ns3:ICD9	"331" ;
+	ns3:diagnosedWith	ns3:alzheimers_disease .
+_:vb10314	ns1:startsNoLaterThan	"2007-09-23T12:00:00" ;
+	ns3:ICD9	"536.8" ;
+	ns3:diagnosedWith	ns3:dyspepsia_and_other_specified_disorders_of_stomach .
+_:vb10315	ns3:patient	_:vb10297 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10316 ,
+		_:vb10317 ,
+		_:vb10318 ,
+		_:vb10319 ,
+		_:vb10320 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"1996-09-12" .
+_:vb10316	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10317	ns3:testName	"Lipid panel" .
+_:vb10318	ns3:testName	"Hepatic function panel" .
+_:vb10319	ns3:testName	"Renal function panel" .
+_:vb10320	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10321	ns3:patient	_:vb10297 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10322 ,
+		_:vb10323 ,
+		_:vb10324 ,
+		_:vb10325 ,
+		_:vb10326 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2002-07-15" .
+_:vb10322	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10323	ns3:testName	"Lipid panel" .
+_:vb10324	ns3:testName	"Hepatic function panel" .
+_:vb10325	ns3:testName	"Renal function panel" .
+_:vb10326	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10327	ns3:patient	_:vb10297 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10328 ,
+		_:vb10329 ,
+		_:vb10330 ,
+		_:vb10331 ,
+		_:vb10332 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2008-11-05" .
+_:vb10328	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10329	ns3:testName	"Lipid panel" .
+_:vb10330	ns3:testName	"Hepatic function panel" .
+_:vb10331	ns3:testName	"Renal function panel" .
+_:vb10332	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10333	ns3:patient	_:vb10297 ;
+	ns3:workingDiagnosis	"Alzheimer's disease" ;
+	ns3:test	_:vb10334 ,
+		_:vb10335 ,
+		_:vb10336 ,
+		_:vb10337 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2003-17-05" .
+_:vb10334	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10335	ns3:testName	"Mini-mental state examination" .
+_:vb10336	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10337	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10338	ns3:patient	_:vb10297 ;
+	ns3:workingDiagnosis	"Alzheimer's disease" ;
+	ns3:test	_:vb10340 ,
+		_:vb10341 ,
+		_:vb10342 ,
+		_:vb10343 ,
+		_:vb10339 ,
+		_:vb10344 ,
+		_:vb10345 ;
+	ns3:reportedSymptoms	"Declining memory" ;
+	ns3:dateOfEncounter	"2005-12-05" .
+_:vb10339	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10340	ns3:testName	"Mini-mental state examination" .
+_:vb10341	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10342	ns3:testName	"Lipid panel" .
+_:vb10343	ns3:testName	"Hepatic function panel" .
+_:vb10344	ns3:testName	"Renal function panel" .
+_:vb10345	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10346	ns3:patient	_:vb10297 ;
+	ns3:workingDiagnosis	"Alzheimer's disease" ;
+	ns3:test	_:vb10348 ,
+		_:vb10347 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2007-10-15" .
+_:vb10347	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10348	ns3:testName	"Mini-mental state examination" .
+_:vb10349	foaf:givenName	"Edward" ;
+	ns1:subjectOfDescription	<AD_PCHR_4-tmo.trig> ;
+	ns3:demographics	_:vb10351 ;
+	ns3:hasCondition	_:vb10358 ,
+		_:vb10359 ,
+		_:vb10360 .
+_:vb10352	ns1:startsNoEarlierThan	"1989-05-15" ;
+	ns3:prescribedTo	_:vb10349 ;
+	ns4:has_participant	_:vb10353 .
+_:vb10353	rdf:type	ns1:medication ;
+	ns3:genericName	"TEGRETOL TABLETS EXTENDED RELEASE" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/00179178370> .
+_:vb10354	ns1:startsNoEarlierThan	"2009-08-20" ;
+	ns3:prescribedTo	_:vb10349 ;
+	ns4:has_participant	_:vb10355 .
+_:vb10355	rdf:type	ns1:medication ;
+	ns3:genericName	"DONEPEZIL HYDROCHLORIDE TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/11071084201> .
+_:vb10356	ns1:startsNoEarlierThan	"2009-05-20" ;
+	ns3:prescribedTo	_:vb10349 ;
+	ns4:has_participant	_:vb10357 .
+_:vb10357	rdf:type	ns1:medication ;
+	ns3:genericName	"CARVEDILOL TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/54569597500> .
+_:vb10358	ns1:startsNoLaterThan	"1950-05-15T12:00:00" ;
+	ns3:ICD9	"345" ;
+	ns3:diagnosedWith	ns3:epilepsy_and_recurrent_seizures .
+_:vb10359	ns1:startsNoLaterThan	"1995-05-20T12:00:00" ;
+	ns3:ICD9	"402.1" ;
+	ns3:diagnosedWith	ns3:hypertension .
+_:vb10360	ns1:startsNoLaterThan	"2009-05-20T12:00:00" ;
+	ns3:ICD9	"331.0" ;
+	ns3:diagnosedWith	ns3:alzheimers_dementia .
+_:vb10361	ns3:patient	_:vb10349 ;
+	ns3:workingDiagnosis	"epilepsy" ;
+	ns3:test	_:vb10362 ,
+		_:vb10363 ,
+		_:vb10364 ,
+		_:vb10365 ,
+		_:vb10366 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2001-06-15" .
+_:vb10362	ns3:testName	"HLA-B 1502 Genotype; Carbamazepine Hypersensitivity" .
+_:vb10363	ns3:testName	"Cytochrome P450 1A2 Genotyping" .
+_:vb10364	ns3:testName	"Cytochrome P450 2C9 Genotyping" .
+_:vb10365	ns3:testName	"Cytochrome P450 2C19 Genotyping" .
+_:vb10366	ns3:testName	"Cytochrome P450 2C19 Genotyping" .
+_:vb10367	ns3:patient	_:vb10349 ;
+	ns3:workingDiagnosis	"Urea Metabolism Disorder" ;
+	ns3:test	_:vb10368 ,
+		_:vb10369 ;
+	ns3:reportedSymptoms	"Nausea" ;
+	ns3:dateOfEncounter	"2003-07-15" .
+_:vb10368	ns3:testName	"Ornithine Transcarbamylase Genotyping" .
+_:vb10369	ns3:testName	"carbamoyl-phosphate synthetase 1 genotyping" .
+_:vb10370	ns3:patient	_:vb10349 ;
+	ns3:workingDiagnosis	"none" ;
+	ns3:test	_:vb10371 ;
+	ns3:reportedSymptoms	"none" ;
+	ns3:dateOfEncounter	"2009-01-20" .
+_:vb10371	ns3:testName	"Lipid panel" .
+_:vb10372	ns3:patient	_:vb10349 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:test	_:vb10376 ,
+		_:vb10377 ,
+		_:vb10373 ,
+		_:vb10374 ,
+		_:vb10375 ;
+	ns3:reportedSymptoms	" Confusion, Declining memory " ;
+	ns3:dateOfEncounter	"2009-07-15" .
+_:vb10373	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10374	ns3:testName	"Hepatic function panel" .
+_:vb10375	ns3:testName	"" .
+_:vb10376	ns3:testName	"Comprehensive metabolic panel" .
+_:vb10377	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10378	ns3:patient	_:vb10349 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:test	_:vb10380 ,
+		_:vb10381 ,
+		_:vb10379 ;
+	ns3:reportedSymptoms	" Confusion, Declining memory " ;
+	ns3:dateOfEncounter	"2009-07-16" .
+_:vb10379	ns3:testName	"Other psychologic evaluation and testing" .
+_:vb10380	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10381	rdf:type	ns3:ADmark_Alzheimers_Evaluation ;
+	ns3:result	_:vb10382 .
+_:vb10382	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_APOE4 .
+_:vb10383	foaf:givenName	"Georg" ;
+	ns1:subjectOfDescription	<AD_PCHR_5-tmo.trig> ;
+	ns3:demographics	_:vb10385 ;
+	ns3:hasCondition	_:vb10396 ,
+		_:vb10397 ,
+		_:vb10398 ,
+		_:vb10399 ,
+		_:vb10400 ,
+		_:vb10401 .
+_:vb10386	ns1:startsNoEarlierThan	"2008-02-03" ;
+	ns3:prescribedTo	_:vb10383 ;
+	ns4:has_participant	_:vb10387 .
+_:vb10387	rdf:type	ns1:medication ;
+	ns3:genericName	"ATORVASTATIN TABLET" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/5456944671> .
+_:vb10388	ns1:startsNoEarlierThan	"2008-05-06" ;
+	ns3:prescribedTo	_:vb10383 ;
+	ns4:has_participant	_:vb10389 .
+_:vb10389	rdf:type	ns1:medication ;
+	ns3:genericName	"CARVEDILOL TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/000007414020> .
+_:vb10390	ns1:startsNoEarlierThan	"2008-05-06" ;
+	ns3:prescribedTo	_:vb10383 ;
+	ns4:has_participant	_:vb10391 .
+_:vb10391	rdf:type	ns1:medication ;
+	ns3:genericName	"CLOPIDOGREL TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/6050502532> .
+_:vb10392	ns1:startsNoEarlierThan	"2009-06-18" ;
+	ns3:prescribedTo	_:vb10383 ;
+	ns4:has_participant	_:vb10393 .
+_:vb10393	rdf:type	ns1:medication ;
+	ns3:genericName	"OMEPRAZOLE CAPSULES" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/6050500652> .
+_:vb10394	ns1:startsNoEarlierThan	"2009-07-22" ;
+	ns3:prescribedTo	_:vb10383 ;
+	ns4:has_participant	_:vb10395 .
+_:vb10395	rdf:type	ns1:medication ;
+	ns3:genericName	"DONEPEZIL HYDROCHLORIDE TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/0093732098> .
+_:vb10396	ns1:startsNoLaterThan	"2008-02-03T12:00:00" ;
+	ns3:ICD9	"410" ;
+	ns3:diagnosedWith	ns3:hypertension .
+_:vb10397	ns1:startsNoLaterThan	"2009-07-21T12:00:00" ;
+	ns3:ICD9	"331" ;
+	ns3:diagnosedWith	ns3:alzheimers_disease .
+_:vb10398	ns1:startsNoLaterThan	"2008-05-06T12:00:00" ;
+	ns3:ICD9	"414" ;
+	ns3:diagnosedWith	ns3:acute_coronary_occlusion_without_myocardial_infarction .
+_:vb10399	ns1:startsNoLaterThan	"2009-06-18T12:00:00" ;
+	ns3:ICD9	"530.81" ;
+	ns3:diagnosedWith	ns3:gastroesophageal_reflux_disease .
+_:vb10400	ns1:startsNoLaterThan	"2009-07-23T12:00:00" ;
+	ns3:ICD9	"787.0" ;
+	ns3:diagnosedWith	ns3:nausea_and_vomiting .
+_:vb10401	ns1:startsNoLaterThan	"2009-07-23T12:00:00" ;
+	ns3:ICD9	"9995.2" ;
+	ns3:diagnosedWith	ns3:adverse_drug_effect .
+_:vb10402	ns3:patient	_:vb10383 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2002-02-02" .
+_:vb10403	ns3:patient	_:vb10383 ;
+	ns3:workingDiagnosis	"hypertension" ;
+	ns3:test	_:vb10404 ,
+		_:vb10405 ;
+	ns3:reportedSymptoms	"headache, somnolence" ;
+	ns3:dateOfEncounter	"2008-03-02" .
+_:vb10404	ns3:testName	"Rhythm ECG" .
+_:vb10405	ns3:testName	"Mini-mental state examination" .
+_:vb10406	ns3:patient	_:vb10383 ;
+	ns3:workingDiagnosis	"acute coronary syndrome" ;
+	ns3:test	_:vb10407 ,
+		_:vb10412 ,
+		_:vb10408 ,
+		_:vb10409 ,
+		_:vb10410 ,
+		_:vb10411 ;
+	ns3:reportedSymptoms	"chest pain, nausea, diaphoresis" ;
+	ns3:dateOfEncounter	"2008-05-06" .
+_:vb10407	ns3:testName	"Blood Test" .
+_:vb10408	ns3:testName	"Renal function panel" .
+_:vb10409	ns3:testName	"Hepatic function panel" .
+_:vb10410	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10411	ns3:testName	"Lipid panel" .
+_:vb10412	ns3:testName	"Mini-mental state examination" .
+_:vb10413	ns3:patient	_:vb10383 ;
+	ns3:workingDiagnosis	"gastroesophageal reflux disease" ;
+	ns3:test	_:vb10414 ,
+		_:vb10415 ;
+	ns3:reportedSymptoms	"dysphagia, nausea" ;
+	ns3:dateOfEncounter	"2009-06-18" .
+_:vb10414	ns3:testName	"Mini-mental state examination" .
+_:vb10415	ns3:testName	"Magnetic resonance imaging of brain and brain" .
+_:vb10416	ns3:patient	_:vb10383 ;
+	ns3:workingDiagnosis	"alzheimer's disease" ;
+	ns3:reportedSymptoms	"memory loss" ;
+	ns3:dateOfEncounter	"2009-07-21" .
+_:vb10417	ns3:patient	_:vb10383 ;
+	ns3:workingDiagnosis	"adverse drug effect" ;
+	ns3:reportedSymptoms	"nausea and vomiting" ;
+	ns3:dateOfEncounter	"2009-07-23" .
+_:vb10418	ns3:patient	_:vb10383 ;
+	ns3:workingDiagnosis	"referral for trial" ;
+	ns3:reportedSymptoms	"" ;
+	ns3:dateOfEncounter	"2009-07-30" .
+_:vb10419	foaf:givenName	"Gerlinde" ;
+	ns1:subjectOfDescription	<AD_PCHR_6-tmo.trig> ;
+	ns3:demographics	_:vb10421 ;
+	ns3:hasCondition	_:vb10426 ,
+		_:vb10427 .
+_:vb10422	ns1:startsNoEarlierThan	"2009-07-20>" ;
+	ns3:prescribedTo	_:vb10419 ;
+	ns4:has_participant	_:vb10423 .
+_:vb10423	rdf:type	ns1:medication ;
+	ns3:genericName	"DONEPEZIL HYDROCHLORIDE TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/11071084101> .
+_:vb10424	ns1:startsNoEarlierThan	"2009-11-09" ;
+	ns3:prescribedTo	_:vb10419 ;
+	ns4:has_participant	_:vb10425 .
+_:vb10425	rdf:type	ns1:medication ;
+	ns3:genericName	"AMLODIPINE TABLETS" ;
+	ns3:ndcCode	<http://indivo.org/codes/ndc/00069-1520-68> .
+_:vb10426	ns1:startsNoLaterThan	"2008-11-09T12:00:00" ;
+	ns3:ICD9	"401.9" ;
+	ns3:diagnosedWith	ns3:hypertension .
+_:vb10427	ns1:startsNoLaterThan	"2009-11-09T12:00:00" ;
+	ns3:ICD9	"275.41" ;
+	ns3:diagnosedWith	ns3:hypocalcemia .
+_:vb10428	ns3:patient	_:vb10419 ;
+	ns3:workingDiagnosis	"false" ;
+	ns3:test	_:vb10429 ,
+		_:vb10430 ,
+		_:vb10431 ,
+		_:vb10432 ,
+		_:vb10433 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-05-10" .
+_:vb10429	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10430	ns3:testName	"Lipid panel" .
+_:vb10431	ns3:testName	"Hepatic function panel" .
+_:vb10432	ns3:testName	"Renal function panel" .
+_:vb10433	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10434	ns3:patient	_:vb10419 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:test	_:vb10436 ,
+		_:vb10437 ,
+		_:vb10435 ;
+	ns3:reportedSymptoms	"Confusion, Declining memory" ;
+	ns3:dateOfEncounter	"2009-07-15" .
+_:vb10435	ns3:testName	"Syphilis test; quantitative" .
+_:vb10436	ns3:testName	"Administration of psychologic test" .
+_:vb10437	ns3:testName	"Magnetic resonance imaging of brain and brain stem" .
+_:vb10438	ns3:patient	_:vb10419 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:test	_:vb10439 ,
+		_:vb10440 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-07-20" .
+_:vb10439	ns3:testName	"Alzheimer's Disease Assessment Scale-cognitive subscale" .
+_:vb10440	rdf:type	ns3:ADmark_Alzheimers_Evaluation ;
+	ns3:result	_:vb10441 .
+_:vb10441	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_APOE4 .
+_:vb10442	ns3:patient	_:vb10419 ;
+	ns3:workingDiagnosis	"Abnormal gait" ,
+		"Major Depression" ;
+	ns3:test	_:vb10443 ;
+	ns3:reportedSymptoms	"Depression, gait problems" ;
+	ns3:dateOfEncounter	"2009-09-15" .
+_:vb10443	ns3:testName	"Administration of psychologic test" .
+_:vb10444	ns3:patient	_:vb10419 ;
+	ns3:workingDiagnosis	"Major Depression" ;
+	ns3:test	_:vb10445 ,
+		_:vb10446 ;
+	ns3:reportedSymptoms	"Depression" ;
+	ns3:dateOfEncounter	"2009-11-09" .
+_:vb10445	ns3:testName	"Rhythm ECG" .
+_:vb10446	ns3:testName	"Renal function panel" .
+_:vb10447	ns3:patient	_:vb10419 ;
+	ns3:workingDiagnosis	"referral to endocrinologist" ;
+	ns3:test	_:vb10448 ;
+	ns3:reportedSymptoms	"none" ;
+	ns3:dateOfEncounter	"2009-11-16" .
+_:vb10448	ns3:testName	"Renal function panel" .
+_:vb10449	foaf:givenName	"Julianne" ;
+	ns1:subjectOfDescription	<AD_PCHR_7-tmo.trig> ;
+	ns3:demographics	_:vb10451 ;
+	ns3:hasCondition	_:vb10452 ,
+		_:vb10453 .
+_:vb10452	ns1:startsNoLaterThan	"1978-01-31T12:00:00" ;
+	ns3:ICD9	"758" ;
+	ns3:diagnosedWith	ns3:down_syndrome .
+_:vb10453	ns1:startsNoLaterThan	"2009-02-01T12:00:00" ;
+	ns3:ICD9	"331" ;
+	ns3:diagnosedWith	ns3:alzheimers_disease .
+_:vb10454	ns3:patient	_:vb10449 ;
+	ns3:workingDiagnosis	"true" ;
+	ns3:test	_:vb10455 ,
+		_:vb10460 ,
+		_:vb10461 ,
+		_:vb10456 ,
+		_:vb10457 ,
+		_:vb10458 ,
+		_:vb10459 ;
+	ns3:reportedSymptoms	"true" ;
+	ns3:dateOfEncounter	"2008-11-15" .
+_:vb10455	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10456	ns3:testName	"Lipid panel" .
+_:vb10457	ns3:testName	"Hepatic function panel" .
+_:vb10458	ns3:testName	"Renal function panel" .
+_:vb10459	ns3:testName	"Thyroid stimulating hormone (TSH)" .
+_:vb10460	ns3:testName	"Corticotropic Releasing Hormone Stimulation Panel" .
+_:vb10461	ns3:testName	"CoagulationBattery" .
+_:vb10462	ns3:patient	_:vb10449 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:test	_:vb10463 ,
+		_:vb10464 ,
+		_:vb10465 ;
+	ns3:reportedSymptoms	"Confusion, Becomes lost" ;
+	ns3:dateOfEncounter	"2009-01-15" .
+_:vb10463	ns3:testName	"Administration of psychologic test" .
+_:vb10464	ns3:testName	"Magnetic resonance imaging of brain and brain stem" .
+_:vb10465	ns3:testName	"Blood count; complete (CBC), automated (Hgb, Hct, RBC, WBC and platelet count) and automated differential WBC count" .
+_:vb10466	ns3:patient	_:vb10449 ;
+	ns3:workingDiagnosis	"Dementia" ;
+	ns3:test	_:vb10468 ,
+		_:vb10467 ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-01-20" .
+_:vb10467	ns3:testName	"Alzheimer's Disease Assessment Scale-cognitive subscale" .
+_:vb10468	rdf:type	ns3:ADmark_Alzheimers_Evaluation ;
+	ns3:result	_:vb10469 .
+_:vb10469	rdf:type	ns3:SNPResult ;
+	ns3:present	1 ;
+	ns3:feature	ns3:variant_APOE4 .
+_:vb10470	ns3:patient	_:vb10449 ;
+	ns3:workingDiagnosis	"Alzheimers Disease" ;
+	ns3:reportedSymptoms	"false" ;
+	ns3:dateOfEncounter	"2009-01-30" .

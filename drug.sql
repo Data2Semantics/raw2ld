@@ -1,3 +1,0 @@
-TRUNCATE TABLE aers.drug ;
-
-LOAD DATA INFILE '/tmp/drug11q1_step1.txt' INTO TABLE aers.drug FIELDS TERMINATED BY '$' IGNORE 1 LINES
