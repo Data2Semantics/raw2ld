@@ -9,4 +9,4 @@ This repository hosts:
 * D2RQ mappings (See <http://www4.wiwiss.fu-berlin.de/bizer/d2rq/>)
 
 
-![AERS Ontology](/img/aers_ontology.png "AERS Ontology")
+![AERS Ontology](https://github.com/Data2Semantics/data/raw/master/img/aers_ontology.png "AERS Ontology")
