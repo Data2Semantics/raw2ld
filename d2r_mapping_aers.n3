@@ -540,8 +540,8 @@ map:reaction_isr a d2rq:PropertyBridge;
 map:indication a d2rq:ClassMap;
     d2rq:dataStorage map:database;
     d2rq:uriPattern "http://aers.data2semantics.org/resource/indication/@@indi.indi_pt|urlify@@";
-    d2rq:class aers:Therapy;
-    d2rq:classDefinitionLabel "Therapy";
+    d2rq:class aers:Indication;
+    d2rq:classDefinitionLabel "Indication";
     .
 
 map:indication_involvement a d2rq:PropertyBridge;
