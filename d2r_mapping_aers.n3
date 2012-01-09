@@ -1,7 +1,7 @@
 @prefix map: <file:/Users/saramagliacane/Documents/workspace/d2r-server-0.7/prova.n3#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix db: <> .
-@prefix aers: <http://localhost:2020/vocab/> .
+@prefix aers: <http://aers.data2semantics.org/vocab/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -11,7 +11,7 @@
 
 <> a d2r:Server;
     rdfs:label "AERS D2R Server";
-    d2r:baseURI <http://localhost:2020/>;
+    d2r:baseURI <http://aers.data2semantics.org/>;
     d2r:port 2020;
     d2r:vocabularyIncludeInstances true;
     .
@@ -36,7 +36,7 @@ map:database a d2rq:Database;
 # T
 map:case a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/case/@@demo.case|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/case/@@demo.case|urlify@@";
 	d2rq:class aers:Case;
 	d2rq:classDefinitionLabel "Case";
 	.
@@ -53,7 +53,7 @@ map:case__label a d2rq:PropertyBridge ;
 
 map:status a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/status/@@demo.i_f_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/status/@@demo.i_f_cod|urlify@@";
 	d2rq:class aers:Status;
 	d2rq:classDefinitionLabel "Status";
 	.
@@ -77,7 +77,7 @@ map:status_followup__label a d2rq:PropertyBridge ;
 
 map:report_type a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/report/type/@@demo.rept_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/report/type/@@demo.rept_cod|urlify@@";
 	d2rq:class aers:ReportType;
 	d2rq:classDefinitionLabel "Report Type";
 	.
@@ -109,7 +109,7 @@ map:report_type_direct__label a d2rq:PropertyBridge ;
 
 map:gender a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/gender/@@demo.gndr_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/gender/@@demo.gndr_cod|urlify@@";
 	d2rq:class aers:Gender;
 	d2rq:classDefinitionLabel "Gender";
 	d2rq:condition "demo.gndr_cod <> '' ";
@@ -149,7 +149,7 @@ map:gender_not_specified__label a d2rq:PropertyBridge ;
 
 map:occupation a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/occupation/@@demo.occp_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/occupation/@@demo.occp_cod|urlify@@";
 	d2rq:class aers:Occupation;
 	d2rq:classDefinitionLabel "Occupation";
 	d2rq:condition "demo.occp_cod <> '' ";
@@ -198,7 +198,7 @@ map:occupation_cn__label a d2rq:PropertyBridge ;
 # Manufacturer
 map:manufacturer a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/manufacturer/@@demo.mfr_sndr|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/manufacturer/@@demo.mfr_sndr|urlify@@";
 	d2rq:class aers:Manufacturer;
 	d2rq:classDefinitionLabel "Manufacturer";
 	d2rq:condition "demo.mfr_sndr <> ''";
@@ -217,7 +217,7 @@ map:manufacturer__label a d2rq:PropertyBridge;
 # Country
 map:country a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/country/@@demo.reporter_country|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/country/@@demo.reporter_country|urlify@@";
 	d2rq:class aers:Country;
 	d2rq:classDefinitionLabel "Country";
 	d2rq:condition "demo.reporter_country <> ''";
@@ -237,7 +237,7 @@ map:country__label a d2rq:PropertyBridge;
 
 map:report a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/report/@@demo.isr|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/report/@@demo.isr|urlify@@";
 	d2rq:class aers:Report;
 	d2rq:classDefinitionLabel "Report";
 	.
@@ -259,7 +259,7 @@ map:report_case a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:report;
 	d2rq:property aers:case;
 	d2rq:propertyDefinitionLabel "case";
-	d2rq:uriPattern "http://localhost:2020/resource/case/@@demo.case|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/case/@@demo.case|urlify@@";
 	d2rq:condition "demo.case <> ''";
 	.
 
@@ -267,7 +267,7 @@ map:report_i_f_cod a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:report;
 	d2rq:property aers:status;
 	d2rq:propertyDefinitionLabel "initial or followup";
-	d2rq:uriPattern "http://localhost:2020/resource/status/@@demo.i_f_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/status/@@demo.i_f_cod|urlify@@";
 	d2rq:condition "demo.i_f_cod <> ''";
 	.
 map:report_foll_seq a d2rq:PropertyBridge;
@@ -314,7 +314,7 @@ map:report_rept_cod a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:report;
 	d2rq:property aers:report_type;
 	d2rq:propertyDefinitionLabel "report type";
-	d2rq:uriPattern "http://localhost:2020/resource/report/type/@@demo.rept_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/report/type/@@demo.rept_cod|urlify@@";
 	d2rq:condition "demo.rept_cod <> ''";
 	.
 map:report_mfr_num a d2rq:PropertyBridge;
@@ -328,7 +328,7 @@ map:report_mfr_sndr a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:report;
 	d2rq:property aers:manufacturer;
 	d2rq:propertyDefinitionLabel "manufacturer";
-	d2rq:uriPattern "http://localhost:2020/resource/manufacturer/@@demo.mfr_sndr|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/manufacturer/@@demo.mfr_sndr|urlify@@";
 	d2rq:condition "demo.mfr_sndr <> ''";
 	.
 #map:report_age a d2rq:PropertyBridge;
@@ -424,7 +424,7 @@ map:report_gndr_cod a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:report;
 	d2rq:property aers:gender;
 	d2rq:propertyDefinitionLabel "gender";
-	d2rq:uriPattern "http://localhost:2020/resource/gender/@@demo.gndr_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/gender/@@demo.gndr_cod|urlify@@";
 	d2rq:condition "demo.gndr_cod <> ''";
 	.
 
@@ -481,7 +481,7 @@ map:report_occp_cod a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:report;
 	d2rq:property aers:reporter_occupation;
 	d2rq:propertyDefinitionLabel "reporter occupation";
-	d2rq:uriPattern "http://localhost:2020/resource/occupation/@@demo.occp_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/occupation/@@demo.occp_cod|urlify@@";
 	d2rq:condition "demo.occp_cod <> ''";
 	.
 map:report_death_dt a d2rq:PropertyBridge;
@@ -510,7 +510,7 @@ map:report_reporter_country a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:report;
 	d2rq:property aers:reporter_country;
 	d2rq:propertyDefinitionLabel "reporter country";
-	d2rq:uriPattern "http://localhost:2020/resource/country/@@demo.reporter_country|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/country/@@demo.reporter_country|urlify@@";
 	d2rq:condition "demo.reporter_country <> ''";
 	.
 
@@ -518,7 +518,7 @@ map:report_reporter_country a d2rq:PropertyBridge;
 # Table reaction
 map:reaction a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://localhost:2020/resource/reaction/@@reac.pt|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/reaction/@@reac.pt|urlify@@";
     d2rq:class aers:Reaction;
     d2rq:classDefinitionLabel "Reaction";
     .
@@ -533,14 +533,36 @@ map:reaction_isr a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:reaction;
 	d2rq:property aers:reaction_of;
 	d2rq:propertyDefinitionLabel "reaction of";
-	d2rq:uriPattern "http://localhost:2020/resource/report/@@reac.isr|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/report/@@reac.isr|urlify@@";
 	.	
+
+# Table indication
+map:indication a d2rq:ClassMap;
+    d2rq:dataStorage map:database;
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/indication/@@indi.indi_pt|urlify@@";
+    d2rq:class aers:Therapy;
+    d2rq:classDefinitionLabel "Therapy";
+    .
+
+map:indication_involvement a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:indication;
+	d2rq:property aers:indication_for;
+	d2rq:propertyDefinitionLabel "indication for";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/involvement/@@indi.isr|urlify@@/@@indi.drug_seq|urlify@@";
+	.	
+
+map:indication_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:indication;
+	d2rq:property rdfs:label ;
+	d2rq:pattern "@@indi.indi_pt@@";
+	d2rq:condition "indi.indi_pt <> ''";
+	.
 
 
 # Table therapy
 map:therapy a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://localhost:2020/resource/involvement/@@ther.isr|urlify@@/@@ther.drug_seq|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/involvement/@@ther.isr|urlify@@/@@ther.drug_seq|urlify@@";
     d2rq:class aers:Therapy;
     d2rq:classDefinitionLabel "Therapy";
     .
@@ -549,7 +571,7 @@ map:therapy_isr a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:therapy;
 	d2rq:property aers:therapy_of;
 	d2rq:propertyDefinitionLabel "therapy of";
-	d2rq:uriPattern "http://localhost:2020/resource/report/@@ther.isr|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/report/@@ther.isr|urlify@@";
 	.	
 
 map:therapy_start_dt a d2rq:PropertyBridge;
@@ -659,7 +681,7 @@ map:therapy_duration_seconds a d2rq:PropertyBridge;
 # Table outcome
 map:outcome a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://localhost:2020/resource/outcome/@@outc.outc_cod|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/outcome/@@outc.outc_cod|urlify@@";
     d2rq:class aers:Outcome;
     d2rq:classDefinitionLabel "Outcome";
     .
@@ -718,7 +740,7 @@ map:outcome_isr a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:outcome;
 	d2rq:property aers:outcome_of;
 	d2rq:propertyDefinitionLabel "outcome of";
-	d2rq:uriPattern "http://localhost:2020/resource/report/@@outc.isr|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/report/@@outc.isr|urlify@@";
 	.	
 
 
@@ -726,7 +748,7 @@ map:outcome_isr a d2rq:PropertyBridge;
 # Table drug_dechal
 map:drug_dechal a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://localhost:2020/resource/drug/dechallenge/@@drug.dechal|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/dechallenge/@@drug.dechal|urlify@@";
     d2rq:class aers:Dechallenge;
     d2rq:classDefinitionLabel "Dechallenge";
     d2rq:condition "drug.dechal <> ''";
@@ -761,7 +783,7 @@ map:drug_dechal_d__label a d2rq:PropertyBridge;
 # Table drug_rechal
 map:drug_rechal a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://localhost:2020/resource/drug/rechallenge/@@drug.rechal|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/rechallenge/@@drug.rechal|urlify@@";
     d2rq:class aers:Dechallenge;
     d2rq:classDefinitionLabel "Dechallenge";
     d2rq:condition "drug.rechal <> ''";
@@ -796,7 +818,7 @@ map:drug_rechal_d__label a d2rq:PropertyBridge;
 # Table drug
 map:drug a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://localhost:2020/resource/drug/@@drugview.drugname|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/@@drugview.drugname|urlify@@";
     d2rq:class aers:Drug;
     d2rq:classDefinitionLabel "Drug";
     d2rq:condition "drugview.drugname <> ''";
@@ -817,21 +839,21 @@ map:drug__label a d2rq:PropertyBridge;
 
 map:drugInvolvement a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/involvement/@@drug.isr|urlify@@/@@drug.drug_seq|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/involvement/@@drug.isr|urlify@@/@@drug.drug_seq|urlify@@";
 	d2rq:class aers:Involvement;
 	d2rq:classDefinitionLabel "Involvement";
 	.
 map:drugInvolvement_involvedDrug a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:drugInvolvement;
 	d2rq:property aers:drug;
-    d2rq:uriPattern "http://localhost:2020/resource/drug/@@drug.drugname|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/@@drug.drugname|urlify@@";
     .
 
 
 
 map:drug_route a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/drug/route/@@drug.route|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/route/@@drug.route|urlify@@";
 	d2rq:class aers:DrugRoute;
 	d2rq:classDefinitionLabel "Drug Route";
 	d2rq:condition "drug.route <> ''";
@@ -846,7 +868,7 @@ map:drug_route__label a d2rq:PropertyBridge;
 
 map:drug_role a d2rq:ClassMap;
 	d2rq:dataStorage map:database;
-	d2rq:uriPattern "http://localhost:2020/resource/drug/role/@@drug.role_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/role/@@drug.role_cod|urlify@@";
 	d2rq:class aers:DrugRole;
 	d2rq:classDefinitionLabel "Drug Role";
 	d2rq:condition "drug.role_cod <> ''";
@@ -894,7 +916,7 @@ map:drugInvolvement_isr a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:drugInvolvement;
 	d2rq:property aers:involved_in;
 	d2rq:propertyDefinitionLabel "involved in";
-    d2rq:uriPattern "http://localhost:2020/resource/report/@@drug.isr|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/report/@@drug.isr|urlify@@";
 	.
 #map:drugInvolvement_drug_seq a d2rq:PropertyBridge;
 #	d2rq:belongsToClassMap map:drugInvolvement;
@@ -906,7 +928,7 @@ map:drugInvolvement_role_cod a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:drugInvolvement;
 	d2rq:property aers:drug_role;
 	d2rq:propertyDefinitionLabel "drug role";
-	d2rq:uriPattern "http://localhost:2020/resource/drug/role/@@drug.role_cod|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/role/@@drug.role_cod|urlify@@";
 	d2rq:condition "drug.role_cod <> ''";
 	.
 #map:drugInvolvement_drugname a d2rq:PropertyBridge;
@@ -927,7 +949,7 @@ map:drugInvolvement_route a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:drugInvolvement;
 	d2rq:property aers:drug_route;
 	d2rq:propertyDefinitionLabel "drug route";
-	d2rq:uriPattern "http://localhost:2020/resource/drug/route/@@drug.route|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/route/@@drug.route|urlify@@";
 	d2rq:condition "drug.route <> ''";
 	.
 map:drugInvolvement_dose_vbm a d2rq:PropertyBridge;
@@ -941,14 +963,14 @@ map:drugInvolvement_dechal a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:drugInvolvement;
 	d2rq:property aers:dechallenge;
 	d2rq:propertyDefinitionLabel "drug dechallenge";
-	d2rq:uriPattern "http://localhost:2020/resource/drug/dechallenge/@@drug.dechal|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/dechallenge/@@drug.dechal|urlify@@";
 	d2rq:condition "drug.dechal <> ''";
 	.
 map:drugInvolvement_rechal a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:drugInvolvement;
 	d2rq:property aers:rechallenge;
 	d2rq:propertyDefinitionLabel "rechallenge";
-	d2rq:uriPattern "http://localhost:2020/resource/drug/rechallenge/@@drug.rechal|urlify@@";
+	d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/rechallenge/@@drug.rechal|urlify@@";
 	d2rq:condition "drug.rechal <> ''";
 	.
 map:drugInvolvement_lot_num a d2rq:PropertyBridge;
