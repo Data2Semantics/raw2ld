@@ -1,10 +1,9 @@
-delimiter $$
 
-CREATE DATABASE `aers` /*!40100 DEFAULT CHARACTER SET latin1 */$$
 
-delimiter $$
+CREATE DATABASE `aers` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-CREATE TABLE `demo` (
+
+CREATE TABLE aers.`demo` (
   `isr` int(11) NOT NULL,
   `case` int(11) DEFAULT NULL,
   `i_f_cod` varchar(45) DEFAULT NULL,
@@ -29,12 +28,11 @@ CREATE TABLE `demo` (
   `confid` varchar(45) DEFAULT NULL,
   `reporter_country` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`isr`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-delimiter $$
 
-CREATE TABLE `drug` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+
+CREATE TABLE aers.`drug` (
   `isr` int(11) NOT NULL,
   `drug_seq` varchar(45) NOT NULL,
   `role_cod` varchar(45) DEFAULT NULL,
@@ -46,37 +44,39 @@ CREATE TABLE `drug` (
   `rechal` varchar(45) DEFAULT NULL,
   `lot_num` varchar(45) DEFAULT NULL,
   `exp_dt` date DEFAULT NULL,
-  `nda_num` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `NAME` (`drugname`),
-  KEY `ISR` (`isr`),
-  KEY `drug_seq` (`drug_seq`),
-  KEY `isrseqname` (`isr`,`drug_seq`,`drugname`)
-) ENGINE=InnoDB AUTO_INCREMENT=687034 DEFAULT CHARSET=latin1$$
+  `nda_num` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-delimiter $$
 
-CREATE TABLE `outc` (
+
+CREATE TABLE aers.`indi` (
+  `isr` int(11) DEFAULT NULL,
+  `drug_seq` int(11) DEFAULT NULL,
+  `indi_pt` varchar(120) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE aers.`outc` (
   `isr` int(11) DEFAULT NULL,
   `outc_cod` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-delimiter $$
 
-CREATE TABLE `reac` (
+CREATE TABLE aers.`reac` (
   `isr` int(11) DEFAULT NULL,
   `pt` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-delimiter $$
 
-CREATE TABLE `ther` (
+
+CREATE TABLE aers.`ther` (
   `isr` int(11) DEFAULT NULL,
   `drug_seq` varchar(45) DEFAULT NULL,
   `start_dt` date DEFAULT NULL,
   `end_dt` date DEFAULT NULL,
   `dur` varchar(45) DEFAULT NULL,
   `dur_cod` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
