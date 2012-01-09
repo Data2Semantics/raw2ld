@@ -818,17 +818,17 @@ map:drug_rechal_d__label a d2rq:PropertyBridge;
 # Table drug
 map:drug a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/@@drugview.drugname|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/drug/@@drug.drugname|urlify@@";
     d2rq:class aers:Drug;
     d2rq:classDefinitionLabel "Drug";
-    d2rq:condition "drugview.drugname <> ''";
+    d2rq:condition "drug.drugname <> ''";
     .
 
 map:drug__label a d2rq:PropertyBridge;
 	d2rq:belongsToClassMap map:drug;
 	d2rq:property rdfs:label;
-	d2rq:pattern "@@drugview.drugname@@";
-	d2rq:condition "drugview.drugname <> ''";
+	d2rq:pattern "@@drug.drugname@@";
+	d2rq:condition "drug.drugname <> ''";
     .
 #map:drugInvolvement_sameAsDBPedia a d2rq:PropertyBridge;
 #    d2rq:belongsToClassMap map:drug;
