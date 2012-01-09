@@ -1,17 +1,11 @@
-# Pubby Example Configuration
+# Pubby Configuration for the Data2Semantics AERS dataset
 #
-# This configuration connects to the DBpedia SPARQL endpoint and
-# re-publishes on your local machine, with dereferenceable
-# localhost URIs.
+# This configuration connects to the Data2Semantics SPARQL endpoint and
+# re-publishes on the web (eculture2), with dereferenceable
+# eculture2.cs.vu.nl URIs.
 #
-# This assumes you already have a servlet container running
-# on your machine at http://localhost:3030/ .
-#
-# Install Pubby as the root webapp of your servlet container,
-# and make sure the config-file parameter in Pubby's web.xml
-# points to this configuration file.
-#
-# Then browse to http://localhost:3030/ .
+
+
 
 # Prefix declarations to be used in RDF output
 @prefix conf: <http://richard.cyganiak.de/2007/pubby/config.rdf#> .
@@ -34,7 +28,7 @@
 @prefix prvTypes: <http://purl.org/net/provenance/types#> .
 @prefix doap:     <http://usefulinc.com/ns/doap#> .
 @prefix void:     <http://rdfs.org/ns/void#> .
-@prefix aers:	<http://aers.data2semantics.org/> .
+@prefix aers2:	<http://aers.data2semantics.org/> .
 @prefix aers:	<http://eculture2.cs.vu.nl:5010/> .
 @prefix ir:       <http://www.ontologydesignpatterns.org/cp/owl/informationrealization.owl#> .
 
@@ -48,7 +42,7 @@
     conf:webBase <http://eculture2.cs.vu.nl:5010/>;
     # URL of an RDF file whose prefix mapping is to be used by the
     # server; defaults to <>, which is *this* file.
-    conf:usePrefixesFrom <>;
+    # conf:usePrefixesFrom <>;
     # If labels and descriptions are available in multiple languages,
     # prefer this one.
     conf:defaultLanguage "en";
@@ -56,10 +50,10 @@
     # be shown.
     conf:indexResource <http://aers.data2semantics.org/resource/reaction/FEBRILE_NEUTROPENIA>;
 
-# Dataset configuration section #1 (for DBpedia resources)
+# Dataset configuration for AERS resources
 #
-# URIs in the SPARQL endpoint: http://dbpedia.org/resource/*
-# URIs on the Web:             http://localhost:3030/resource/*
+# URIs in the SPARQL endpoint: http://aers.data2semantics.org/*
+# URIs on the Web:             http://eculture2.cs.vu.nl:5010/*
     conf:dataset [
         # SPARQL endpoint URL of the dataset
         conf:sparqlEndpoint <http://eculture2.cs.vu.nl:5020/sparql/>;
@@ -82,28 +76,12 @@
         # corresponds to the placeholder URIs in metadata.ttl that begin
         # with about:metadata:metadata:
         # Examples for such properties are:
-#        meta:pubbyUser <URI of the data publisher who uses this Pubby>;
-#        meta:pubbyOperator <URI of the service provider who operates this Pubby>;
-#        meta:endpointUser <URI of the data publisher who uses the SPARQL endpoint queried by this Pubby>;
-#        meta:endpointOperator <URI of the service provider who operates the SPARQL endpoint>;
-#        meta:endpointDataset <URI of the linked dataset that is exposed via the SPARQL endpoint>;
+       meta:pubbyUser <http://aers.data2semantics.org>;
+       meta:pubbyOperator <http://www.few.vu.nl/~hoekstra>;
+       meta:endpointUser <http://eculture2.cs.vu.nl>;
+       meta:endpointOperator <http://www.few.vu.nl/~hoekstra>;
+       meta:endpointDataset <http://aers.data2semantics.org>;
     ];
 
 
-
-# Dataset configuration section #2 (for DBpedia classes and properties)
-#
-# URIs in the SPARQL endpoint: http://dbpedia.org/class/*
-#                              http://dbpedia.org/property/*
-# URIs on the Web:             http://localhost:3030/class/*
-#                              http://localhost:3030/property/*
-#    conf:dataset [
-#        conf:sparqlEndpoint <http://localhost:8000/sparql/>;
-        # conf:sparqlDefaultGraph <http://dbpedia.org>;
-#        conf:datasetBase <http://aers.data2semantics.org/vocab/>;
-        # Dataset URIs are mapped only if the part after the
-        # conf:webBase matches this regular expression
-#        conf:webResourcePrefix "vocab/";
-        # conf:fixUnescapedCharacters "(),'!$&*+;=@";
-#    ];
     .
