@@ -338,7 +338,7 @@
                     
                     d2s-prov:jdbcURL "http://localhost:3306" ;
                     
-                    d2s-prov:sqlScript <https://raw.github.com/Data2Semantics/data/72d51558cd6f7fcd5c55c089b2f40f64b170f43f/sql/import_all.sql> .
+                    d2s-prov:sqlScript <https://raw.github.com/Data2Semantics/data/e6ad91e45ba0511abd91202510d7ff082afea67b/sql/import_all.sql> .
 
 
 
@@ -388,13 +388,6 @@
 
 
 
-###  https://raw.github.com/Data2Semantics/data/72d51558cd6f7fcd5c55c089b2f40f64b170f43f/sql/import_all.sql
-
-<https://raw.github.com/Data2Semantics/data/72d51558cd6f7fcd5c55c089b2f40f64b170f43f/sql/import_all.sql> rdf:type d2s-prov:MySQLScript ,
-                                                                                                                  owl:NamedIndividual .
-
-
-
 ###  https://raw.github.com/Data2Semantics/data/907f81a6d2f6c69d98665259dece1e77ff831838/sql/create_database.sql
 
 <https://raw.github.com/Data2Semantics/data/907f81a6d2f6c69d98665259dece1e77ff831838/sql/create_database.sql> rdf:type d2s-prov:MySQLScript ,
@@ -410,6 +403,13 @@
                                                                                                                    owl:NamedIndividual ;
                                                                                                           
                                                                                                           rdfs:label "D2RQ Mapping Specification for the Adverse Event Reporting System"@en .
+
+
+
+###  https://raw.github.com/Data2Semantics/data/e6ad91e45ba0511abd91202510d7ff082afea67b/sql/import_all.sql
+
+<https://raw.github.com/Data2Semantics/data/e6ad91e45ba0511abd91202510d7ff082afea67b/sql/import_all.sql> rdf:type d2s-prov:MySQLScript ,
+                                                                                                                  owl:NamedIndividual .
 
 
 
