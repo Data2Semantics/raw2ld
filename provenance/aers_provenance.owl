@@ -1,14 +1,15 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix : <http://aers.data2semantics.org/provenance/#> .
+@prefix : <http://aers.data2semantics.org/provenance/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix d2s-prov: <http://www.data2semantics.org/provenance-ontology/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @base <http://aers.data2semantics.org/provenance/> .
 
 <http://aers.data2semantics.org/provenance/> rdf:type owl:Ontology ;
                                              
-                                             owl:imports <http://www.data2semantics.org/provenance-ontology/> .
+                                             owl:imports d2s-prov: .
 
 
 #################################################################
@@ -38,585 +39,342 @@
 
 ###  http://aers.data2semantics.org
 
-<http://aers.data2semantics.org> rdf:type <http://www.data2semantics.org/provenance-ontology/Graph> ,
+<http://aers.data2semantics.org> rdf:type d2s-prov:Graph ,
                                           owl:NamedIndividual ;
                                  
-                                 <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/import_aers_dump> .
+                                 <http://www.w3.org/ns/prov-o/wasGeneratedBy> :import_aers_dump .
 
 
 
 ###  http://aers.data2semantics.org/provenance/DEMO11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/DEMO11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "DEMO11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:DEMO11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "DEMO11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/DRUG11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/DRUG11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "DRUG11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:DRUG11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "DRUG11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/INDI11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/INDI11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "INDI11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:INDI11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "INDI11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
+
+
+
+###  http://aers.data2semantics.org/provenance/INDI11Q1_fixed.TXT
+
+:INDI11Q1_fixed.TXT rdf:type d2s-prov:File ,
+                             owl:NamedIndividual ;
+                    
+                    rdfs:label "INDI11Q1_fixed.TXT"@en ;
+                    
+                    <http://www.w3.org/ns/prov-o/wasGeneratedBy> :replace_CR_with_dollarCR .
 
 
 
 ###  http://aers.data2semantics.org/provenance/OUTC11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/OUTC11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "OUTC11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:OUTC11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "OUTC11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/REAC11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/REAC11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "REAC11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:REAC11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "REAC11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/RPSR11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/RPSR11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "RPSR11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:RPSR11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "RPSR11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/STAT11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/STAT11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "STAT11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:STAT11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "STAT11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/THER11Q1.TXT
 
-<http://aers.data2semantics.org/provenance/THER11Q1.TXT> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "THER11Q1.TXT"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> .
+:THER11Q1.TXT rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "THER11Q1.TXT"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/aers_4store_database
 
-<http://aers.data2semantics.org/provenance/aers_4store_database> rdf:type <http://www.data2semantics.org/provenance-ontology/4StoreDatabase> ,
-                                                                          owl:NamedIndividual ;
-                                                                 
-                                                                 rdfs:label "AERS 4Store Database"@en .
+:aers_4store_database rdf:type d2s-prov:4StoreDatabase ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "AERS 4Store Database"@en .
 
 
 
 ###  http://aers.data2semantics.org/provenance/aers_asci_2011q1.zip
 
-<http://aers.data2semantics.org/provenance/aers_asci_2011q1.zip> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                          owl:NamedIndividual ;
-                                                                 
-                                                                 rdfs:label "aers_asci_2011q1.zip"@en ;
-                                                                 
-                                                                 <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/aers_asci_2011q1.zip> .
+:aers_asci_2011q1.zip rdf:type d2s-prov:File ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "aers_asci_2011q1.zip"@en ;
+                      
+                      <http://www.w3.org/ns/prov-o/wasGeneratedBy> :aers_asci_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/aers_database
 
-<http://aers.data2semantics.org/provenance/aers_database> rdf:type <http://www.data2semantics.org/provenance/MySQLDatabase> ,
-                                                                   owl:NamedIndividual ;
-                                                          
-                                                          rdfs:label "AERS Database"@en ;
-                                                          
-                                                          rdfs:comment """Database for storing the adverse event reports
+:aers_database rdf:type d2s-prov:MySQLDatabase ,
+                        owl:NamedIndividual ;
+               
+               rdfs:label "AERS Database"@en ;
+               
+               rdfs:comment """Database for storing the adverse event reports
 """@en ;
-                                                          
-                                                          <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/create_aers_database> .
+               
+               <http://www.w3.org/ns/prov-o/wasGeneratedBy> :create_aers_database .
 
 
 
 ###  http://aers.data2semantics.org/provenance/aers_dump.nt
 
-<http://aers.data2semantics.org/provenance/aers_dump.nt> rdf:type <http://www.data2semantics.org/provenance/File> ,
-                                                                  owl:NamedIndividual ;
-                                                         
-                                                         rdfs:label "aers_dump.nt"@en ;
-                                                         
-                                                         <http://www.w3.org/ns/prov-o/wasGeneratedBy> <http://aers.data2semantics.org/provenance/dump_aers_database_to_rdf> .
+:aers_dump.nt rdf:type d2s-prov:File ,
+                       owl:NamedIndividual ;
+              
+              rdfs:label "aers_dump.nt"@en ;
+              
+              <http://www.w3.org/ns/prov-o/wasGeneratedBy> :dump_aers_database_to_rdf .
 
 
 
 ###  http://aers.data2semantics.org/provenance/create_aers_database
 
-<http://aers.data2semantics.org/provenance/create_aers_database> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
-                                                                          owl:NamedIndividual ;
-                                                                 
-                                                                 rdfs:label "Create AERS database"@en ;
-                                                                 
-                                                                 <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/create_database_script> ;
-                                                                 
-                                                                 <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
+:create_aers_database rdf:type d2s-prov:MySQLActivity ,
+                               owl:NamedIndividual ;
+                      
+                      rdfs:label "Create AERS database"@en ;
+                      
+                      <http://www.w3.org/ns/prov-o/hadRecipe> :create_database_script ;
+                      
+                      <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
 
 
 
 ###  http://aers.data2semantics.org/provenance/create_database_script
 
-<http://aers.data2semantics.org/provenance/create_database_script> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
-                                                                            owl:NamedIndividual ;
-                                                                   
-                                                                   rdfs:label "Script for creating the AERS database"@en ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/sqlScript> """delimiter $$
-
-CREATE DATABASE `aers` /*!40100 DEFAULT CHARACTER SET latin1 */$$
-
-delimiter $$
-
-CREATE TABLE `demo` (
-  `isr` int(11) NOT NULL,
-  `case` int(11) DEFAULT NULL,
-  `i_f_cod` varchar(45) DEFAULT NULL,
-  `foll_seq` varchar(45) DEFAULT NULL,
-  `image` varchar(45) DEFAULT NULL,
-  `event_dt` date DEFAULT NULL,
-  `mfr_dt` date DEFAULT NULL,
-  `fda_dt` date DEFAULT NULL,
-  `rept_cod` varchar(45) DEFAULT NULL,
-  `mfr_num` varchar(45) DEFAULT NULL,
-  `mfr_sndr` varchar(45) DEFAULT NULL,
-  `age` varchar(45) DEFAULT NULL,
-  `age_cod` varchar(45) DEFAULT NULL,
-  `gndr_cod` varchar(45) DEFAULT NULL,
-  `e_sub` varchar(45) DEFAULT NULL,
-  `wt` varchar(45) DEFAULT NULL,
-  `wt_cod` varchar(45) DEFAULT NULL,
-  `rept_dt` date DEFAULT NULL,
-  `occp_cod` varchar(45) DEFAULT NULL,
-  `death_dt` date DEFAULT NULL,
-  `to_mfr` varchar(45) DEFAULT NULL,
-  `confid` varchar(45) DEFAULT NULL,
-  `reporter_country` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`isr`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
-
-delimiter $$
-
-CREATE TABLE `drug` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `isr` int(11) NOT NULL,
-  `drug_seq` varchar(45) NOT NULL,
-  `role_cod` varchar(45) DEFAULT NULL,
-  `drugname` varchar(45) DEFAULT NULL,
-  `val_vbm` varchar(45) DEFAULT NULL,
-  `route` varchar(45) DEFAULT NULL,
-  `dose_vbm` varchar(45) DEFAULT NULL,
-  `dechal` varchar(45) DEFAULT NULL,
-  `rechal` varchar(45) DEFAULT NULL,
-  `lot_num` varchar(45) DEFAULT NULL,
-  `exp_dt` date DEFAULT NULL,
-  `nda_num` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `NAME` (`drugname`),
-  KEY `ISR` (`isr`),
-  KEY `drug_seq` (`drug_seq`),
-  KEY `isrseqname` (`isr`,`drug_seq`,`drugname`)
-) ENGINE=InnoDB AUTO_INCREMENT=687034 DEFAULT CHARSET=latin1$$
-
-delimiter $$
-
-CREATE TABLE `outc` (
-  `isr` int(11) DEFAULT NULL,
-  `outc_cod` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
-
-delimiter $$
-
-CREATE TABLE `reac` (
-  `isr` int(11) DEFAULT NULL,
-  `pt` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
-
-delimiter $$
-
-CREATE TABLE `ther` (
-  `isr` int(11) DEFAULT NULL,
-  `drug_seq` varchar(45) DEFAULT NULL,
-  `start_dt` date DEFAULT NULL,
-  `end_dt` date DEFAULT NULL,
-  `dur` varchar(45) DEFAULT NULL,
-  `dur_cod` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1$$
-
-"""^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:anyURI ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
+:create_database_script rdf:type d2s-prov:MySQLRecipe ,
+                                 owl:NamedIndividual ;
+                        
+                        rdfs:label "Script for creating the AERS database"@en ;
+                        
+                        d2s-prov:jdbcURL "http://localhost:3306"^^xsd:anyURI ;
+                        
+                        d2s-prov:username "root"^^xsd:string ;
+                        
+                        d2s-prov:sqlScript <https://raw.github.com/Data2Semantics/data/907f81a6d2f6c69d98665259dece1e77ff831838/sql/create_database.sql> .
 
 
 
 ###  http://aers.data2semantics.org/provenance/download_aers_ascii_2011q1.zip
 
-<http://aers.data2semantics.org/provenance/download_aers_ascii_2011q1.zip> rdf:type <http://www.data2semantics.org/provenance-ontology/Download> ,
-                                                                                    owl:NamedIndividual ;
-                                                                           
-                                                                           rdfs:label "download_aers_ascii_2011q1.zip"@en ;
-                                                                           
-                                                                           <http://www.w3.org/ns/prov-o/used> <http://www.fda.gov/downloads/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/UCM270803.zip> ;
-                                                                           
-                                                                           <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
+:download_aers_ascii_2011q1.zip rdf:type d2s-prov:Download ,
+                                         owl:NamedIndividual ;
+                                
+                                rdfs:label "download_aers_ascii_2011q1.zip"@en ;
+                                
+                                <http://www.w3.org/ns/prov-o/used> <http://www.fda.gov/downloads/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/UCM270803.zip> ;
+                                
+                                <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
 
 
 
 ###  http://aers.data2semantics.org/provenance/dump_aers_database_to_rdf
 
-<http://aers.data2semantics.org/provenance/dump_aers_database_to_rdf> rdf:type <http://www.data2semantics.org/provenance/D2RQDumpRDF> ,
-                                                                               owl:NamedIndividual ;
-                                                                      
-                                                                      rdfs:label "dump_aers_database_to_rdf"@en ;
-                                                                      
-                                                                      <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/aers_database> ;
-                                                                      
-                                                                      <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/dump_aers_database_to_rdf_recipe> ;
-                                                                      
-                                                                      <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
+:dump_aers_database_to_rdf rdf:type d2s-prov:D2RQDumpRDF ,
+                                    owl:NamedIndividual ;
+                           
+                           rdfs:label "dump_aers_database_to_rdf"@en ;
+                           
+                           <http://www.w3.org/ns/prov-o/used> :aers_database ;
+                           
+                           <http://www.w3.org/ns/prov-o/hadRecipe> :dump_aers_database_to_rdf_recipe ;
+                           
+                           <http://www.w3.org/ns/prov-o/wasScheduledAfter> :import_all_data ;
+                           
+                           <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
 
 
 
 ###  http://aers.data2semantics.org/provenance/dump_aers_database_to_rdf_recipe
 
-<http://aers.data2semantics.org/provenance/dump_aers_database_to_rdf_recipe> rdf:type <http://www.data2semantics.org/provenance/MappingBasedD2RQDumpRDFRecipe> ,
-                                                                                      owl:NamedIndividual ;
-                                                                             
-                                                                             rdfs:label "dump_aers_database_to_rdf_recipe"@en ;
-                                                                             
-                                                                             <http://www.data2semantics.org/provenance/format> "N-TRIPLE"^^xsd:string ;
-                                                                             
-                                                                             <http://www.data2semantics.org/provenance/baseURI> "http://aers.data2semantics.org"^^xsd:anyURI ;
-                                                                             
-                                                                             <http://www.data2semantics.org/provenance/outfile> <http://aers.data2semantics.org/provenance/aers_dump.nt> ;
-                                                                             
-                                                                             <http://www.data2semantics.org/provenance/mapping> <http://aers.data2semantics.org/provenance/mapping> .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_DEMO11Q1
-
-<http://aers.data2semantics.org/provenance/import_DEMO11Q1> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
-                                                                     owl:NamedIndividual ;
-                                                            
-                                                            rdfs:label "import_DEMO11Q1"@en ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/DEMO11Q1.TXT> ,
-                                                                                               <http://aers.data2semantics.org/provenance/aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/create_aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/import_DEMO11Q1_recipe> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_DEMO11Q1_recipe
-
-<http://aers.data2semantics.org/provenance/import_DEMO11Q1_recipe> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
-                                                                            owl:NamedIndividual ;
-                                                                   
-                                                                   rdfs:label "import_DEMO11Q1_recipe"@en ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/sqlScript> """TRUNCATE TABLE aers.demo ;
-
-LOAD DATA INFILE 'DEMO11Q1.TXT' INTO TABLE aers.demo FIELDS TERMINATED BY '$' IGNORE 1 LINES"""^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_DRUG11Q1
-
-<http://aers.data2semantics.org/provenance/import_DRUG11Q1> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
-                                                                     owl:NamedIndividual ;
-                                                            
-                                                            rdfs:label "import_DRUG11Q1"@en ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/DRUG11Q1.TXT> ,
-                                                                                               <http://aers.data2semantics.org/provenance/aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/create_aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/import_DRUG11Q1_recipe> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_DRUG11Q1_recipe
-
-<http://aers.data2semantics.org/provenance/import_DRUG11Q1_recipe> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
-                                                                            owl:NamedIndividual ;
-                                                                   
-                                                                   rdfs:label "import_DRUG11Q1_recipe"@en ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/sqlScript> """TRUNCATE TABLE aers.drug ;
-
-LOAD DATA INFILE 'DRUG11Q1.TXT' INTO TABLE aers.drug FIELDS TERMINATED BY '$' IGNORE 1 LINES"""^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_OUTC11Q1
-
-<http://aers.data2semantics.org/provenance/import_OUTC11Q1> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
-                                                                     owl:NamedIndividual ;
-                                                            
-                                                            rdfs:label "import_OUTC11Q1"@en ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/OUTC11Q1.TXT> ,
-                                                                                               <http://aers.data2semantics.org/provenance/aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/create_aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/import_OUTC11Q1_recipe> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_OUTC11Q1_recipe
-
-<http://aers.data2semantics.org/provenance/import_OUTC11Q1_recipe> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
-                                                                            owl:NamedIndividual ;
-                                                                   
-                                                                   rdfs:label "import_OUTC11Q1_recipe"@en ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/sqlScript> """TRUNCATE TABLE aers.outc ;
-
-LOAD DATA INFILE 'OUTC11Q1.TXT' INTO TABLE aers.outc FIELDS TERMINATED BY '$' IGNORE 1 LINES"""^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_REAC11Q1
-
-<http://aers.data2semantics.org/provenance/import_REAC11Q1> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
-                                                                     owl:NamedIndividual ;
-                                                            
-                                                            rdfs:label "import_REAC11Q1"@en ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/REAC11Q1.TXT> ,
-                                                                                               <http://aers.data2semantics.org/provenance/aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/create_aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/import_REAC11Q1_recipe> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_REAC11Q1_recipe
-
-<http://aers.data2semantics.org/provenance/import_REAC11Q1_recipe> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
-                                                                            owl:NamedIndividual ;
-                                                                   
-                                                                   rdfs:label "import_REAC11Q1_recipe"@en ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/sqlScript> """TRUNCATE TABLE aers.reac ;
-
-LOAD DATA INFILE 'REAC11Q1.TXT' INTO TABLE aers.reac FIELDS TERMINATED BY '$' IGNORE 1 LINES"""^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_THER11Q1
-
-<http://aers.data2semantics.org/provenance/import_THER11Q1> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
-                                                                     owl:NamedIndividual ;
-                                                            
-                                                            rdfs:label "import_THER11Q1"@en ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/THER11Q1.TXT> ,
-                                                                                               <http://aers.data2semantics.org/provenance/aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/create_aers_database> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/import_THER11Q1_recipe> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> ;
-                                                            
-                                                            <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
-
-
-
-###  http://aers.data2semantics.org/provenance/import_THER11Q1_recipe
-
-<http://aers.data2semantics.org/provenance/import_THER11Q1_recipe> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
-                                                                            owl:NamedIndividual ;
-                                                                   
-                                                                   rdfs:label "import_THER11Q1_recipe"@en ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/sqlScript> """TRUNCATE TABLE aers.ther ;
-
-LOAD DATA INFILE 'THER11Q1.TXT' INTO TABLE aers.ther FIELDS TERMINATED BY '$' IGNORE 1 LINES"""^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:string ;
-                                                                   
-                                                                   <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
+:dump_aers_database_to_rdf_recipe rdf:type d2s-prov:MappingBasedD2RQDumpRDFRecipe ,
+                                           owl:NamedIndividual ;
+                                  
+                                  rdfs:label "dump_aers_database_to_rdf_recipe"@en ;
+                                  
+                                  d2s-prov:format "N-TRIPLE"^^xsd:string ;
+                                  
+                                  d2s-prov:baseURI "http://aers.data2semantics.org"^^xsd:anyURI ;
+                                  
+                                  d2s-prov:outfile :aers_dump.nt ;
+                                  
+                                  d2s-prov:mapping <https://raw.github.com/Data2Semantics/data/9606163aefb97f90e5c6dd9163319752a5ff77be/d2r_mapping_aers.n3> .
 
 
 
 ###  http://aers.data2semantics.org/provenance/import_aers_dump
 
-<http://aers.data2semantics.org/provenance/import_aers_dump> rdf:type <http://www.data2semantics.org/provenance-ontology/4StoreActivity> ,
-                                                                      owl:NamedIndividual ;
-                                                             
-                                                             rdfs:label "import_aers_dump"@en ;
-                                                             
-                                                             <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/aers_4store_database> ,
-                                                                                                <http://aers.data2semantics.org/provenance/aers_dump.nt> ;
-                                                             
-                                                             <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/import_aers_dump_recipe> ;
-                                                             
-                                                             <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
+:import_aers_dump rdf:type d2s-prov:4StoreActivity ,
+                           owl:NamedIndividual ;
+                  
+                  rdfs:label "import_aers_dump"@en ;
+                  
+                  <http://www.w3.org/ns/prov-o/used> :aers_4store_database ,
+                                                     :aers_dump.nt ;
+                  
+                  <http://www.w3.org/ns/prov-o/wasScheduledAfter> :dump_aers_database_to_rdf ;
+                  
+                  <http://www.w3.org/ns/prov-o/hadRecipe> :import_aers_dump_recipe ;
+                  
+                  <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
 
 
 
 ###  http://aers.data2semantics.org/provenance/import_aers_dump_recipe
 
-<http://aers.data2semantics.org/provenance/import_aers_dump_recipe> rdf:type <http://www.data2semantics.org/provenance-ontology/4StoreImportRecipe> ,
-                                                                             owl:NamedIndividual ;
-                                                                    
-                                                                    rdfs:label "import_aers_dump_recipe"@en ;
-                                                                    
-                                                                    <http://www.data2semantics.org/provenance/format> "ntriples"^^xsd:string ;
-                                                                    
-                                                                    <http://www.data2semantics.org/provenance-ontology/model> <http://aers.data2semantics.org> ;
-                                                                    
-                                                                    <http://www.data2semantics.org/provenance-ontology/database> <http://aers.data2semantics.org/provenance/aers_4store_database> ;
-                                                                    
-                                                                    <http://www.data2semantics.org/provenance-ontology/fileToImport> <http://aers.data2semantics.org/provenance/aers_dump.nt> .
+:import_aers_dump_recipe rdf:type d2s-prov:4StoreImportRecipe ,
+                                  owl:NamedIndividual ;
+                         
+                         rdfs:label "import_aers_dump_recipe"@en ;
+                         
+                         d2s-prov:format "ntriples"^^xsd:string ;
+                         
+                         d2s-prov:model <http://aers.data2semantics.org> ;
+                         
+                         d2s-prov:database :aers_4store_database ;
+                         
+                         d2s-prov:fileToImport :aers_dump.nt .
 
 
 
-###  http://aers.data2semantics.org/provenance/mapping
+###  http://aers.data2semantics.org/provenance/import_all_data
 
-<http://aers.data2semantics.org/provenance/mapping> rdf:type <http://www.data2semantics.org/provenance/D2RQMapping> ,
-                                                             owl:NamedIndividual ;
-                                                    
-                                                    rdfs:label "D2RQ Mapping Specification for the Adverse Event Reporting System"@en .
+:import_all_data rdf:type d2s-prov:MySQLActivity ,
+                          owl:NamedIndividual ;
+                 
+                 rdfs:label "Import all data from AERS dumps"@en ;
+                 
+                 <http://www.w3.org/ns/prov-o/used> :DEMO11Q1.TXT ,
+                                                    :DRUG11Q1.TXT ;
+                 
+                 <http://www.w3.org/ns/prov-o/wasGeneratedBy> :INDI11Q1_fixed.TXT ;
+                 
+                 <http://www.w3.org/ns/prov-o/used> :OUTC11Q1.TXT ,
+                                                    :REAC11Q1.TXT ,
+                                                    :RPSR11Q1.TXT ,
+                                                    :STAT11Q1.TXT ,
+                                                    :THER11Q1.TXT ,
+                                                    :aers_database ;
+                 
+                 <http://www.w3.org/ns/prov-o/wasScheduledAfter> :create_aers_database ;
+                 
+                 <http://www.w3.org/ns/prov-o/hadRecipe> :import_data_recipe ;
+                 
+                 <http://www.w3.org/ns/prov-o/wasScheduledAfter> :unzip_aers_ascii_2011q1.zip ;
+                 
+                 <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
 
 
 
-###  http://aers.data2semantics.org/provenance/set_empty_dates_to_zero
+###  http://aers.data2semantics.org/provenance/import_data_recipe
 
-<http://aers.data2semantics.org/provenance/set_empty_dates_to_zero> rdf:type <http://www.data2semantics.org/provenance/MySQLActivity> ,
-                                                                             owl:NamedIndividual ;
-                                                                    
-                                                                    rdfs:label "Set empty dates to zero"@en ;
-                                                                    
-                                                                    <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/aers_database> ;
-                                                                    
-                                                                    <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/import_DEMO11Q1> ,
-                                                                                                                    <http://aers.data2semantics.org/provenance/import_DRUG11Q1> ;
-                                                                    
-                                                                    <http://www.w3.org/ns/prov-o/hadRecipe> <http://aers.data2semantics.org/provenance/set_empty_dates_to_zero_recipe> ;
-                                                                    
-                                                                    <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
+:import_data_recipe rdf:type d2s-prov:MySQLRecipe ,
+                             owl:NamedIndividual ;
+                    
+                    rdfs:label "import_data_recipe"@en ;
+                    
+                    d2s-prov:jdbcURL "http://localhost:3306" ;
+                    
+                    d2s-prov:sqlScript <https://raw.github.com/Data2Semantics/data/72d51558cd6f7fcd5c55c089b2f40f64b170f43f/sql/import_all.sql> .
 
 
 
-###  http://aers.data2semantics.org/provenance/set_empty_dates_to_zero_recipe
+###  http://aers.data2semantics.org/provenance/replace_CR_with_dollarCR
 
-<http://aers.data2semantics.org/provenance/set_empty_dates_to_zero_recipe> rdf:type <http://www.data2semantics.org/provenance/MySQLRecipe> ,
-                                                                                    owl:NamedIndividual ;
-                                                                           
-                                                                           rdfs:label "Recipe for setting empty dates to 0000-00-00"@en ;
-                                                                           
-                                                                           <http://www.data2semantics.org/provenance/sqlScript> """UPDATE aers.demo SET death_dt=NULL WHERE death_dt='0000-00-00';
-UPDATE aers.demo SET event_dt=NULL WHERE event_dt='0000-00-00';
-UPDATE aers.demo SET mfr_dt=NULL WHERE mfr_dt='0000-00-00';
-UPDATE aers.demo SET fda_dt=NULL WHERE fda_dt='0000-00-00';
-UPDATE aers.demo SET rept_dt=NULL WHERE rept_dt='0000-00-00';
-
-UPDATE aers.drug SET exp_dt=NULL WHERE exp_dt='0000-00-00';
-"""^^xsd:string ;
-                                                                           
-                                                                           <http://www.data2semantics.org/provenance/jdbcURL> "http://localhost:3306"^^xsd:anyURI ;
-                                                                           
-                                                                           <http://www.data2semantics.org/provenance/username> "root"^^xsd:string .
+:replace_CR_with_dollarCR rdf:type d2s-prov:Sed ,
+                                   owl:NamedIndividual ;
+                          
+                          rdfs:label "replace_CR_with_dollarCR"@en ;
+                          
+                          d2s-prov:commandLine "-i 's/\r/\$\r/'" ;
+                          
+                          <http://www.w3.org/ns/prov-o/used> :INDI11Q1.TXT ;
+                          
+                          <http://www.w3.org/ns/prov-o/wasScheduledAfter> :unzip_aers_ascii_2011q1.zip .
 
 
 
 ###  http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip
 
-<http://aers.data2semantics.org/provenance/unzip_aers_ascii_2011q1.zip> rdf:type <http://www.data2semantics.org/provenance-ontology/Unzip> ,
-                                                                                 owl:NamedIndividual ;
-                                                                        
-                                                                        rdfs:label "unzip_aers_ascii_2011q1.zip"@en ;
-                                                                        
-                                                                        <http://www.w3.org/ns/prov-o/used> <http://aers.data2semantics.org/provenance/aers_asci_2011q1.zip> ;
-                                                                        
-                                                                        <http://www.w3.org/ns/prov-o/wasScheduledAfter> <http://aers.data2semantics.org/provenance/download_aers_ascii_2011q1.zip> ;
-                                                                        
-                                                                        <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
+:unzip_aers_ascii_2011q1.zip rdf:type d2s-prov:Unzip ,
+                                      owl:NamedIndividual ;
+                             
+                             rdfs:label "unzip_aers_ascii_2011q1.zip"@en ;
+                             
+                             <http://www.w3.org/ns/prov-o/used> :aers_asci_2011q1.zip ;
+                             
+                             <http://www.w3.org/ns/prov-o/wasScheduledAfter> :download_aers_ascii_2011q1.zip ;
+                             
+                             <http://www.w3.org/ns/prov-o/wasControlledBy> <http://www.few.vu.nl/~hoekstra> .
 
 
 
 ###  http://www.fda.gov/downloads/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/UCM270803.zip
 
-<http://www.fda.gov/downloads/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/UCM270803.zip> rdf:type <http://www.data2semantics.org/provenance/File> ,
+<http://www.fda.gov/downloads/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/UCM270803.zip> rdf:type d2s-prov:File ,
                                                                                                                                     owl:NamedIndividual .
 
 
@@ -627,6 +385,31 @@ UPDATE aers.drug SET exp_dt=NULL WHERE exp_dt='0000-00-00';
                                           <http://www.w3.org/ns/prov-o/Agent> ;
                                  
                                  rdfs:label "Rinke Hoekstra" .
+
+
+
+###  https://raw.github.com/Data2Semantics/data/72d51558cd6f7fcd5c55c089b2f40f64b170f43f/sql/import_all.sql
+
+<https://raw.github.com/Data2Semantics/data/72d51558cd6f7fcd5c55c089b2f40f64b170f43f/sql/import_all.sql> rdf:type d2s-prov:MySQLScript ,
+                                                                                                                  owl:NamedIndividual .
+
+
+
+###  https://raw.github.com/Data2Semantics/data/907f81a6d2f6c69d98665259dece1e77ff831838/sql/create_database.sql
+
+<https://raw.github.com/Data2Semantics/data/907f81a6d2f6c69d98665259dece1e77ff831838/sql/create_database.sql> rdf:type d2s-prov:MySQLScript ,
+                                                                                                                       owl:NamedIndividual ;
+                                                                                                              
+                                                                                                              rdfs:label "https://github.com/Data2Semantics/data/raw/master/sql/create_database.sql"@en .
+
+
+
+###  https://raw.github.com/Data2Semantics/data/9606163aefb97f90e5c6dd9163319752a5ff77be/d2r_mapping_aers.n3
+
+<https://raw.github.com/Data2Semantics/data/9606163aefb97f90e5c6dd9163319752a5ff77be/d2r_mapping_aers.n3> rdf:type d2s-prov:D2RQMapping ,
+                                                                                                                   owl:NamedIndividual ;
+                                                                                                          
+                                                                                                          rdfs:label "D2RQ Mapping Specification for the Adverse Event Reporting System"@en .
 
 
 
