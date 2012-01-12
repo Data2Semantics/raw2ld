@@ -1,4 +1,4 @@
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix : <http://www.data2semantics.org/patient-example.owl#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -81,7 +81,7 @@
                                                              
                                                              rdfs:label "john_doe"@en ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasAge> 34 ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasAge> 67 ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                              
@@ -96,6 +96,58 @@
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/outpatient> .
 
+
+
+                                                             ###  http://www.data2semantics.org/patient-example.owl/jane_doe
+
+<http://www.data2semantics.org/patient-example.owl/jane_doe> rdf:type <http://www.data2semantics.org/ontology/patient/Patient> ,
+                                                                                                                                   owl:NamedIndividual ;
+
+                                                                                                                          rdfs:label "jane_doe"@en ;
+
+                                                                                                                          <http://www.data2semantics.org/ontology/patient/hasAge> 65 ;
+
+                                                                                                                          <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
+
+                                                                                                                          <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> ;
+
+                                                                                                                         
+
+                                                                                                                          <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
+
+                                                                                                                          <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
+                                                                                                                                                                                         <http://linkedlifedata.com/resource/umls/id/C0376545> ;
+
+                                                                                                                          <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/outpatient> .
+                                                                                                                          
+                                                                                                                          
+                                                                                                                          
+                                                                                                                          
+                                                                                                                          
+                                                                                                                          
+                                                                                                                          ###  http://www.data2semantics.org/patient-example.owl/jimmy_doe
+
+                                                              <http://www.data2semantics.org/patient-example.owl/jimmy_doe> rdf:type <http://www.data2semantics.org/ontology/patient/Patient> ,
+                                                                                                                                                                                                 owl:NamedIndividual ;
+
+                                                                                                                                                                                        rdfs:label "jimmy_doe"@en ;
+
+                                                                                                                                                                                        <http://www.data2semantics.org/ontology/patient/hasAge> 34 ;
+
+                                                                                                                                                                                        <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
+
+                                                                                                                                                                                        <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> ;
+
+
+
+                                                                                                                                                                                        <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
+
+                                                                                                                                                                                        <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
+                                                                                                                                                                                                                                                       <http://linkedlifedata.com/resource/umls/id/C0376545> ;
+                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                       <http://www.data2semantics.org/ontology/patient/hadPreviousIndication> <http://linkedlifedata.com/resource/umls/id/C0026946> ;
+
+                                                                                                                                                                                        <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/outpatient> .
 
 
 
