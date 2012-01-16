@@ -75,6 +75,8 @@ class Trace(object):
         self.g.add((commandURI, self.PROVO['startedAt'], start))
         
         for p in params[1:] :
+            if replace :
+                p = p.replace(replace, 'HIDDENVALUE')
             if p in inputs :
                 # p is an input to the process, and thus a resource by itself
                 # p is a frbr:Expression (version) of a work (e.g. we could generate multiple versions of the same file)
@@ -166,7 +168,7 @@ if __name__ == '__main__':
     parser.add_option("--prov-destination", type="string", metavar="FILE", dest="destination", help="Serialize the generated RDF graph to FILE (default is 'out.ttl')", default='out.ttl')
     parser.add_option("--prov-inputs", type="string", metavar="INPUTS", dest="inputs", help="Comma separated list of input resources (QNames) for this activity")
     parser.add_option("--prov-outputs", type="string", metavar="OUTPUTS", dest="outputs", help="Comma separated list of output resources (QNames) for this activity")
-    
+    parser.add_option("--prov-hide", type="string", dest="hidden", help="String to hide from provenance record (e.g. passwords)")
     (option,args) = parser.parse_args()
     
     print option
@@ -197,6 +199,6 @@ if __name__ == '__main__':
         splitter.whitespace = ' '
         splitter.whitespace_split = True
         command_call = list(splitter)
-        t.execute(command_call, inputs=trace_inputs, outputs=trace_outputs)
+        t.execute(command_call, inputs=trace_inputs, outputs=trace_outputs, replace=option.hidden)
     
     t.serialize(file=option.destination)
