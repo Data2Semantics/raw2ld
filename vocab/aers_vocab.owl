@@ -1,0 +1,566 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix aers: <http://aers.data2semantics.org/vocab/> .
+@prefix : <http://aers.data2semantics.org/vocab/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://aers.data2semantics.org/vocab/> .
+
+<http://aers.data2semantics.org/vocab/> rdf:type owl:Ontology ;
+                                        
+                                        rdfs:comment "Vocabulary that specifies classes and properties used in the RDF publication of the Adverse Event Reporting System"@en .
+
+
+#################################################################
+#
+#    Annotation properties
+#
+#################################################################
+
+
+
+
+#################################################################
+#
+#    Datatypes
+#
+#################################################################
+
+
+###  http://www.w3.org/2001/XMLSchema#date
+
+xsd:date rdf:type rdfs:Datatype .
+
+
+
+###  http://www.w3.org/2001/XMLSchema#duration
+
+xsd:duration rdf:type rdfs:Datatype .
+
+
+
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://aers.data2semantics.org/vocab/case
+
+aers:case rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "case"@en ;
+          
+          rdfs:range aers:Case ;
+          
+          rdfs:domain aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/drug
+
+aers:drug rdf:type owl:ObjectProperty ;
+          
+          rdfs:label "drug"@en ;
+          
+          rdfs:range aers:Drug ;
+          
+          rdfs:domain aers:Involvement .
+
+
+
+###  http://aers.data2semantics.org/vocab/drug_role
+
+aers:drug_role rdf:type owl:ObjectProperty ;
+               
+               rdfs:label "drug_role"@en ;
+               
+               rdfs:range aers:DrugRole ;
+               
+               rdfs:domain aers:Involvement .
+
+
+
+###  http://aers.data2semantics.org/vocab/drug_route
+
+aers:drug_route rdf:type owl:ObjectProperty ;
+                
+                rdfs:label "drug_route"@en ;
+                
+                rdfs:range aers:DrugRoute ;
+                
+                rdfs:domain aers:Involvement .
+
+
+
+###  http://aers.data2semantics.org/vocab/gender
+
+aers:gender rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "gender"@en ;
+            
+            rdfs:range aers:Gender ;
+            
+            rdfs:domain aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/involved_in
+
+aers:involved_in rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:label "involved_in"@en ;
+                 
+                 rdfs:domain aers:Involvement ;
+                 
+                 rdfs:range aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/manufacturer
+
+aers:manufacturer rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:label "manufacturer"@en ;
+                  
+                  rdfs:range aers:Manufacturer ;
+                  
+                  rdfs:domain aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/outcome_of
+
+aers:outcome_of rdf:type owl:ObjectProperty ;
+                
+                rdfs:label "outcome_of"@en ;
+                
+                rdfs:domain aers:Outcome ;
+                
+                rdfs:range aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/reaction_of
+
+aers:reaction_of rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:label "reaction_of"@en ;
+                 
+                 rdfs:domain aers:Reaction ;
+                 
+                 rdfs:range aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/report_type
+
+aers:report_type rdf:type owl:ObjectProperty ;
+                 
+                 rdfs:label "report_type"@en ;
+                 
+                 rdfs:domain aers:Report ;
+                 
+                 rdfs:range aers:ReportType .
+
+
+
+###  http://aers.data2semantics.org/vocab/reporter_country
+
+aers:reporter_country rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:label "reporter_country"@en ;
+                      
+                      rdfs:range aers:Country ;
+                      
+                      rdfs:domain aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/reporter_occupation
+
+aers:reporter_occupation rdf:type owl:ObjectProperty ;
+                         
+                         rdfs:label "reporter_occupation"@en ;
+                         
+                         rdfs:range aers:Occupation ;
+                         
+                         rdfs:domain aers:Report .
+
+
+
+###  http://aers.data2semantics.org/vocab/status
+
+aers:status rdf:type owl:ObjectProperty ;
+            
+            rdfs:label "status"@en ;
+            
+            rdfs:domain aers:Report ;
+            
+            rdfs:range aers:Status .
+
+
+
+###  http://aers.data2semantics.org/vocab/therapy_of
+
+aers:therapy_of rdf:type owl:ObjectProperty ;
+                
+                rdfs:label "therapy_of"@en ;
+                
+                rdfs:range aers:Report ;
+                
+                rdfs:domain aers:Therapy .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://aers.data2semantics.org/vocab/age
+
+aers:age rdf:type owl:DatatypeProperty ;
+         
+         rdfs:label "age"@en ;
+         
+         rdfs:domain aers:Report ;
+         
+         rdfs:range xsd:duration .
+
+
+
+###  http://aers.data2semantics.org/vocab/drug_dose
+
+aers:drug_dose rdf:type owl:DatatypeProperty ;
+               
+               rdfs:label "drug_dose"@en ;
+               
+               rdfs:domain aers:Involvement ;
+               
+               rdfs:range xsd:string .
+
+
+
+###  http://aers.data2semantics.org/vocab/drug_name_source
+
+aers:drug_name_source rdf:type owl:DatatypeProperty ;
+                      
+                      rdfs:label "drug_name_source"@en ;
+                      
+                      rdfs:domain aers:Involvement ;
+                      
+                      rdfs:range xsd:string .
+
+
+
+###  http://aers.data2semantics.org/vocab/duration
+
+aers:duration rdf:type owl:DatatypeProperty ;
+              
+              rdfs:label "duration"@en ;
+              
+              rdfs:domain aers:Therapy ;
+              
+              rdfs:range xsd:duration .
+
+
+
+###  http://aers.data2semantics.org/vocab/electronic_submission
+
+aers:electronic_submission rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:label "electronic_submission"@en ;
+                           
+                           rdfs:domain aers:Report ;
+                           
+                           rdfs:range xsd:string .
+
+
+
+###  http://aers.data2semantics.org/vocab/end_date
+
+aers:end_date rdf:type owl:DatatypeProperty ;
+              
+              rdfs:label "end_date"@en ;
+              
+              rdfs:domain aers:Therapy ;
+              
+              rdfs:range xsd:date .
+
+
+
+###  http://aers.data2semantics.org/vocab/event_date
+
+aers:event_date rdf:type owl:DatatypeProperty ;
+                
+                rdfs:label "event_date"@en ;
+                
+                rdfs:domain aers:Report ;
+                
+                rdfs:range xsd:date .
+
+
+
+###  http://aers.data2semantics.org/vocab/fda_date
+
+aers:fda_date rdf:type owl:DatatypeProperty ;
+              
+              rdfs:label "fda_date"@en ;
+              
+              rdfs:domain aers:Report ;
+              
+              rdfs:range xsd:date .
+
+
+
+###  http://aers.data2semantics.org/vocab/image
+
+aers:image rdf:type owl:DatatypeProperty ;
+           
+           rdfs:label "image"@en ;
+           
+           rdfs:domain aers:Report ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://aers.data2semantics.org/vocab/manufacturer_date
+
+aers:manufacturer_date rdf:type owl:DatatypeProperty ;
+                       
+                       rdfs:label "manufacturer_date"@en ;
+                       
+                       rdfs:domain aers:Report ;
+                       
+                       rdfs:range xsd:date .
+
+
+
+###  http://aers.data2semantics.org/vocab/manufacturer_report_identifier
+
+aers:manufacturer_report_identifier rdf:type owl:DatatypeProperty ;
+                                    
+                                    rdfs:label "manufacturer_report_identifier"@en ;
+                                    
+                                    rdfs:domain aers:Report ;
+                                    
+                                    rdfs:range xsd:string .
+
+
+
+###  http://aers.data2semantics.org/vocab/report_date
+
+aers:report_date rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:label "report_date"@en ;
+                 
+                 rdfs:domain aers:Report ;
+                 
+                 rdfs:range xsd:date .
+
+
+
+###  http://aers.data2semantics.org/vocab/report_identifier
+
+aers:report_identifier rdf:type owl:DatatypeProperty ;
+                       
+                       rdfs:label "report_identifier"@en ;
+                       
+                       rdfs:domain aers:Report ;
+                       
+                       rdfs:range xsd:string .
+
+
+
+###  http://aers.data2semantics.org/vocab/start_date
+
+aers:start_date rdf:type owl:DatatypeProperty ;
+                
+                rdfs:label "start_date"@en ;
+                
+                rdfs:domain aers:Therapy ;
+                
+                rdfs:range xsd:date .
+
+
+
+###  http://aers.data2semantics.org/vocab/weight
+
+aers:weight rdf:type owl:DatatypeProperty ;
+            
+            rdfs:label "weight"@en ;
+            
+            rdfs:domain aers:Report ;
+            
+            rdfs:range xsd:double .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://aers.data2semantics.org/vocab/Case
+
+aers:Case rdf:type owl:Class ;
+          
+          rdfs:label "Case"@en ;
+          
+          rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Country
+
+aers:Country rdf:type owl:Class ;
+             
+             rdfs:label "Country"@en ;
+             
+             rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Drug
+
+aers:Drug rdf:type owl:Class ;
+          
+          rdfs:label "Drug"@en ;
+          
+          rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/DrugRole
+
+aers:DrugRole rdf:type owl:Class ;
+              
+              rdfs:label "DrugRole"@en ;
+              
+              rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/DrugRoute
+
+aers:DrugRoute rdf:type owl:Class ;
+               
+               rdfs:label "DrugRoute"@en ;
+               
+               rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Gender
+
+aers:Gender rdf:type owl:Class ;
+            
+            rdfs:label "Gender"@en ;
+            
+            rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Involvement
+
+aers:Involvement rdf:type owl:Class ;
+                 
+                 rdfs:label "Involvement"@en ;
+                 
+                 rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Manufacturer
+
+aers:Manufacturer rdf:type owl:Class ;
+                  
+                  rdfs:label "Manufacturer"@en ;
+                  
+                  rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Occupation
+
+aers:Occupation rdf:type owl:Class ;
+                
+                rdfs:label "Occupation"@en ;
+                
+                rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Outcome
+
+aers:Outcome rdf:type owl:Class ;
+             
+             rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Reaction
+
+aers:Reaction rdf:type owl:Class ;
+              
+              rdfs:label "Reaction"@en ;
+              
+              rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Report
+
+aers:Report rdf:type owl:Class ;
+            
+            rdfs:label "Report"@en .
+
+
+
+###  http://aers.data2semantics.org/vocab/ReportType
+
+aers:ReportType rdf:type owl:Class ;
+                
+                rdfs:label "ReportType"@en ;
+                
+                rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Status
+
+aers:Status rdf:type owl:Class ;
+            
+            rdfs:label "Status"@en ;
+            
+            rdfs:subClassOf owl:Thing .
+
+
+
+###  http://aers.data2semantics.org/vocab/Therapy
+
+aers:Therapy rdf:type owl:Class ;
+             
+             rdfs:label "Therapy"@en ;
+             
+             rdfs:subClassOf owl:Thing .
+
+
+
+
+###  Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net
+
