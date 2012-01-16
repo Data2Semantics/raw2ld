@@ -1,5 +1,6 @@
 import glob
 import os
+from d2s.prov import prov
 
 MASK_TO_AERS_DATA = '../aers_data_files/AERS_ASCII_*/ascii/*.TXT'
 USER = 'root'
@@ -18,14 +19,9 @@ os.system("sed -i 's/\\r/\\$\\r/g' /tmp/INDI*.TXT")
 print "... done"
 
 
-print "Using 'sed' to remove dates in DEMO tables with value '00000000' to ensure XSD compliance."
-os.system("sed -i 's/\\$00000000\\$/\\$\\$/g' /tmp/DEMO*.TXT")
+print "Using 'sed' to remove dates in all tables with value '00000000' to ensure XSD compliance."
+os.system("sed -i 's/\\$00000000\\$/\\$\\$/g' /tmp/*.TXT")
 print "... done"
-
-print "Using 'sed' to remove dates in DRUG tables with value '00000000' to ensure XSD compliance."
-os.system("sed -i 's/\\$00000000\\$/\\$\\$/g' /tmp/DRUG*.TXT")
-print "... done"
-
 
 
 command_template = "mysql -u {0} -p{1} aers -e \"LOAD DATA INFILE '{2}' REPLACE INTO TABLE aers.{3} FIELDS TERMINATED BY '$' IGNORE 1 LINES;\""
