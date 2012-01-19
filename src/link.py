@@ -2,14 +2,14 @@ from SPARQLWrapper import SPARQLWrapper, XML, JSON
 from time import time, sleep
 import re
 from rdflib import ConjunctiveGraph, Namespace, URIRef, plugin, query
-
+from d2s.prov import Trace
 
 plugin.register('sparql', query.Processor,
                        'rdfextras.sparql.processor', 'Processor')
 plugin.register('sparql', query.Result,
                        'rdfextras.sparql.query', 'SPARQLQueryResult')
 
-OUT_FILE = 'drug_links.nt'
+
 
 
 aers_sqw = SPARQLWrapper("http://eculture2.cs.vu.nl:5021/sparql/")
@@ -152,7 +152,7 @@ aers_indication = prefixes + """
     } 
 """
 
-ctcae_drug = prefixes + """
+ctcae = prefixes + """
     SELECT DISTINCT ?resource ?label WHERE {
         ?resource   rdf:type    owl:Class .
         ?resource   rdfs:label  ?label .
@@ -293,7 +293,7 @@ drugbank_drug = prefixes + """
 
 drug_index = doQuery(aers_sqw, aers_drug, drug_index, 'AERS Drug Names')
 
-drug_index = doQuery(aers_sqw, ctcae_drug, drug_index, 'CTCAE Drug Names')
+drug_index = doQuery(aers_sqw, ctcae, drug_index, 'CTCAE Drug Names')
 
 drug_index = doQuery(aers_sqw, dbpedia_drug, drug_index, 'DBPedia Drug Names', 'slashURIToLabel', regex='http://dbpedia.org/resource/')
 
@@ -308,19 +308,19 @@ drug_matches = getMatches(drug_index)
 drug_graph = addMatchesToGraph(drug_matches)    
 
 
-print "Serializing to {0}...".format(OUT_FILE)
-drug_graph.serialize(OUT_FILE, format = 'nt')
+print "Serializing to {0}...".format('drug_links.nt')
+drug_graph.serialize('drug_links.nt', format = 'nt')
 print "... done"
 
 indication_index = doQuery(aers_sqw, aers_indication, indication_index, 'AERS Indications')
 
 indication_index = doQuery(aers_sqw, sider_effect, indication_index, 'Sider Effects')
 
+indication_index = doQuery(aers_sqw, ctcae, indication_index, 'CTCAE Indication Names')
+
 indication_index = doQuery(lld_sqw, linkedct_condition, indication_index, 'LinkedCT Conditions')
 
 indication_index = doQuery(lld_sqw, umls_indication, indication_index, 'UMLS Indications')
-
-print indication_index['febrile neutropenia']
 
 indication_matches = getMatches(indication_index)
 
