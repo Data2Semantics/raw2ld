@@ -99,6 +99,14 @@ d2s-patient:isMeasurementType rdf:type owl:ObjectProperty ;
 
 
 
+###  http://www.data2semantics.org/ontology/patient/usesMedication
+
+d2s-patient:usesMedication rdf:type owl:ObjectProperty ;
+                           
+                           rdfs:label "usesMedication"@en .
+
+
+
 
 
 #################################################################
@@ -115,6 +123,24 @@ d2s-patient:hasAge rdf:type owl:DatatypeProperty ;
                    rdfs:label "hasAge"@en ;
                    
                    rdfs:range xsd:integer .
+
+
+
+###  http://www.data2semantics.org/ontology/patient/hasNeutrophilCount
+
+d2s-patient:hasNeutrophilCount rdf:type owl:DatatypeProperty ;
+                               
+                               rdfs:label "hasNeutrophilCount"@en ;
+                               
+                               rdfs:subPropertyOf owl:topDataProperty .
+
+
+
+###  http://www.data2semantics.org/ontology/patient/hasTemperature
+
+d2s-patient:hasTemperature rdf:type owl:DatatypeProperty ;
+                           
+                           rdfs:label "hasTemperature"@en .
 
 
 

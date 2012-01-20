@@ -36,9 +36,129 @@
 #################################################################
 
 
+###  http://aers.data2semantics.org/resource/drug/AMBISOME
+
+<http://aers.data2semantics.org/resource/drug/AMBISOME> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/ANIDULAFUNGIN
+
+<http://aers.data2semantics.org/resource/drug/ANIDULAFUNGIN> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/CEFPROZIL
+
+<http://aers.data2semantics.org/resource/drug/CEFPROZIL> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/CETIRIZINE_HYDROCHLORIDE
+
+<http://aers.data2semantics.org/resource/drug/CETIRIZINE_HYDROCHLORIDE> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/CILAZAPRIL
+
+<http://aers.data2semantics.org/resource/drug/CILAZAPRIL> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/CYTARABINE
+
+<http://aers.data2semantics.org/resource/drug/CYTARABINE> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/EPIRUBICIN
+
+<http://aers.data2semantics.org/resource/drug/EPIRUBICIN> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/FORADIL
+
+<http://aers.data2semantics.org/resource/drug/FORADIL> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/MERCAPTOPURINE
+
+<http://aers.data2semantics.org/resource/drug/MERCAPTOPURINE> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/METHOTREXATE
+
+<http://aers.data2semantics.org/resource/drug/METHOTREXATE> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/PROPAFENONE
+
+<http://aers.data2semantics.org/resource/drug/PROPAFENONE> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/SUNITINIB_MALATE
+
+<http://aers.data2semantics.org/resource/drug/SUNITINIB_MALATE> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/drug/TOPOTECAN
+
+<http://aers.data2semantics.org/resource/drug/TOPOTECAN> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS
+
+<http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/indication/DEMYELINATING_POLYNEUROPATHY
+
+<http://aers.data2semantics.org/resource/indication/DEMYELINATING_POLYNEUROPATHY> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/indication/HERPES_ZOSTER
+
+<http://aers.data2semantics.org/resource/indication/HERPES_ZOSTER> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT
+
+<http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/indication/PARALYSIS
+
+<http://aers.data2semantics.org/resource/indication/PARALYSIS> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL
+
+<http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> rdf:type owl:NamedIndividual .
+
+
+
 ###  http://linkedlifedata.com/resource/id/umls/C0559692
 
 <http://linkedlifedata.com/resource/id/umls/C0559692> rdf:type owl:NamedIndividual .
+
+
+
+###  http://linkedlifedata.com/resource/umls/id/C0015967
+
+<http://linkedlifedata.com/resource/umls/id/C0015967> rdf:type owl:NamedIndividual .
 
 
 
@@ -54,11 +174,23 @@
 
 
 
+###  http://linkedlifedata.com/resource/umls/id/C0027947
+
+<http://linkedlifedata.com/resource/umls/id/C0027947> rdf:type owl:NamedIndividual .
+
+
+
 ###  http://linkedlifedata.com/resource/umls/id/C0277884
 
 <http://linkedlifedata.com/resource/umls/id/C0277884> rdf:type owl:NamedIndividual ;
                                                       
                                                       rdfs:label "http://linkedlifedata.com/resource/umls/id/C0277884"@en .
+
+
+
+###  http://linkedlifedata.com/resource/umls/id/C0277885
+
+<http://linkedlifedata.com/resource/umls/id/C0277885> rdf:type owl:NamedIndividual .
 
 
 
@@ -85,11 +217,21 @@
                                                              
                                                              rdfs:comment "over 60, no previous fungal infection" ;
                                                              
+                                                             <http://www.data2semantics.org/ontology/patient/usesMedication> <http://aers.data2semantics.org/resource/drug/CEFPROZIL> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/drug/CYTARABINE> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/drug/EPIRUBICIN> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/drug/FORADIL> ;
+                                                             
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/PARALYSIS> ;
+                                                             
                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> , <http://linkedlifedata.com/resource/umls/id/C0027947>;
+                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0015967> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884>, <http://linkedlifedata.com/resource/umls/id/C0015967> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> ,
+                                                                                                                            <http://linkedlifedata.com/resource/umls/id/C0027947> ;
+                                                             
+                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
                                                                                                                             <http://linkedlifedata.com/resource/umls/id/C0376545> ;
@@ -109,45 +251,33 @@
                                                               
                                                               rdfs:comment "Under 60, inpatient" ;
                                                               
+                                                              <http://www.data2semantics.org/ontology/patient/usesMedication> <http://aers.data2semantics.org/resource/drug/ANIDULAFUNGIN> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/CETIRIZINE_HYDROCHLORIDE> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/CILAZAPRIL> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/METHOTREXATE> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/PROPAFENONE> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/TOPOTECAN> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DEMYELINATING_POLYNEUROPATHY> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> ;
+                                                              
                                                               <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                               
-                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117>, <http://linkedlifedata.com/resource/umls/id/C0027947> ;
+                                                              <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0015967> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hadPreviousIndication> <http://linkedlifedata.com/resource/umls/id/C0026946> ;
                                                               
-                                                              <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884>, <http://linkedlifedata.com/resource/umls/id/C0015967> ;
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0027947> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
                                                                                                                              <http://linkedlifedata.com/resource/umls/id/C0376545> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/inpatient> .
 
-
-
-
-###  http://www.data2semantics.org/patient-example.owl/katie_doe
-
-<http://www.data2semantics.org/patient-example.owl/katie_doe> rdf:type <http://www.data2semantics.org/ontology/patient/Patient> ,
-                                                                                                                                     owl:NamedIndividual ;
-
-                                                                                                                            rdfs:label "katie_doe"@en ;
-
-                                                                                                                            <http://www.data2semantics.org/ontology/patient/hasAge> 36 ;
-
-                                                                                                                            rdfs:comment "Under 60, inpatient,decreased systolic blood pressure" ;
-
-                                                                                                                            <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
-
-                                                                                                                            <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117>, <http://linkedlifedata.com/resource/umls/id/C0027947> ;
-
-                                                                                                                            <http://www.data2semantics.org/ontology/patient/hadPreviousIndication> <http://linkedlifedata.com/resource/umls/id/C0026946> ;
-
-                                                                                                                            <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277885>, <http://linkedlifedata.com/resource/umls/id/C0015967> ;
-
-                                                                                                                            <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
-                                                                                                                                                                                           <http://linkedlifedata.com/resource/umls/id/C0376545> ;
-
-                                                                                                                            <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/inpatient> .
 
 
 ###  http://www.data2semantics.org/patient-example.owl/john_doe
@@ -161,18 +291,77 @@
                                                              
                                                              rdfs:comment "over 60, matches all other criteria" ;
                                                              
+                                                             <http://www.data2semantics.org/ontology/patient/usesMedication> <http://aers.data2semantics.org/resource/drug/AMBISOME> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/drug/CEFPROZIL> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/drug/CETIRIZINE_HYDROCHLORIDE> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/drug/FORADIL> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/drug/MERCAPTOPURINE> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT> ;
+                                                             
                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117>, <http://linkedlifedata.com/resource/umls/id/C0027947> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0015967> ;
+                                                             
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hadPreviousIndication> <http://linkedlifedata.com/resource/umls/id/C0026946> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884>, <http://linkedlifedata.com/resource/umls/id/C0015967> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0027947> ;
+                                                             
+                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
                                                                                                                             <http://linkedlifedata.com/resource/umls/id/C0376545> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/outpatient> .
+
+
+
+###  http://www.data2semantics.org/patient-example.owl/katie_doe
+
+<http://www.data2semantics.org/patient-example.owl/katie_doe> rdf:type <http://www.data2semantics.org/ontology/patient/Patient> ,
+                                                                       owl:NamedIndividual ;
+                                                              
+                                                              rdfs:label "katie_doe"@en ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasAge> 36 ;
+                                                              
+                                                              rdfs:comment "Under 60, inpatient,decreased systolic blood pressure" ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/usesMedication> <http://aers.data2semantics.org/resource/drug/AMBISOME> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/ANIDULAFUNGIN> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/CEFPROZIL> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/METHOTREXATE> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/PROPAFENONE> ,
+                                                                                                                              <http://aers.data2semantics.org/resource/drug/TOPOTECAN> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0015967> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hadPreviousIndication> <http://linkedlifedata.com/resource/umls/id/C0026946> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0027947> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277885> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
+                                                                                                                             <http://linkedlifedata.com/resource/umls/id/C0376545> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/inpatient> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://www.data2semantics.org/patient-example.owl/http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> .
+
+
+
+###  http://www.data2semantics.org/patient-example.owl/http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL
+
+<http://www.data2semantics.org/patient-example.owl/http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> rdf:type owl:NamedIndividual ;
+                                                                                                                        
+                                                                                                                        rdfs:label "http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL"@en .
 
 
 
