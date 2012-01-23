@@ -126,6 +126,14 @@
 
 
 
+###  http://aers.data2semantics.org/resource/indication/DIARRHOEA
+
+<http://aers.data2semantics.org/resource/indication/DIARRHOEA> rdf:type owl:NamedIndividual ;
+                                                               
+                                                               owl:sameAs <http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl#Diarrhea> .
+
+
+
 ###  http://aers.data2semantics.org/resource/indication/HERPES_ZOSTER
 
 <http://aers.data2semantics.org/resource/indication/HERPES_ZOSTER> rdf:type owl:NamedIndividual .
@@ -147,6 +155,12 @@
 ###  http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL
 
 <http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/indication/VOMITING
+
+<http://aers.data2semantics.org/resource/indication/VOMITING> rdf:type owl:NamedIndividual .
 
 
 
@@ -206,6 +220,12 @@
 
 
 
+###  http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl#Diarrhea
+
+<http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl#Diarrhea> rdf:type owl:NamedIndividual .
+
+
+
 ###  http://www.data2semantics.org/patient-example.owl/jane_doe
 
 <http://www.data2semantics.org/patient-example.owl/jane_doe> rdf:type <http://www.data2semantics.org/ontology/patient/Patient> ,
@@ -222,7 +242,9 @@
                                                                                                                              <http://aers.data2semantics.org/resource/drug/EPIRUBICIN> ,
                                                                                                                              <http://aers.data2semantics.org/resource/drug/FORADIL> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/PARALYSIS> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ,
+                                                                                                                            <http://aers.data2semantics.org/resource/indication/PARALYSIS> ,
+                                                                                                                            <http://aers.data2semantics.org/resource/indication/VOMITING> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                              
@@ -259,7 +281,9 @@
                                                                                                                               <http://aers.data2semantics.org/resource/drug/TOPOTECAN> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DEMYELINATING_POLYNEUROPATHY> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> ;
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/VOMITING> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                               
@@ -296,8 +320,13 @@
                                                                                                                              <http://aers.data2semantics.org/resource/drug/CETIRIZINE_HYDROCHLORIDE> ,
                                                                                                                              <http://aers.data2semantics.org/resource/drug/FORADIL> ,
                                                                                                                              <http://aers.data2semantics.org/resource/drug/MERCAPTOPURINE> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT> ;
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS> ;
+                                                             
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ;
+                                                             
+                                                             <http://www.data2semantics.org/ontology/patient/usesMedication> <http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT> ;
+                                                             
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/VOMITING> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                              
@@ -335,6 +364,9 @@
                                                                                                                               <http://aers.data2semantics.org/resource/drug/METHOTREXATE> ,
                                                                                                                               <http://aers.data2semantics.org/resource/drug/PROPAFENONE> ,
                                                                                                                               <http://aers.data2semantics.org/resource/drug/TOPOTECAN> ;
+                                                              
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/indication/VOMITING> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                               
