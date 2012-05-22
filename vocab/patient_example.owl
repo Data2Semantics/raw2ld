@@ -114,53 +114,53 @@
 
 
 
-###  http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS
+###  http://aers.data2semantics.org/resource/diagnosis/CLOSTRIDIUM_COLITIS
 
-<http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS> rdf:type owl:NamedIndividual .
-
-
-
-###  http://aers.data2semantics.org/resource/indication/DEMYELINATING_POLYNEUROPATHY
-
-<http://aers.data2semantics.org/resource/indication/DEMYELINATING_POLYNEUROPATHY> rdf:type owl:NamedIndividual .
+<http://aers.data2semantics.org/resource/diagnosis/CLOSTRIDIUM_COLITIS> rdf:type owl:NamedIndividual .
 
 
 
-###  http://aers.data2semantics.org/resource/indication/DIARRHOEA
+###  http://aers.data2semantics.org/resource/diagnosis/DEMYELINATING_POLYNEUROPATHY
 
-<http://aers.data2semantics.org/resource/indication/DIARRHOEA> rdf:type owl:NamedIndividual ;
+<http://aers.data2semantics.org/resource/diagnosis/DEMYELINATING_POLYNEUROPATHY> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA
+
+<http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA> rdf:type owl:NamedIndividual ;
                                                                
                                                                owl:sameAs <http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl#Diarrhea> .
 
 
 
-###  http://aers.data2semantics.org/resource/indication/HERPES_ZOSTER
+###  http://aers.data2semantics.org/resource/diagnosis/HERPES_ZOSTER
 
-<http://aers.data2semantics.org/resource/indication/HERPES_ZOSTER> rdf:type owl:NamedIndividual .
-
-
-
-###  http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT
-
-<http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT> rdf:type owl:NamedIndividual .
+<http://aers.data2semantics.org/resource/diagnosis/HERPES_ZOSTER> rdf:type owl:NamedIndividual .
 
 
 
-###  http://aers.data2semantics.org/resource/indication/PARALYSIS
+###  http://aers.data2semantics.org/resource/diagnosis/LEUKAEMIA_RECURRENT
 
-<http://aers.data2semantics.org/resource/indication/PARALYSIS> rdf:type owl:NamedIndividual .
-
-
-
-###  http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL
-
-<http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> rdf:type owl:NamedIndividual .
+<http://aers.data2semantics.org/resource/diagnosis/LEUKAEMIA_RECURRENT> rdf:type owl:NamedIndividual .
 
 
 
-###  http://aers.data2semantics.org/resource/indication/VOMITING
+###  http://aers.data2semantics.org/resource/diagnosis/PARALYSIS
 
-<http://aers.data2semantics.org/resource/indication/VOMITING> rdf:type owl:NamedIndividual .
+<http://aers.data2semantics.org/resource/diagnosis/PARALYSIS> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/diagnosis/PNEUMONIA_FUNGAL
+
+<http://aers.data2semantics.org/resource/diagnosis/PNEUMONIA_FUNGAL> rdf:type owl:NamedIndividual .
+
+
+
+###  http://aers.data2semantics.org/resource/diagnosis/VOMITING
+
+<http://aers.data2semantics.org/resource/diagnosis/VOMITING> rdf:type owl:NamedIndividual .
 
 
 
@@ -194,11 +194,11 @@
 
 
 
-###  http://linkedlifedata.com/resource/umls/id/C0277884
+###  http://aers.data2semantics.org/page/resource/diagnosis/BLOOD_PRESSURE_SYSTOLIC_INCREASED
 
-<http://linkedlifedata.com/resource/umls/id/C0277884> rdf:type owl:NamedIndividual ;
+<http://aers.data2semantics.org/page/resource/diagnosis/BLOOD_PRESSURE_SYSTOLIC_INCREASED> rdf:type owl:NamedIndividual ;
                                                       
-                                                      rdfs:label "http://linkedlifedata.com/resource/umls/id/C0277884"@en .
+                                                      rdfs:label "BLOOD PRESSURE SYSTOLIC INCREASED"@en .
 
 
 
@@ -242,9 +242,9 @@
                                                                                                                              <http://aers.data2semantics.org/resource/drug/EPIRUBICIN> ,
                                                                                                                              <http://aers.data2semantics.org/resource/drug/FORADIL> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ,
-                                                                                                                            <http://aers.data2semantics.org/resource/indication/PARALYSIS> ,
-                                                                                                                            <http://aers.data2semantics.org/resource/indication/VOMITING> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA> ,
+                                                                                                                            <http://aers.data2semantics.org/resource/diagnosis/PARALYSIS> ,
+                                                                                                                            <http://aers.data2semantics.org/resource/diagnosis/VOMITING> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                              
@@ -253,7 +253,7 @@
                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0024117> ,
                                                                                                                             <http://linkedlifedata.com/resource/umls/id/C0027947> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://aers.data2semantics.org/page/resource/diagnosis/BLOOD_PRESSURE_SYSTOLIC_INCREASED> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
                                                                                                                             <http://linkedlifedata.com/resource/umls/id/C0376545> ;
@@ -280,10 +280,10 @@
                                                                                                                               <http://aers.data2semantics.org/resource/drug/PROPAFENONE> ,
                                                                                                                               <http://aers.data2semantics.org/resource/drug/TOPOTECAN> ;
                                                               
-                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DEMYELINATING_POLYNEUROPATHY> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/VOMITING> ;
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/diagnosis/DEMYELINATING_POLYNEUROPATHY> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/diagnosis/PNEUMONIA_FUNGAL> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/diagnosis/VOMITING> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                               
@@ -295,7 +295,7 @@
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0027947> ;
                                                               
-                                                              <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
+                                                              <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://aers.data2semantics.org/page/resource/diagnosis/BLOOD_PRESSURE_SYSTOLIC_INCREASED> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
                                                                                                                              <http://linkedlifedata.com/resource/umls/id/C0376545> ;
@@ -320,13 +320,13 @@
                                                                                                                              <http://aers.data2semantics.org/resource/drug/CETIRIZINE_HYDROCHLORIDE> ,
                                                                                                                              <http://aers.data2semantics.org/resource/drug/FORADIL> ,
                                                                                                                              <http://aers.data2semantics.org/resource/drug/MERCAPTOPURINE> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/CLOSTRIDIUM_COLITIS> ;
+                                                                                                                             <http://aers.data2semantics.org/resource/diagnosis/CLOSTRIDIUM_COLITIS> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/usesMedication> <http://aers.data2semantics.org/resource/indication/LEUKAEMIA_RECURRENT> ;
+                                                             <http://www.data2semantics.org/ontology/patient/usesMedication> <http://aers.data2semantics.org/resource/diagnosis/LEUKAEMIA_RECURRENT> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/VOMITING> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/diagnosis/VOMITING> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                              
@@ -338,7 +338,7 @@
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0027947> ;
                                                              
-                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://linkedlifedata.com/resource/umls/id/C0277884> ;
+                                                             <http://www.data2semantics.org/ontology/patient/hasMeasurement> <http://aers.data2semantics.org/page/resource/diagnosis/BLOOD_PRESSURE_SYSTOLIC_INCREASED> ;
                                                              
                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://linkedlifedata.com/resource/umls/id/C0280100> ,
                                                                                                                             <http://linkedlifedata.com/resource/umls/id/C0376545> ;
@@ -365,8 +365,8 @@
                                                                                                                               <http://aers.data2semantics.org/resource/drug/PROPAFENONE> ,
                                                                                                                               <http://aers.data2semantics.org/resource/drug/TOPOTECAN> ;
                                                               
-                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/indication/DIARRHOEA> ,
-                                                                                                                             <http://aers.data2semantics.org/resource/indication/VOMITING> ;
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA> ,
+                                                                                                                             <http://aers.data2semantics.org/resource/diagnosis/VOMITING> ;
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hadRecentTreatment> <http://linkedlifedata.com/resource/id/umls/C0559692> ;
                                                               
@@ -385,15 +385,15 @@
                                                               
                                                               <http://www.data2semantics.org/ontology/patient/hasStatus> <http://www.data2semantics.org/ontology/patient/inpatient> ;
                                                               
-                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://www.data2semantics.org/patient-example.owl/http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> .
+                                                              <http://www.data2semantics.org/ontology/patient/hasIndication> <http://aers.data2semantics.org/resource/diagnosis/PNEUMONIA_FUNGAL> .
 
 
 
-###  http://www.data2semantics.org/patient-example.owl/http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL
+###  http://aers.data2semantics.org/resource/diagnosis/PNEUMONIA_FUNGAL
 
-<http://www.data2semantics.org/patient-example.owl/http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL> rdf:type owl:NamedIndividual ;
+<http://aers.data2semantics.org/resource/diagnosis/PNEUMONIA_FUNGAL> rdf:type owl:NamedIndividual ;
                                                                                                                         
-                                                                                                                        rdfs:label "http://aers.data2semantics.org/resource/indication/PNEUMONIA_FUNGAL"@en .
+                                                                                                                        rdfs:label "PNEUMONIA FUNGAL"@en .
 
 
 
