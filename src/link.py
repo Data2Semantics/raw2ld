@@ -10,11 +10,20 @@ plugin.register('sparql', query.Result,
                        'rdfextras.sparql.query', 'SPARQLQueryResult')
 
 
+# Eculture
+FULL_SPARQL_ENDPOINT = "http://eculture2.cs.vu.nl:5021/sparql/"
+# Local
+AERS_SPARQL_ENDPOINT = "http://localhost:8080/openrdf-sesame/repositories/hubble"
 
 
-aers_sqw = SPARQLWrapper("http://eculture2.cs.vu.nl:5021/sparql/")
+aers_sqw = SPARQLWrapper(AERS_SPARQL_ENDPOINT)
 aers_sqw.setReturnFormat(JSON)
 aers_sqw.addCustomParameter('soft-limit','-1')
+
+full_sqw = SPARQLWrapper(FULL_SPARQL_ENDPOINT)
+full_sqw.setReturnFormat(JSON)
+full_sqw.addCustomParameter('soft-limit','-1')
+
 
 lld_sqw = SPARQLWrapper("http://linkedlifedata.com/sparql")
 lld_sqw.setReturnFormat(JSON)
@@ -119,7 +128,7 @@ def addMatchesToGraph(matches):
 
 # Intialise indexes
 drug_index = {}
-indication_index = {}
+diagnosis_index = {}
 country_index = {}
 
 
@@ -139,10 +148,10 @@ aers_country = prefixes + """
 """
 
 
-aers_indication = prefixes + """
+aers_diagnosis = prefixes + """
     SELECT DISTINCT ?resource ?label WHERE {
         {
-            ?resource   rdf:type    aers-vocab:Indication . 
+            ?resource   rdf:type    aers-vocab:Diagnosis . 
             ?resource   rdfs:label  ?label .
         }
         UNION
@@ -258,7 +267,7 @@ umls_drug = prefixes + """
         }
     }"""
     
-umls_indication = prefixes + """
+umls_diagnosis = prefixes + """
     SELECT DISTINCT ?resource ?label WHERE {
         { 
             ?resource   calbc:hasCorrelation       calbc-group:DISO .
@@ -293,13 +302,13 @@ drugbank_drug = prefixes + """
 
 drug_index = doQuery(aers_sqw, aers_drug, drug_index, 'AERS Drug Names')
 
-drug_index = doQuery(aers_sqw, ctcae, drug_index, 'CTCAE Drug Names')
+drug_index = doQuery(full_sqw, ctcae, drug_index, 'CTCAE Drug Names')
 
-drug_index = doQuery(aers_sqw, dbpedia_drug, drug_index, 'DBPedia Drug Names', 'slashURIToLabel', regex='http://dbpedia.org/resource/')
+drug_index = doQuery(full_sqw, dbpedia_drug, drug_index, 'DBPedia Drug Names', 'slashURIToLabel', regex='http://dbpedia.org/resource/')
 
-drug_index = doQuery(aers_sqw, sider_drug, drug_index, 'Sider Drug Names')
+drug_index = doQuery(full_sqw, sider_drug, drug_index, 'Sider Drug Names')
 
-drug_index = doQuery(aers_sqw, drugbank_drug, drug_index, 'Drugbank Drug Names')
+drug_index = doQuery(full_sqw, drugbank_drug, drug_index, 'Drugbank Drug Names')
 
 drug_index = doQuery(lld_sqw, umls_drug, drug_index, 'UMLS Drug Names')
 
@@ -307,39 +316,44 @@ drug_matches = getMatches(drug_index)
     
 drug_graph = addMatchesToGraph(drug_matches)    
 
+drug_links_file = open('drug_links.nt','w')
 
 print "Serializing to {0}...".format('drug_links.nt')
-drug_graph.serialize('drug_links.nt', format = 'nt')
+drug_graph.serialize(drug_links_file, format = 'nt')
 print "... done"
 
-indication_index = doQuery(aers_sqw, aers_indication, indication_index, 'AERS Indications')
+diagnosis_index = doQuery(aers_sqw, aers_diagnosis, diagnosis_index, 'AERS diagnosiss')
 
-indication_index = doQuery(aers_sqw, sider_effect, indication_index, 'Sider Effects')
+diagnosis_index = doQuery(full_sqw, sider_effect, diagnosis_index, 'Sider Effects')
 
-indication_index = doQuery(aers_sqw, ctcae, indication_index, 'CTCAE Indication Names')
+diagnosis_index = doQuery(full_sqw, ctcae, diagnosis_index, 'CTCAE diagnosis Names')
 
-indication_index = doQuery(lld_sqw, linkedct_condition, indication_index, 'LinkedCT Conditions')
+diagnosis_index = doQuery(lld_sqw, linkedct_condition, diagnosis_index, 'LinkedCT Conditions')
 
-indication_index = doQuery(lld_sqw, umls_indication, indication_index, 'UMLS Indications')
+diagnosis_index = doQuery(lld_sqw, umls_diagnosis, diagnosis_index, 'UMLS diagnosiss')
 
-indication_matches = getMatches(indication_index)
+diagnosis_matches = getMatches(diagnosis_index)
 
-indication_graph = addMatchesToGraph(indication_matches)
+diagnosis_graph = addMatchesToGraph(diagnosis_matches)
 
-print "Serializing to {0}...".format('indication_links.nt')
-indication_graph.serialize('indication_links.nt', format = 'nt')
+diagnosis_links_file = open('diagnosis_links.nt','w')
+
+print "Serializing to {0}...".format('diagnosis_links.nt')
+diagnosis_graph.serialize(diagnosis_links_file, format = 'nt')
 print "... done"
 
 country_index = doQuery(aers_sqw, aers_country, country_index, 'AERS Country Names')
 
-country_index = doQuery(aers_sqw, dbpedia_country, country_index, 'DBPedia Country Names', labelFunction='slashURIToLabel', regex='http://dbpedia.org/resource/')
+country_index = doQuery(full_sqw, dbpedia_country, country_index, 'DBPedia Country Names', labelFunction='slashURIToLabel', regex='http://dbpedia.org/resource/')
 
 country_matches = getMatches(country_index)
     
 country_graph = addMatchesToGraph(country_matches)    
 
+country_links_file = open('country_links.nt','w')
+
 print "Serializing to {0}...".format('country_links.nt')
-country_graph.serialize('country_links.nt', format = 'nt')
+country_graph.serialize(country_links_file, format = 'nt')
 print "... done"
 
 
