@@ -6,9 +6,8 @@ import shlex
 
 
 
-
 MASK_TO_AERS_DATA = '../aers_data_files/aers_ascii_2011q1/ascii/*.TXT'
-MYSQL_PATH = '/usr/local/mysql-5.5.17-osx10.6-x86_64/bin'
+MYSQL_PATH = '/usr/local/mysql/bin'
 USER = 'root'
 
 PASS = 'visstick'
@@ -36,7 +35,7 @@ for ftype in tables :
 
 
 for tab in tables :
-    files = glob.glob('/tmp/{0}11Q1.TXT'.format(tab.upper()))
+    files = glob.glob('/tmp/{0}11Q1.TXT.checked'.format(tab.upper()))
     print "Truncating table {0} ...".format(tab)
     trunc_command = ['{0}/mysql'.format(MYSQL_PATH),'-u',USER,'-p{0}'.format(PASS),'aers','-e','TRUNCATE TABLE aers.{0};'.format(tab)]
     t.execute(trunc_command, inputs=['aers.{0}'.format(tab)],outputs=['aers.{0}'.format(tab)],replace=PASS)
