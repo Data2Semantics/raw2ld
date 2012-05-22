@@ -518,7 +518,7 @@ map:report_reporter_country a d2rq:PropertyBridge;
 # Table reaction
 map:reaction a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://aers.data2semantics.org/resource/indication/@@reac.pt|urlify@@";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/diagnosis/@@reac.pt|urlify@@";
     d2rq:class aers:Reaction;
     d2rq:classDefinitionLabel "Reaction";
     .
@@ -536,23 +536,23 @@ map:reaction_isr a d2rq:PropertyBridge;
 	d2rq:uriPattern "http://aers.data2semantics.org/resource/report/@@reac.isr|urlify@@";
 	.	
 
-# Table indication
-map:indication a d2rq:ClassMap;
+# Table diagnosis
+map:diagnosis a d2rq:ClassMap;
     d2rq:dataStorage map:database;
-    d2rq:uriPattern "http://aers.data2semantics.org/resource/indication/@@indi.indi_pt|urlify@@";
-    d2rq:class aers:Indication;
-    d2rq:classDefinitionLabel "Indication";
+    d2rq:uriPattern "http://aers.data2semantics.org/resource/diagnosis/@@indi.indi_pt|urlify@@";
+    d2rq:class aers:Diagnosis;
+    d2rq:classDefinitionLabel "Diagnosis";
     .
 
-map:indication_involvement a d2rq:PropertyBridge;
-	d2rq:belongsToClassMap map:indication;
-	d2rq:property aers:indication_for;
-	d2rq:propertyDefinitionLabel "indication for";
+map:diagnosis_involvement a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diagnosis;
+	d2rq:property aers:diagnosis_for;
+	d2rq:propertyDefinitionLabel "diagnosis for";
 	d2rq:uriPattern "http://aers.data2semantics.org/resource/involvement/@@indi.isr|urlify@@/@@indi.drug_seq|urlify@@";
 	.	
 
-map:indication_label a d2rq:PropertyBridge;
-	d2rq:belongsToClassMap map:indication;
+map:diagnosis_label a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:diagnosis;
 	d2rq:property rdfs:label ;
 	d2rq:pattern "@@indi.indi_pt@@";
 	d2rq:condition "indi.indi_pt <> ''";
