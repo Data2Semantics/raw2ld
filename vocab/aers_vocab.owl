@@ -513,11 +513,11 @@ aers:Outcome rdf:type owl:Class ;
 
 
 
-###  http://aers.data2semantics.org/vocab/Reaction
+###  http://aers.data2semantics.org/vocab/Diagnosis
 
-aers:Reaction rdf:type owl:Class ;
+aers:Diagnosis rdf:type owl:Class ;
               
-              rdfs:label "Reaction"@en ;
+              rdfs:label "Diagnosis"@en ;
               
               rdfs:subClassOf owl:Thing .
 
