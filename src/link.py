@@ -13,7 +13,8 @@ plugin.register('sparql', query.Result,
 # Eculture
 FULL_SPARQL_ENDPOINT = "http://eculture2.cs.vu.nl:5021/sparql/"
 # Local
-AERS_SPARQL_ENDPOINT = "http://localhost:8080/openrdf-sesame/repositories/hubble"
+AERS_SPARQL_ENDPOINT = FULL_SPARQL_ENDPOINT
+#"http://localhost:8080/openrdf-sesame/repositories/hubble"
 
 
 aers_sqw = SPARQLWrapper(AERS_SPARQL_ENDPOINT)
@@ -322,7 +323,7 @@ print "Serializing to {0}...".format('drug_links.nt')
 drug_graph.serialize(drug_links_file, format = 'nt')
 print "... done"
 
-diagnosis_index = doQuery(aers_sqw, aers_diagnosis, diagnosis_index, 'AERS diagnosiss')
+diagnosis_index = doQuery(aers_sqw, aers_diagnosis, diagnosis_index, 'AERS diagnosis')
 
 diagnosis_index = doQuery(full_sqw, sider_effect, diagnosis_index, 'Sider Effects')
 
@@ -330,7 +331,7 @@ diagnosis_index = doQuery(full_sqw, ctcae, diagnosis_index, 'CTCAE diagnosis Nam
 
 diagnosis_index = doQuery(lld_sqw, linkedct_condition, diagnosis_index, 'LinkedCT Conditions')
 
-diagnosis_index = doQuery(lld_sqw, umls_diagnosis, diagnosis_index, 'UMLS diagnosiss')
+diagnosis_index = doQuery(lld_sqw, umls_diagnosis, diagnosis_index, 'UMLS diagnosis')
 
 diagnosis_matches = getMatches(diagnosis_index)
 
