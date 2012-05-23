@@ -1,271 +1,84 @@
 @prefix d2s-patient: <http://www.data2semantics.org/ontology/patient/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix : <http://www.data2semantics.org/ontology/patient/#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.data2semantics.org/ontology/patient/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://www.data2semantics.org/ontology/patient/> rdf:type owl:Ontology .
+d2s-patient: a owl:Ontology .
 
+d2s-patient:hadPreviousIndication a owl:ObjectProperty;
+    rdfs:label "hadPreviousIndication"@en .
 
-#################################################################
-#
-#    Annotation properties
-#
-#################################################################
+d2s-patient:hadRecentTreatment a owl:ObjectProperty;
+    rdfs:label "hadRecentTreatment"@en;
+    rdfs:domain d2s-patient:Patient .
 
+d2s-patient:hasAge a owl:DatatypeProperty;
+    rdfs:label "hasAge"@en;
+    rdfs:range xsd:integer .
 
+d2s-patient:hasDiagnosis a owl:ObjectProperty;
+    rdfs:label "hasDiagnosis"@en;
+    rdfs:domain d2s-patient:Patient .
 
+d2s-patient:hasMeasurement a owl:ObjectProperty;
+    rdfs:label "hasMeasurement"@en;
+    rdfs:domain d2s-patient:Patient .
 
-#################################################################
-#
-#    Datatypes
-#
-#################################################################
+d2s-patient:hasNeutrophilCount a owl:DatatypeProperty;
+    rdfs:label "hasNeutrophilCount"@en;
+    rdfs:subPropertyOf owl:topDataProperty .
 
+d2s-patient:hasStatus a owl:ObjectProperty;
+    rdfs:label "hasStatus"@en .
 
+d2s-patient:hasSubjectiveSymptom a owl:ObjectProperty;
+    rdfs:label "hasSubjectiveSymptom"@en;
+    rdfs:domain d2s-patient:Patient .
 
+d2s-patient:hasTemperature a owl:DatatypeProperty;
+    rdfs:label "hasTemperature"@en .
 
-#################################################################
-#
-#    Object Properties
-#
-#################################################################
+d2s-patient:isMeasurementType a owl:ObjectProperty;
+    rdfs:label "isMeasurementType"@en .
 
+d2s-patient:usesMedication a owl:ObjectProperty;
+    rdfs:label "usesMedication"@en .
 
-###  http://www.data2semantics.org/ontology/patient/hadPreviousIndication
+d2s-patient:PatientStatus a owl:Class;
+    rdfs:label "PatientStatus"@en;
+    rdfs:subClassOf owl:Thing;
+    owl:equivalentClass [ a owl:Class;
+            owl:oneOf ( d2s-patient:inpatient d2s-patient:outpatient ) ] .
 
-d2s-patient:hadPreviousIndication rdf:type owl:ObjectProperty ;
-                                  
-                                  rdfs:label "hadPreviousIndication"@en .
+d2s-patient:inpatient a d2s-patient:PatientStatus,
+        owl:NamedIndividual;
+    rdfs:label "inpatient"@en .
 
+d2s-patient:mild a d2s-patient:SubjectiveSymptom,
+        owl:NamedIndividual;
+    rdfs:label "mild"@en .
 
+d2s-patient:none a d2s-patient:SubjectiveSymptom,
+        owl:NamedIndividual;
+    rdfs:label "none"@en .
 
-###  http://www.data2semantics.org/ontology/patient/hadRecentTreatment
+d2s-patient:outpatient a d2s-patient:PatientStatus,
+        owl:NamedIndividual;
+    rdfs:label "outpatient"@en .
 
-d2s-patient:hadRecentTreatment rdf:type owl:ObjectProperty ;
-                               
-                               rdfs:label "hadRecentTreatment"@en ;
-                               
-                               rdfs:domain d2s-patient:Patient .
+d2s-patient:severe a d2s-patient:SubjectiveSymptom,
+        owl:NamedIndividual;
+    rdfs:label "severe"@en .
 
+d2s-patient:SubjectiveSymptom a owl:Class;
+    rdfs:label "SubjectiveSymptom"@en;
+    owl:equivalentClass [ a owl:Class;
+            owl:oneOf ( d2s-patient:mild d2s-patient:severe d2s-patient:none ) ] .
 
+d2s-patient:Patient a owl:Class;
+    rdfs:label "Patient"@en .
 
-###  http://www.data2semantics.org/ontology/patient/hasDiagnosis
-
-d2s-patient:hasDiagnosis rdf:type owl:ObjectProperty ;
-                          
-                          rdfs:label "hasDiagnosis"@en ;
-                          
-                          rdfs:domain d2s-patient:Patient .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/hasMeasurement
-
-d2s-patient:hasMeasurement rdf:type owl:ObjectProperty ;
-                           
-                           rdfs:label "hasMeasurement"@en ;
-                           
-                           rdfs:domain d2s-patient:Patient .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/hasStatus
-
-d2s-patient:hasStatus rdf:type owl:ObjectProperty ;
-                      
-                      rdfs:label "hasStatus"@en .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/hasSubjectiveSymptom
-
-d2s-patient:hasSubjectiveSymptom rdf:type owl:ObjectProperty ;
-                                 
-                                 rdfs:label "hasSubjectiveSymptom"@en ;
-                                 
-                                 rdfs:domain d2s-patient:Patient .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/isMeasurementType
-
-d2s-patient:isMeasurementType rdf:type owl:ObjectProperty ;
-                              
-                              rdfs:label "isMeasurementType"@en .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/usesMedication
-
-d2s-patient:usesMedication rdf:type owl:ObjectProperty ;
-                           
-                           rdfs:label "usesMedication"@en .
-
-
-
-
-
-#################################################################
-#
-#    Data properties
-#
-#################################################################
-
-
-###  http://www.data2semantics.org/ontology/patient/hasAge
-
-d2s-patient:hasAge rdf:type owl:DatatypeProperty ;
-                   
-                   rdfs:label "hasAge"@en ;
-                   
-                   rdfs:range xsd:integer .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/hasNeutrophilCount
-
-d2s-patient:hasNeutrophilCount rdf:type owl:DatatypeProperty ;
-                               
-                               rdfs:label "hasNeutrophilCount"@en ;
-                               
-                               rdfs:subPropertyOf owl:topDataProperty .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/hasTemperature
-
-d2s-patient:hasTemperature rdf:type owl:DatatypeProperty ;
-                           
-                           rdfs:label "hasTemperature"@en .
-
-
-
-
-
-#################################################################
-#
-#    Classes
-#
-#################################################################
-
-
-###  http://www.data2semantics.org/ontology/patient/Patient
-
-d2s-patient:Patient rdf:type owl:Class ;
-                    
-                    rdfs:label "Patient"@en .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/PatientStatus
-
-d2s-patient:PatientStatus rdf:type owl:Class ;
-                          
-                          rdfs:label "PatientStatus"@en ;
-                          
-                          owl:equivalentClass [ rdf:type owl:Class ;
-                                                owl:oneOf ( d2s-patient:inpatient
-                                                            d2s-patient:outpatient
-                                                          )
-                                              ] ;
-                          
-                          rdfs:subClassOf owl:Thing .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/SubjectiveSymptom
-
-d2s-patient:SubjectiveSymptom rdf:type owl:Class ;
-                              
-                              rdfs:label "SubjectiveSymptom"@en ;
-                              
-                              owl:equivalentClass [ rdf:type owl:Class ;
-                                                    owl:oneOf ( d2s-patient:mild
-                                                                d2s-patient:severe
-                                                                d2s-patient:none
-                                                              )
-                                                  ] .
-
-
-
-
-
-#################################################################
-#
-#    Individuals
-#
-#################################################################
-
-
-###  http://www.data2semantics.org/ontology/patient/inpatient
-
-d2s-patient:inpatient rdf:type d2s-patient:PatientStatus ,
-                               owl:NamedIndividual ;
-                      
-                      rdfs:label "inpatient"@en .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/mild
-
-d2s-patient:mild rdf:type d2s-patient:SubjectiveSymptom ,
-                          owl:NamedIndividual ;
-                 
-                 rdfs:label "mild"@en .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/none
-
-d2s-patient:none rdf:type d2s-patient:SubjectiveSymptom ,
-                          owl:NamedIndividual ;
-                 
-                 rdfs:label "none"@en .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/outpatient
-
-d2s-patient:outpatient rdf:type d2s-patient:PatientStatus ,
-                                owl:NamedIndividual ;
-                       
-                       rdfs:label "outpatient"@en .
-
-
-
-###  http://www.data2semantics.org/ontology/patient/severe
-
-d2s-patient:severe rdf:type d2s-patient:SubjectiveSymptom ,
-                            owl:NamedIndividual ;
-                   
-                   rdfs:label "severe"@en .
-
-
-
-
-
-#################################################################
-#
-#    General axioms
-#
-#################################################################
-
-
-[ rdf:type owl:AllDifferent ;
-  owl:distinctMembers ( d2s-patient:inpatient
-                        d2s-patient:mild
-                        d2s-patient:none
-                        d2s-patient:outpatient
-                        d2s-patient:severe
-                      )
-] .
-
-
-
-
-###  Generated by the OWL API (version 3.2.3.1824) http://owlapi.sourceforge.net
+[] a owl:AllDifferent;
+    owl:distinctMembers ( d2s-patient:inpatient d2s-patient:mild d2s-patient:none d2s-patient:outpatient d2s-patient:severe ) .
 
