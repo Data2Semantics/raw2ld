@@ -27,9 +27,12 @@ data = json.load(response)
 
 # Retrieve all ontologies, their ids and abbreviations from BioPortal (we can actually only use those with a BioPortal PURL)
 for ontology in data["success"]["data"][0]["list"][0]["ontologyBean"]:
-    abbr = ontology["abbreviation"]
-    id = ontology["ontologyId"]
-    ontology_map[abbr] = id
+    try :
+        abbr = ontology["abbreviation"]
+        id = ontology["ontologyId"]
+        ontology_map[abbr] = id
+    except KeyError :
+        print "Ontology {} does not have an abbreviation, cannot use it for linking!".format(ontology["ontologyId"])
 
 print "... done"
 
@@ -56,26 +59,34 @@ else :
 
 print "... done"
 
-#TEST = "http://purl.bioontology.org/ontology/MDR/10015919"
+# TESTING PURPOSES ONLY
+#TEST = "http://purl.org/obo/owl/DOID#DOID_8584"
+#bioportal_uris = [TEST]
 
-# Keep a list of all URIs we've visited
+# Keep a list of all URIs we've visited (actually, we don't need this as bioportal_uris is a set!)
 visited = []
 counter = 0
+total = len(bioportal_uris)
 
-print "Searching for UMLS ids in useful terms"
+print "Searching for UMLS ids from (BioPortal) PURL URIs"
 for bioportal_uri in bioportal_uris :
     if bioportal_uri not in visited :
         counter = counter + 1
         visited.append(bioportal_uri)
     
-        print "{}: Checking for potential match in URI: {}".format(counter, bioportal_uri)
+        
         # Example URI: http://purl.bioontology.org/ontology/MDR/10015919
         # "MDR" is the abbreviation of the ontology
         # "100159191" is the concept id
         m = re.search(r'http://purl.bioontology.org/ontology/(.+)/(.+)$', bioportal_uri)
         
+        if not m:
+            # Find abbreviations and concept ids for OBO ontologies converted to OWL
+            m = re.search(r'http://purl.org/obo/owl/(.+)#(.+)$', bioportal_uri)
+        
         if m :
             # If there's a match
+            print "{}/{}: {}".format(counter, total, bioportal_uri)
             try :
                 ontology_abbr = m.group(1)
                 ontology_id = ontology_map[ontology_abbr]
@@ -88,25 +99,40 @@ for bioportal_uri in bioportal_uris :
                 
                 data = json.load(response)
                 
+#                print data
+                
                 try :
                     concept_label = data["success"]["data"][0]["classBean"]["label"]
-                    links_cg.add((bioportal_uri,RDFS.label,Literal(concept_label)))
+                    links_cg.add((URIRef(bioportal_uri),RDFS.label,Literal(concept_label)))
 #                    print "Inspecting {} ({})".format(concept_label,bioportal_uri)
-                    
+#                    print "Label: {}".format(concept_label)
                     
                     for rel in data["success"]["data"][0]["classBean"]["relations"][0]["entry"] :
+#                        print "Rel: {}".format(rel)
+#                        print "String: {}".format(rel["string"])
                         try :
                             if rel["string"] == "UMLS_CUI" :
                                 umls_id = rel["list"][0]["string"]
                                 if type(umls_id) != list: 
                                     lld_uri = lld_base.format(umls_id)
-                                    print bioportal_uri, "->", lld_uri
+                                    print "\t\t{}".format(lld_uri)
                                     links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2002/07/owl#sameAs'),URIRef(lld_uri)))
                                 else :
                                     for id in umls_id :
                                         lld_uri = lld_base.format(id)
-                                        print bioportal_uri, "->", lld_uri
-                                        links_cg.add((bioportal_uri,URIRef('http://www.w3.org/2002/07/owl#sameAs'),URIRef(lld_uri)))
+                                        print "\t\t{}".format(lld_uri)
+                                        links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2002/07/owl#sameAs'),URIRef(lld_uri)))
+                            elif rel["string"] == "xref_EXACT SYNONYM":
+                                for entry in rel["list"]:
+#                                    print "Entry: {}".format(entry)
+                                    if type(entry) == dict :
+                                        for e in entry["string"] :
+#                                            print "E: {}".format(e)
+                                            em = re.search(r'UMLS_CUI:(.+)', e)
+                                            if em :
+                                                lld_uri = lld_base.format(em.group(1))
+                                                print "\t\t{}".format(lld_uri)
+                                                links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2002/07/owl#sameAs'),URIRef(lld_uri)))
                                         
                                     
                         except KeyError:
@@ -124,7 +150,7 @@ print "... done!"
 
 print "Serializing to file"
 f = open('bioportal_links.nt','w')
-links_cg.serialize(f,format="nt")
+links_cg.serialize(f, format="nt")
 
 print "... done!"
         
