@@ -8,3 +8,5 @@ links/drug_links.nt
 aers_data_files/AERS_ASCII_2011q2/README.doc
 
 links/diagnosis_links.nt
+
+src/bioportal_links.nt
