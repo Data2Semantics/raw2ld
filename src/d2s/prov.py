@@ -63,9 +63,12 @@ class Trace(object):
         self.g.bind("provns", self.PROVNS)
         
         if trailFile :
-            self.log.debug("Loading provenance trail file")
-            self.g.parse(trailFile, format='n3')
-            self.buildProvenanceTrail()
+            try:
+                self.log.debug("Loading provenance trail file")
+                self.g.parse(trailFile, format='n3')
+                self.buildProvenanceTrail()
+            except :
+                print "Trailfile does not exist yet..."
         
 
         
@@ -265,7 +268,8 @@ class Trace(object):
     
     
     def serialize(self, file = 'out.ttl'):
-        return self.g.serialize(file, format='turtle')
+        f = open(file,"w")
+        return self.g.serialize(f, format='turtle')
     
 
 
@@ -328,4 +332,5 @@ if __name__ == '__main__':
         command_call = list(splitter)
         t.execute(command_call, inputs=trace_inputs, outputs=trace_outputs, replace=option.hidden)
     
-    t.serialize(file=option.destination)
+    f = open(option.destination, "w")
+    t.serialize(file=f)
