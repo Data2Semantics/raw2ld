@@ -53,11 +53,11 @@ d2s-patient:hadRecentTreatment rdf:type owl:ObjectProperty ;
 
 
 
-###  http://www.data2semantics.org/ontology/patient/hasIndication
+###  http://www.data2semantics.org/ontology/patient/hasDiagnosis
 
-d2s-patient:hasIndication rdf:type owl:ObjectProperty ;
+d2s-patient:hasDiagnosis rdf:type owl:ObjectProperty ;
                           
-                          rdfs:label "hasIndication"@en ;
+                          rdfs:label "hasDiagnosis"@en ;
                           
                           rdfs:domain d2s-patient:Patient .
 
