@@ -22,10 +22,13 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
     cg.add((recURI, RDF.type, D2SA['RecommendationAnnotation']))
     cg.add((recURI, RDF.type, OA['Annotation']))
     
+    
     if not rec.isupper() :
         target = TARGET[recHash]
         selector = SELECTOR[recHash]
         cg.add((recURI, OA['hasTarget'], target))
+        cg.add((recURI, OA['hasBody'], Literal(rec.decode('utf-8').strip())))
+        
         cg.add((target, RDF.type, OA['SpecificResource']))
         cg.add((target, OA['hasSource'], source))
         cg.add((target, OA['hasSelector'], selector))
@@ -40,11 +43,14 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
         
         cg.add((recURI, OA['hasBody'], Literal(rec.decode('utf-8').title().strip())))
         
+        
+        
     if level :
 #        levelHash = hashlib.md5(level).hexdigest()
         levelURI = LEVEL[level]      
         
         cg.add((recURI, D2SA['hasLevel'], levelURI))
+        cg.add((levelURI, RDF.type, D2SA['RecommendationLevel']))
         cg.add((levelURI, RDFS.label, Literal(level))) 
         
     if evSummary :
@@ -59,6 +65,8 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
         cg.add((evsURI, RDF.type, D2SA['EvidenceSummaryAnnotation']))
         cg.add((evsURI, RDF.type, OA['Annotation']))
         
+        cg.add((evsURI, OA['hasBody'], Literal(evSummary.decode('utf-8').strip())))
+        
         cg.add((evsURI, OA['hasTarget'], target))
         cg.add((target, RDF.type, OA['SpecificResource']))
         cg.add((target, OA['hasSource'], source))
@@ -72,12 +80,12 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
         if referenceNr :
             referenceNr = referenceNr.strip('[]')
             
-            refSourceURI = URIRef(guideline + '/' + referenceNr)
+            refSourceURI = DOCUMENT[referenceNr]
             
             
             if recInReference :   
                 recInRefHash = hashlib.md5(recInReference).hexdigest()
-                recURI = URIRef(guideline + '/' + referenceNr + '/' + recInRefHash)
+                recURI = DOCUMENT[referenceNr + '/' + recInRefHash]
                 
                 target = TARGET[recInRefHash]
                 selector = SELECTOR[recInRefHash]
@@ -86,6 +94,8 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
                 
                 cg.add((recURI, RDF.type, D2SA['EvidenceAnnotation']))
                 cg.add((recURI, RDF.type, OA['Annotation']))
+                
+                cg.add((recURI, OA['hasBody'], Literal(recInReference.decode('utf-8').strip())))
                 
                 cg.add((recURI, OA['hasTarget'], target))
                 cg.add((target, RDF.type, OA['SpecificResource']))
@@ -99,7 +109,7 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
             
                 if evInReference :
                     evInRefHash = hashlib.md5(evInReference).hexdigest()
-                    evURI = URIRef(guideline + '/' + referenceNr + '/' + evInRefHash)
+                    evURI = DOCUMENT[referenceNr + '/' + evInRefHash]
                     
                     target = TARGET[evInRefHash]
                     selector = SELECTOR[evInRefHash]
@@ -108,6 +118,8 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
                     
                     cg.add((evURI, RDF.type, D2SA['EvidenceAnnotation']))
                     cg.add((evURI, RDF.type, OA['Annotation']))
+                    
+                    cg.add((evURI, OA['hasBody'], Literal(evInReference.decode('utf-8').strip())))
                     
                     cg.add((evURI, OA['hasTarget'], target))
                     cg.add((target, RDF.type, OA['SpecificResource']))
@@ -181,8 +193,9 @@ if __name__ == '__main__':
     print "Loading reference mappings"
     cg.load(open('reference-mappings.n3','r'), format='n3')
     
-    guideline = 'http://cid.oxfordjournals.org/content/52/4/e56.full'
-    source = URIRef(guideline)
+    guidelineURI = 'http://cid.oxfordjournals.org/content/52/4/e56.full'
+    guidelineID = re.sub(r'http://(.*)',r'\1',guidelineURI)
+    source = URIRef(guidelineURI)
     
     
     DEFAULT = Namespace('http://aers.data2semantics.org/resource/')
@@ -191,7 +204,7 @@ if __name__ == '__main__':
     SELECTOR = Namespace('http://aers.data2semantics.org/resource/selector/')
     LEVEL = Namespace('http://aers.data2semantics.org/resource/level/')
     SUMMARY = Namespace('http://aers.data2semantics.org/resource/summary/')
-    REF = Namespace('http://aers.data2semantics.org/resource/reference/')
+    DOCUMENT = Namespace('http://aers.data2semantics.org/resource/document/'+guidelineID+'/')
     
     
     D2SA = Namespace('http://aers.data2semantics.org/vocab/annotation/')
@@ -205,7 +218,7 @@ if __name__ == '__main__':
 #    cg.bind('selector', SELECTOR)
 #    cg.bind('level', LEVEL)
 #    cg.bind('summary', SUMMARY)
-#    cg.bind('ref',REF)
+#    cg.bind('document',DOCUMENT)
     cg.bind('oa',OA)
     cg.bind('oax',OAX)
     cg.bind('d2sa', D2SA)
@@ -215,5 +228,5 @@ if __name__ == '__main__':
     
     readCSV()
     
-    cg.serialize(open('output.n3','w'), format='n3')
+    cg.serialize(open('output.n3','w'), format='turtle')
         

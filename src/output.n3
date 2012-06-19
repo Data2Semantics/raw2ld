@@ -1,9 +1,9 @@
 @prefix d2sa: <http://aers.data2semantics.org/vocab/annotation/> .
 @prefix oa: <http://www.w3.org/ns/openannotation/core/> .
 @prefix oax: <http://www.w3.org/ns/openannotation/extensions/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix swanrel: <http://purl.org/swan/2.0/discourse-relationships/> .
-@prefix owl:     <http://www.w3.org/2002/07/owl#> .
 
 <http://aers.data2semantics.org/resource/annotation/25e855bf1a657296936f69721cc9d1ad> a d2sa:RecommendationAnnotation,
         oa:Annotation;
@@ -23,6 +23,7 @@
         oa:Annotation;
     d2sa:hasEvidenceSummary <http://aers.data2semantics.org/resource/summary/9d783e7b5fec54fb5ac65c9b2d95a72e>;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/A-III>;
+    oa:hasBody "measurement of serum levels of creatinine and blood urea nitrogen;";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/39d25022d7e3e02d4c995b462a807029> .
 
 <http://aers.data2semantics.org/resource/annotation/3cd36a70b9023c8542963782114fcf66> a d2sa:RecommendationAnnotation,
@@ -47,11 +48,13 @@
         <http://aers.data2semantics.org/resource/summary/72ce021d1658b4649094bf4d4251db35>,
         <http://aers.data2semantics.org/resource/summary/f1cc626f9540688479f8370d3f0421c9>;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/A-III>;
+    oa:hasBody "A chest radiograph is indicated for patients with respiratory signs or symptoms (A-III).";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/674fadae29255276f08471b241fde072> .
 
 <http://aers.data2semantics.org/resource/annotation/694d77340fce86e969368cf532a85416> a d2sa:RecommendationAnnotation,
         oa:Annotation;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/A-III>;
+    oa:hasBody "and measurement of electrolytes, hepatic transaminase enzymes, and total bilirubin (A-III).";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/694d77340fce86e969368cf532a85416> .
 
 <http://aers.data2semantics.org/resource/annotation/7787445136f0672e454b61511af89983> a d2sa:RecommendationAnnotation,
@@ -71,11 +74,13 @@
     d2sa:hasEvidenceSummary <http://aers.data2semantics.org/resource/summary/8ab1263761e2cfe9f25596d5089667cb>,
         <http://aers.data2semantics.org/resource/summary/afaac88618ddf1f24f79aa882cac96e8>;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/A-III>;
+    oa:hasBody "2 blood culture sets from separate venipunctures should be sent if no central catheter is present (A-III).";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/7d53b66dd087fe2b98916c27a0c7f143> .
 
 <http://aers.data2semantics.org/resource/annotation/7fd00a08083bf1995cb17c78e4988c25> a d2sa:RecommendationAnnotation,
         oa:Annotation;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/A-III>;
+    oa:hasBody "Laboratory tests should include a CBC count with differential leukocyte count and platelet count;";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/7fd00a08083bf1995cb17c78e4988c25> .
 
 <http://aers.data2semantics.org/resource/annotation/b8d7e6eb70b41f4924bd2fdf511aaa44> a d2sa:RecommendationAnnotation,
@@ -83,6 +88,7 @@
     d2sa:hasEvidenceSummary <http://aers.data2semantics.org/resource/summary/2faa493ca1fdc07d38c48ac488e2adeb>,
         <http://aers.data2semantics.org/resource/summary/7507da7eb2e8f4fb80959ba9d3da25cf>;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/A-III>;
+    oa:hasBody "At least 2 sets of blood cultures are recommended,";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/b8d7e6eb70b41f4924bd2fdf511aaa44> .
 
 <http://aers.data2semantics.org/resource/annotation/c5b1e4b1545954b786c32441e9e06008> a d2sa:RecommendationAnnotation,
@@ -91,11 +97,13 @@
         <http://aers.data2semantics.org/resource/summary/91a5af7301b490e602eb03ef423dd727>,
         <http://aers.data2semantics.org/resource/summary/b4ae9dca357a2e2043c87a5bb1f951cf>;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/C-III>;
+    oa:hasBody "Blood culture volumes should be limited to > 1% of total blood volume (usually 70 mL/kg) in patients weighing > 40 kg (C-III).";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/c5b1e4b1545954b786c32441e9e06008> .
 
 <http://aers.data2semantics.org/resource/annotation/d542d9d81b1210b5ecb99b265eb77b2e> a d2sa:RecommendationAnnotation,
         oa:Annotation;
     d2sa:hasEvidenceSummary <http://aers.data2semantics.org/resource/summary/0f8ef03dbc52fc47363644ef41d94582>;
+    oa:hasBody "with a set collected simultaneously from each lumen of an existing CVC, if present, and from a peripheral vein site;";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/d542d9d81b1210b5ecb99b265eb77b2e> .
 
 <http://aers.data2semantics.org/resource/annotation/e217cef55cf77d2647b02dc639200562> a d2sa:RecommendationAnnotation,
@@ -107,33 +115,113 @@
         <http://aers.data2semantics.org/resource/summary/eac5d5cfa7ef90fc55891da116b7a161>,
         <http://aers.data2semantics.org/resource/summary/faef636d8420725231a10d9b08e044bd>;
     d2sa:hasLevel <http://aers.data2semantics.org/resource/level/A-III>;
+    oa:hasBody "Culture specimens from other sites of suspected infection should be obtained as clinically indicated (A-III).";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/e217cef55cf77d2647b02dc639200562> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/292> owl:sameAs <http://www.ejcancer.info/article/S0959-8049(06)00391-1/fulltext> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/292> owl:sameAs <http://www.ejcancer.info/article/S0959-8049(06)00391-1/fulltext> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/2922010> owl:sameAs <http://www.ncbi.nlm.nih.gov/pubmed/21095116> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/2922010> owl:sameAs <http://www.ncbi.nlm.nih.gov/pubmed/21095116> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/293> owl:sameAs <http://jco.ascopubs.org/content/24/19/3187.full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/293> owl:sameAs <http://jco.ascopubs.org/content/24/19/3187.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/294> owl:sameAs <http://www.jnccn.org/content/7/1/64.short> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/294> owl:sameAs <http://www.jnccn.org/content/7/1/64.short> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/295> owl:sameAs <http://jco.ascopubs.org/content/24/19/2991.full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/295> owl:sameAs <http://jco.ascopubs.org/content/24/19/2991.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/296> owl:sameAs <http://jco.ascopubs.org/content/26/2/290.full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/296> owl:sameAs <http://jco.ascopubs.org/content/26/2/290.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/297> owl:sameAs <http://jco.ascopubs.org/content/24/19/2975> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/297> owl:sameAs <http://jco.ascopubs.org/content/24/19/2975> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/298> owl:sameAs <http://onlinelibrary.wiley.com/doi/10.1002/cncr.21847/full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/298> owl:sameAs <http://onlinelibrary.wiley.com/doi/10.1002/cncr.21847/full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/299> owl:sameAs <http://www.croh-online.com/article/S1040-8428(09)00005-5/fulltext> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/299> owl:sameAs <http://www.croh-online.com/article/S1040-8428(09)00005-5/fulltext> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/301> owl:sameAs <http://www.annals.org/content/121/7/492.full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/301> owl:sameAs <http://www.annals.org/content/121/7/492.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/303> owl:sameAs <http://jnci.oxfordjournals.org/content/93/1/31.full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/303> owl:sameAs <http://jnci.oxfordjournals.org/content/93/1/31.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/49> owl:sameAs <http://jcm.asm.org/content/45/11/3546.full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/49> owl:sameAs <http://jcm.asm.org/content/45/11/3546.full> .
 
-<http://aers.data2semantics.org/resource/level/C-III> rdfs:label "C-III" .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/47> owl:sameAs <http://www.annals.org/content/119/4/270.full> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/47/de229e7a67b547b528f4030085ee78a3> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "Our data, together with an analysis of previous studies, show that the yield of blood cultures in adults increases approximately 3% per millilitre of blood cultured.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/de229e7a67b547b528f4030085ee78a3> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/48> owl:sameAs <http://www.ncbi.nlm.nih.gov/pubmed/15876945> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/50/8113d1205af3df0398cd3b521c89736f> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/50/86c30637357fe57b33374e0fc84fe3df>;
+    oa:hasBody "In view of our findings for the current study, we recommend the following parameters for detection of bloodstream infections in adult patients when using the BACTEC 9240 system. First, 20 mL of blood should be obtained per venipuncture and distributed equally between an aerobic and an anaerobic blood culture bottle (i.e., “1 blood culture” or “1 blood culture set”). Second, two 20-mL blood samples should be obtained immediately at the time that the first blood culture is ordered for a 24-h period. Each of these 20-mL samples should be obtained from different venipunctures. Third, 2 additional 20-mL samples should be obtained at separate intervals over the remaining 24 h if signs and symptoms of septicemia persist. Finally, blood culture bottles should be incubated for 5 days.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/8113d1205af3df0398cd3b521c89736f> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/50/86c30637357fe57b33374e0fc84fe3df> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "for blood samples obtained from patients without infective endocarditis and cultured using a manual blood culture system containing standard media, yields from cultures of 20 mL and 30 mL of blood were 38% and 62% greater, respectively, than were those from 10 mL of blood. In our study, yields from 20 mL and 30 mL of blood were 29.8% and 47.2% greater, respectively, than those from 10 mL of blood. We found that, if 40-mL blood cultures were compared with 30-mL blood cultures, the increase in yield was less dramatic (7.2%).";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/86c30637357fe57b33374e0fc84fe3df> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/51/60f0759df2871cecc825f22487a4336f> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "Of 551 paired cultures, 469 (85%) were catheternegative/venipuncture-negative, 32 (6%) were catheterpositive/venipuncture-positive, 17 (3%) were catheternegative/venipuncture-positive, and 33 (6%) were catheter-positive/venipuncture-negative pairs. For the 82 paired cultures with at least one positive result, blinded determination of true bacteremia or fungemia was made by two infectious disease specialists. For catheter draw compared with peripheral venipuncture, sensitivity was 89% (95% CI, 79% to 98%) and 78% (CI, 65% to 90%) (difference, 11 percentage points [CI, 26 to 28 percentage points]), specificity was 95% (CI, 93% to 97%) and 97% (CI, 96% to 99%) (difference, 22 percentage points [CI, 25 to 0.2 percentage points]), positive predictive value was 63% (CI, 50% to 75%) and 73% (CI, 60% to 86%) (difference, 210 percentage points [CI, 226 to 5 percentage points]), and negative predictive value was 99% [CI, 97% to 100%]) and 98% (CI, 96% to 100%) (difference, 1 percentage point [CI, 20.5 to 3 percentage points]).";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/60f0759df2871cecc825f22487a4336f> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/51/d5facab33d83bef307c6874d08b7502a> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/51/60f0759df2871cecc825f22487a4336f>;
+    oa:hasBody "In hospitalized hematology-oncology patients, culture of blood drawn through either the central catheter or peripheral vein shows excellent negative predictive value. Culture of blood drawn through an indwelling central venous catheter has low positive predictive value, apparently less than from a peripheral venipuncture. Therefore, a positive result from a catheter needs clinical interpretation and may require confirmation. However, the use of a catheter to obtain blood for culture may be an acceptable method for ruling out bloodstream infections.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/d5facab33d83bef307c6874d08b7502a> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/52/6d66f1a150e38f7f957867d59a75d663> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "Furthermore, the American College of Physicians guidelines also recommend that blood for culture not be obtained from intravascular devices [9]. Although blood may occasionally be obtained from intravenous lines, a culture of blood obtained from such a device should be paired with another culture of blood obtained by peripheral venipuncture. Finally, I am unaware of published data from systematic studies that support obtaining separate blood samples from different ports of triplelumen catheters.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/6d66f1a150e38f7f957867d59a75d663> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/52/9c7cb6bb30c5a2f09228f53ac9501f82> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "My observations support those of Bryant and Strand [8], who noted significantly increased rates of contamination when blood for culture was obtained from intravenous catheters (P < .001).";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/9c7cb6bb30c5a2f09228f53ac9501f82> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/53> owl:sameAs <http://www.ncbi.nlm.nih.gov/pubmed/10391191> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/54> owl:sameAs <http://www.ncbi.nlm.nih.gov/pubmed/3962940> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/55/2b92f5884157cafcd8c9f007059d7bce> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "The results indicated that CRP, the most commonly used marker, was elevated in all conditions related with febrile neutropenia, including non-microbial episodes. Although CRP levels appeared to be slightly lower in patients with non-microbial fever, the difference was not significant. In the present study we found a highly significant difference in PCT levels between bacteremic and nonbacteremic episodes, and based on a cutoff level of 0.62 ng/ml PCT showed good sensitivity and specificity for predicting bacteremia. In contrast to others [28], however, we could not find a significant difference between PCT levels in cases of bacteremia due to grampositive versus gram-negative agents, since PCT levels were elevated in both types of infection. IL-6 was similarly elevated in patients with systemic bacteremic infection in contrast to non-microbial febrile episodes or FUO. It also proved to be an effective marker in distinguishing between bacteremic and non-bacteremic episodes. A cutoff level of 297 pg/ml was associated with a sensitivity comparable to that of PCT, but the specificity was somewhat lower. Surprisingly, we found a difference in the IL-6 levels detected in cases of bacteremia due to gram-positive versus gram-negative microorganisms, with a very low median level present in cases of gram-negative infection. However, this may be a bias due to the small number of patients in our study population.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/2b92f5884157cafcd8c9f007059d7bce> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/55/c34606fb6b242c4070b99408702a3368> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/55/2b92f5884157cafcd8c9f007059d7bce>;
+    oa:hasBody "PCT and IL-6 are more reliable markers than CRP for predicting bacteremia in patients with febrile neutropenia";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/c34606fb6b242c4070b99408702a3368> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/56/300e33d1716cb23cb0415f778b175ef8> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/56/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9>;
+    oa:hasBody "In conclusion,daily measurement of PCT or IL-6 could help identify neutropenic patients with a stable course when the fever lasts >3 d. This could lead to i.v. antibiotic treatment being discontinued or at least not being intensified, which in turn would help to minimise the risk of development of super-infections of resistant strains. In addition, it would reduce adverse events and treatment costs. We suggest that this strategy should be tested prospectively in neutropenic patients.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/300e33d1716cb23cb0415f778b175ef8> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/56/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "Patients whose fever continued for more than 3 d and who developed symptoms and signs of complications had significantly higher plasma levels of PCT and IL-6 (P < 0.05) than did patients without complications. The levels of CRP and SAA did not differ on any day between the two groups of episodes. Furthermore, none of the four studied markers could in advance predict on which day the patient would deteriorate (data not shown). A significant difference in the median values between the two groups was seen only for PCT (P 1/4 0.001) and IL-6 (P 1/4 0.003). Moreover, when comparing day-to-day values, we found significantly lower levels of PCT and IL-6 in the group of episodes with no subsequent complications than in the group with complications (Table 2). However, in individual episodes none of the analysed markers could predict the time for developing complications. A comparison of the two episode groups (complication vs. no complication) showed no significant difference on any day in the levels of CRP and SAA.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/57/02411ad6e41005434acb9aabee15a4ad> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/57/9a7e6f99e4d7e6b708e5a9c9b981c057>;
+    oa:hasBody "Our study supports the value of PCT as a reliable tool to predict clinical outcome in febrile neutropenia.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/02411ad6e41005434acb9aabee15a4ad> .
+
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/57/9a7e6f99e4d7e6b708e5a9c9b981c057> a d2sa:EvidenceAnnotation,
+        oa:Annotation;
+    oa:hasBody "In febrile episodes with an increase in PCT levels we investigated the potential predictive value of a decrease after resolution of fever. The ratio between the maximum value of PCT during the febrile episode and the value on the second afebrile day was determined. This was found to correlate inversely with the duration of the following afebrile period (correlation coefficient −0.332 and P=0.006). Therefore, it is not surprising that a decrease in PCT values appears to be associated with a longer afebrile period after defervescence.";
+    oa:hasTarget <http://aers.data2semantics.org/resource/target/9a7e6f99e4d7e6b708e5a9c9b981c057> .
+
+<http://aers.data2semantics.org/resource/level/C-III> a d2sa:RecommendationLevel;
+    rdfs:label "C-III" .
 
 <http://aers.data2semantics.org/resource/selector/02411ad6e41005434acb9aabee15a4ad> a oax:TextQuoteSelector;
     oax:exact "Our study supports the value of PCT as a reliable tool to predict clinical outcome in febrile neutropenia.";
@@ -296,7 +384,7 @@
     oax:suffix "" .
 
 <http://aers.data2semantics.org/resource/selector/9a7e6f99e4d7e6b708e5a9c9b981c057> a oax:TextQuoteSelector;
-    oax:exact "In febrile episodes with an increase in PCT levels we investigated the potential predictive value of a decrease after resolution of fever. The ratio between the maximum value of PCT during the febrile episode and the value on the second afebrile day was determined. This was found to correlate inversely with the duration of the following afebrile period (correlation coefficient −0.332 and Powl:sameAs0.006). Therefore, it is not surprising that a decrease in PCT values appears to be associated with a longer afebrile period after defervescence.";
+    oax:exact "In febrile episodes with an increase in PCT levels we investigated the potential predictive value of a decrease after resolution of fever. The ratio between the maximum value of PCT during the febrile episode and the value on the second afebrile day was determined. This was found to correlate inversely with the duration of the following afebrile period (correlation coefficient −0.332 and P=0.006). Therefore, it is not surprising that a decrease in PCT values appears to be associated with a longer afebrile period after defervescence.";
     oax:prefix "";
     oax:suffix "" .
 
@@ -422,159 +510,194 @@
 
 <http://aers.data2semantics.org/resource/summary/0a65041f813b25eae36bff520e003824> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "CT of other areas (head, sinuses, abdomen, and pelvis) should be performed as clinically indicated.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/0a65041f813b25eae36bff520e003824> .
 
 <http://aers.data2semantics.org/resource/summary/0f8ef03dbc52fc47363644ef41d94582> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "In the neutropenic patient with cancer, collection of blood culture sets from all CVC lumens (if present), as well as 1 set from a peripheral vein, is advocated during the initial evaluation of fever.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/0f8ef03dbc52fc47363644ef41d94582> .
 
 <http://aers.data2semantics.org/resource/summary/13e4bbbfd0005c6a6d0b93b10268f65c> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "(a ‘‘set’’ consists of 1 venipuncture or catheter access draw of 20 mL of blood divided into 1 aerobic and 1 anaerobic blood culture bottle).";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/13e4bbbfd0005c6a6d0b93b10268f65c> .
 
 <http://aers.data2semantics.org/resource/summary/1bbfb5e7b0ebf2d7afe065c125dd3867> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "After initial defervescence occurs with empirical antibiotics, any recrudescent fever should be evaluated with cultures as a new episode of possible infection.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/1bbfb5e7b0ebf2d7afe065c125dd3867> .
 
 <http://aers.data2semantics.org/resource/summary/2faa493ca1fdc07d38c48ac488e2adeb> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/49] >,
-        <http://cid.oxfordjournals.org/content/52/4/e56.full/50/8113d1205af3df0398cd3b521c89736f>;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/49] >,
+        <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/50/8113d1205af3df0398cd3b521c89736f>;
+    oa:hasBody "Recently, 2 retrospective studies found that 2 blood culture sets detect 80%–90% of bloodstream pathogens in critically ill patients, whereas >3 sets are required to achieve >96% detection [49–50].";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/2faa493ca1fdc07d38c48ac488e2adeb> .
 
 <http://aers.data2semantics.org/resource/summary/4fb17b9fbdad2cdacdf533267fe05b3f> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "At least weekly monitoring of serum transaminase levels is advisable for patients with complicated courses or suspected hepatocellular injury or cholestatic disease.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/4fb17b9fbdad2cdacdf533267fe05b3f> .
 
 <http://aers.data2semantics.org/resource/summary/582d0a8c9f56b30c545203015b0713f6> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/47/de229e7a67b547b528f4030085ee78a3>;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/47/de229e7a67b547b528f4030085ee78a3>;
+    oa:hasBody "The total volume of blood cultured is a crucial determinant of detecting a bloodstream infection [47].";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/582d0a8c9f56b30c545203015b0713f6> .
 
 <http://aers.data2semantics.org/resource/summary/5ab6e27af58fd7efc3b863b5fff030e0> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/48>;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/48>;
+    oa:hasBody "Because total blood volume is approximately 70 mL/kg, the total sample limit would be 7 mL for a 10-kg patient and 28 mL for a 40-kg patient [48].";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/5ab6e27af58fd7efc3b863b5fff030e0> .
 
 <http://aers.data2semantics.org/resource/summary/635f13e47a8c1a254bfbfd0b0775e308> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "¤ CSF: Examination and culture of spinal fluid is indicated if meningitis is suspected. Platelet transfusion should be given prior to lumbar puncture if thrombocytopenia is a concern.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/635f13e47a8c1a254bfbfd0b0775e308> .
 
 <http://aers.data2semantics.org/resource/summary/6a3307767ec957eabb8d121c99898fa0> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "The current data are not sufficient to recommend routine use of these tests to guide decisions about antimicrobial use.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/6a3307767ec957eabb8d121c99898fa0> .
 
 <http://aers.data2semantics.org/resource/summary/71d63e888dea006e5e0ebb25059ad99b> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "¤ Urine: Culture of urine samples is indicated if signs or symptoms of urinary tract infection exist, a urinary catheter is in place, or the findings of urinalysis are abnormal.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/71d63e888dea006e5e0ebb25059ad99b> .
 
 <http://aers.data2semantics.org/resource/summary/72ce021d1658b4649094bf4d4251db35> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Pneumonia during neutropenia can progress rapidly to respiratory compromise and therefore should be managed in the inpatient setting.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/72ce021d1658b4649094bf4d4251db35> .
 
 <http://aers.data2semantics.org/resource/summary/7507da7eb2e8f4fb80959ba9d3da25cf> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Accordingly, at least 2 sets of blood culture specimens should be obtained,";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/7507da7eb2e8f4fb80959ba9d3da25cf> .
 
 <http://aers.data2semantics.org/resource/summary/78b5f52c2488b86b13d7210c97f89d24> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Culture of the sites listed below should be guided by clinical signs and symptoms but should not be performed routinely.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/78b5f52c2488b86b13d7210c97f89d24> .
 
 <http://aers.data2semantics.org/resource/summary/89387b9ac24191021bd4f9f49f00852c> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "If fever persists after empirical antibiotics have been started, then 2 sets of blood cultures (via catheter or periphery) may be obtained on each of the next 2 days.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/89387b9ac24191021bd4f9f49f00852c> .
 
 <http://aers.data2semantics.org/resource/summary/8ab1263761e2cfe9f25596d5089667cb> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Some experts have suggested obtaining both sets of blood cultures from the CVC alone, without peripheral vein sampling.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/8ab1263761e2cfe9f25596d5089667cb> .
 
 <http://aers.data2semantics.org/resource/summary/91a5af7301b490e602eb03ef423dd727> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Some centers limit blood draws to no more than 1% of a patient’s total blood volume.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/91a5af7301b490e602eb03ef423dd727> .
 
 <http://aers.data2semantics.org/resource/summary/94eef192f656671fca697dccc749b844> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Physical Examination";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/94eef192f656671fca697dccc749b844> .
 
 <http://aers.data2semantics.org/resource/summary/98b4e4767890605b197bee8c557f1598> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Accordingly, in neutropenic patients, bacterial infections of skin and soft-tissue may lack in duration, erythema, warmth, or pustulation; a pulmonary infection may have no discernible infiltrate on a radiograph; CSF pleocytosis might be modest or altogether absent in the setting of meningitis; and a urinary tract infection may demonstrate little or no pyuria.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/98b4e4767890605b197bee8c557f1598> .
 
 <http://aers.data2semantics.org/resource/summary/9a754923d6d797ca2b7c2e96b01b49ee> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "These tests should be done at least every 3 days during the course of intensive antibiotic therapy.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/9a754923d6d797ca2b7c2e96b01b49ee> .
 
 <http://aers.data2semantics.org/resource/summary/9d783e7b5fec54fb5ac65c9b2d95a72e> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "CBC counts and determination of the levels of serum creatinine and urea nitrogen are needed to plan supportive care and to monitor for the possible occurrence of drug toxicity.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/9d783e7b5fec54fb5ac65c9b2d95a72e> .
 
 <http://aers.data2semantics.org/resource/summary/9ef4a9520422a4c5d8962bded6215837> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/55/c34606fb6b242c4070b99408702a3368>,
-        <http://cid.oxfordjournals.org/content/52/4/e56.full/56/300e33d1716cb23cb0415f778b175ef8>,
-        <http://cid.oxfordjournals.org/content/52/4/e56.full/57/02411ad6e41005434acb9aabee15a4ad>;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/55/c34606fb6b242c4070b99408702a3368>,
+        <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/56/300e33d1716cb23cb0415f778b175ef8>,
+        <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/57/02411ad6e41005434acb9aabee15a4ad>;
+    oa:hasBody "Studies have demonstrated inconsistent results regarding the use of such markers of inflammation as C-reactive protein, interleukins- 6 and -8, and procalcitonin in neutropenic patients with cancer [55–57].";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/9ef4a9520422a4c5d8962bded6215837> .
 
 <http://aers.data2semantics.org/resource/summary/afaac88618ddf1f24f79aa882cac96e8> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/51/d5facab33d83bef307c6874d08b7502a>,
-        <http://cid.oxfordjournals.org/content/52/4/e56.full/52/6d66f1a150e38f7f957867d59a75d663>,
-        <http://cid.oxfordjournals.org/content/52/4/e56.full/52/9c7cb6bb30c5a2f09228f53ac9501f82>,
-        <http://cid.oxfordjournals.org/content/52/4/e56.full/53>;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/51/d5facab33d83bef307c6874d08b7502a>,
+        <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/52/6d66f1a150e38f7f957867d59a75d663>,
+        <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/52/9c7cb6bb30c5a2f09228f53ac9501f82>,
+        <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/53>;
+    oa:hasBody "However, the Panel does not favor this approach for initial evaluation, because a catheter-related infection cannot be ruled out without the simultaneous peripheral culture [51–53].";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/afaac88618ddf1f24f79aa882cac96e8> .
 
 <http://aers.data2semantics.org/resource/summary/b4ae9dca357a2e2043c87a5bb1f951cf> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "In pediatric patients weighing < 40 kg, proportionately smaller volumes of blood culture samples are suggested.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/b4ae9dca357a2e2043c87a5bb1f951cf> .
 
 <http://aers.data2semantics.org/resource/summary/c23a1ddd23530f00d0ca2efe29a7502d> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Fever is often the only sign of a serious underlying infection.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/c23a1ddd23530f00d0ca2efe29a7502d> .
 
 <http://aers.data2semantics.org/resource/summary/c538a769aff82d3bc8feb2b7d0425b73> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Beyond that, most experts would not continue daily blood cultures for persistent fever unless there is a clinical change in the patient.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/c538a769aff82d3bc8feb2b7d0425b73> .
 
 <http://aers.data2semantics.org/resource/summary/ca29c901a5dbacf1da35da22df342515> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/54>;
+    swanrel:referencesAsSupportingEvidence <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/54>;
+    oa:hasBody "¤ Skin: Aspiration or biopsy of skin lesions suspected of being infected should be performed for cytological testing, Gram staining, and culture [54].";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/ca29c901a5dbacf1da35da22df342515> .
 
 <http://aers.data2semantics.org/resource/summary/ce336404eee998982646eed66d91501a> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Underlying co-morbid conditions, such as diabetes, chronic obstructive lung disease, and/or recent surgical procedures, should be noted.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/ce336404eee998982646eed66d91501a> .
 
 <http://aers.data2semantics.org/resource/summary/cf53e609a312f77a0461df1291a1b76c> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Serum Markers of Inflammation";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/cf53e609a312f77a0461df1291a1b76c> .
 
 <http://aers.data2semantics.org/resource/summary/d4dfd856e16c52b2e4e50fd26e36649f> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "A detailed history should include elicitation of new site-specific symptoms, information about antimicrobial prophylaxis, infection exposures, prior documented infections or pathogen colonization, and co-existence of noninfectious causes of fever, such as blood product administration.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/d4dfd856e16c52b2e4e50fd26e36649f> .
 
 <http://aers.data2semantics.org/resource/summary/dd8fa93a98cb1ae330b6cde9620ecb01> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Signs and symptoms of inflammation are often attenuated or absent in neutropenic patients.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/dd8fa93a98cb1ae330b6cde9620ecb01> .
 
 <http://aers.data2semantics.org/resource/summary/e0c66999179baa2cf6e4cfd3b2e9f82f> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "The physical examination of febrile neutropenic patients requires a careful search to detect subtle symptoms and signs, especially at the sites that are most commonly infected: skin (especially sites of previous procedures or catheters, such as catheter entry and exit sites or bone marrow aspiration sites), oropharynx (including periodontium), alimentary tract, lungs, and perineum.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/e0c66999179baa2cf6e4cfd3b2e9f82f> .
 
 <http://aers.data2semantics.org/resource/summary/eac5d5cfa7ef90fc55891da116b7a161> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "¤ Stool: A stool specimen in a patient with diarrhea should be evaluated with a Clostridium difficile toxin assay. There is limited value in sending a stool specimen for bacterial pathogen cultures or for ova and parasite examination for most patients treated in US hospitals unless there has been recent travel to or residence in areas of endemicity.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/eac5d5cfa7ef90fc55891da116b7a161> .
 
 <http://aers.data2semantics.org/resource/summary/f1cc626f9540688479f8370d3f0421c9> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "Patients with respiratory signs and symptoms should have a chest radiograph to rule out pneumonia.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/f1cc626f9540688479f8370d3f0421c9> .
 
 <http://aers.data2semantics.org/resource/summary/faef636d8420725231a10d9b08e044bd> a d2sa:EvidenceSummaryAnnotation,
         oa:Annotation;
+    oa:hasBody "¤ Respiratory specimens: Sputum samples for routine bacterial culture should be sent if the patient has a productive cough. Lower respiratory tract specimens obtained by bronchoalveolar lavage (BAL) are recommended for patients with an infiltrate of uncertain etiology visible on chest imaging. Nasal wash or BAL specimens are recommended to evaluate for symptoms of respiratory virus infection, particularly during an outbreak or during winter. Assays should be sent for detection of adenovirus, influenza A and B virus, RSV, and parainfluenza virus.";
     oa:hasTarget <http://aers.data2semantics.org/resource/target/faef636d8420725231a10d9b08e044bd> .
 
 <http://aers.data2semantics.org/resource/target/02411ad6e41005434acb9aabee15a4ad> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/02411ad6e41005434acb9aabee15a4ad>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/57> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/57> .
 
 <http://aers.data2semantics.org/resource/target/0a65041f813b25eae36bff520e003824> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/0a65041f813b25eae36bff520e003824>;
@@ -594,7 +717,7 @@
 
 <http://aers.data2semantics.org/resource/target/2b92f5884157cafcd8c9f007059d7bce> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/2b92f5884157cafcd8c9f007059d7bce>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/55> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/55> .
 
 <http://aers.data2semantics.org/resource/target/2faa493ca1fdc07d38c48ac488e2adeb> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/2faa493ca1fdc07d38c48ac488e2adeb>;
@@ -602,7 +725,7 @@
 
 <http://aers.data2semantics.org/resource/target/300e33d1716cb23cb0415f778b175ef8> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/300e33d1716cb23cb0415f778b175ef8>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/56> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/56> .
 
 <http://aers.data2semantics.org/resource/target/39d25022d7e3e02d4c995b462a807029> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/39d25022d7e3e02d4c995b462a807029>;
@@ -622,7 +745,7 @@
 
 <http://aers.data2semantics.org/resource/target/60f0759df2871cecc825f22487a4336f> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/60f0759df2871cecc825f22487a4336f>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/51> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/51> .
 
 <http://aers.data2semantics.org/resource/target/635f13e47a8c1a254bfbfd0b0775e308> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/635f13e47a8c1a254bfbfd0b0775e308>;
@@ -642,7 +765,7 @@
 
 <http://aers.data2semantics.org/resource/target/6d66f1a150e38f7f957867d59a75d663> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/6d66f1a150e38f7f957867d59a75d663>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/52> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/52> .
 
 <http://aers.data2semantics.org/resource/target/71d63e888dea006e5e0ebb25059ad99b> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/71d63e888dea006e5e0ebb25059ad99b>;
@@ -670,11 +793,11 @@
 
 <http://aers.data2semantics.org/resource/target/8113d1205af3df0398cd3b521c89736f> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/8113d1205af3df0398cd3b521c89736f>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/50> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/50> .
 
 <http://aers.data2semantics.org/resource/target/86c30637357fe57b33374e0fc84fe3df> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/86c30637357fe57b33374e0fc84fe3df>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/50> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/50> .
 
 <http://aers.data2semantics.org/resource/target/89387b9ac24191021bd4f9f49f00852c> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/89387b9ac24191021bd4f9f49f00852c>;
@@ -702,11 +825,11 @@
 
 <http://aers.data2semantics.org/resource/target/9a7e6f99e4d7e6b708e5a9c9b981c057> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/9a7e6f99e4d7e6b708e5a9c9b981c057>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/57> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/57> .
 
 <http://aers.data2semantics.org/resource/target/9c7cb6bb30c5a2f09228f53ac9501f82> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/9c7cb6bb30c5a2f09228f53ac9501f82>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/52> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/52> .
 
 <http://aers.data2semantics.org/resource/target/9d783e7b5fec54fb5ac65c9b2d95a72e> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/9d783e7b5fec54fb5ac65c9b2d95a72e>;
@@ -734,7 +857,7 @@
 
 <http://aers.data2semantics.org/resource/target/c34606fb6b242c4070b99408702a3368> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/c34606fb6b242c4070b99408702a3368>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/55> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/55> .
 
 <http://aers.data2semantics.org/resource/target/c538a769aff82d3bc8feb2b7d0425b73> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/c538a769aff82d3bc8feb2b7d0425b73>;
@@ -766,7 +889,7 @@
 
 <http://aers.data2semantics.org/resource/target/d5facab33d83bef307c6874d08b7502a> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/d5facab33d83bef307c6874d08b7502a>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/51> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/51> .
 
 <http://aers.data2semantics.org/resource/target/dd8fa93a98cb1ae330b6cde9620ecb01> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/dd8fa93a98cb1ae330b6cde9620ecb01>;
@@ -774,7 +897,7 @@
 
 <http://aers.data2semantics.org/resource/target/de229e7a67b547b528f4030085ee78a3> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/de229e7a67b547b528f4030085ee78a3>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/47> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/47> .
 
 <http://aers.data2semantics.org/resource/target/e0c66999179baa2cf6e4cfd3b2e9f82f> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/e0c66999179baa2cf6e4cfd3b2e9f82f>;
@@ -790,7 +913,7 @@
 
 <http://aers.data2semantics.org/resource/target/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9>;
-    oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full/56> .
+    oa:hasSource <http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/56> .
 
 <http://aers.data2semantics.org/resource/target/f1cc626f9540688479f8370d3f0421c9> a oa:SpecificResource;
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/f1cc626f9540688479f8370d3f0421c9>;
@@ -800,76 +923,18 @@
     oa:hasSelector <http://aers.data2semantics.org/resource/selector/faef636d8420725231a10d9b08e044bd>;
     oa:hasSource <http://cid.oxfordjournals.org/content/52/4/e56.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/47> owl:sameAs <http://www.annals.org/content/119/4/270.full> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/50> owl:sameAs <http://cid.oxfordjournals.org/content/38/12/1724.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/47/de229e7a67b547b528f4030085ee78a3> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/de229e7a67b547b528f4030085ee78a3> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/51> owl:sameAs <http://www.annals.org/content/131/9/641.1.full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/50/8113d1205af3df0398cd3b521c89736f> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/50/86c30637357fe57b33374e0fc84fe3df>;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/8113d1205af3df0398cd3b521c89736f> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/52> owl:sameAs <http://cid.oxfordjournals.org/content/23/1/40.short> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/50/86c30637357fe57b33374e0fc84fe3df> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/86c30637357fe57b33374e0fc84fe3df> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/55> owl:sameAs <http://www.springerlink.com/content/7uxg8uybjry9hu61/fulltext.html> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/51/60f0759df2871cecc825f22487a4336f> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/60f0759df2871cecc825f22487a4336f> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/56> owl:sameAs <http://onlinelibrary.wiley.com/doi/10.1111/j.1600-0609.2004.00387.x/full> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/51/d5facab33d83bef307c6874d08b7502a> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/51/60f0759df2871cecc825f22487a4336f>;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/d5facab33d83bef307c6874d08b7502a> .
+<http://aers.data2semantics.org/resource/document/cid.oxfordjournals.org/content/52/4/e56.full/57> owl:sameAs <http://www.springerlink.com/content/f5754730675j1643/fulltext.html> .
 
-<http://cid.oxfordjournals.org/content/52/4/e56.full/52/6d66f1a150e38f7f957867d59a75d663> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/6d66f1a150e38f7f957867d59a75d663> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/52/9c7cb6bb30c5a2f09228f53ac9501f82> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/9c7cb6bb30c5a2f09228f53ac9501f82> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/55/2b92f5884157cafcd8c9f007059d7bce> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/2b92f5884157cafcd8c9f007059d7bce> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/55/c34606fb6b242c4070b99408702a3368> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/55/2b92f5884157cafcd8c9f007059d7bce>;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/c34606fb6b242c4070b99408702a3368> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/56/300e33d1716cb23cb0415f778b175ef8> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/56/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9>;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/300e33d1716cb23cb0415f778b175ef8> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/56/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/f0d36e9a5cf8b44b6bcd9bcf9cbfc3f9> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/57/02411ad6e41005434acb9aabee15a4ad> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    swanrel:referencesAsSupportingEvidence <http://cid.oxfordjournals.org/content/52/4/e56.full/57/9a7e6f99e4d7e6b708e5a9c9b981c057>;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/02411ad6e41005434acb9aabee15a4ad> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/57/9a7e6f99e4d7e6b708e5a9c9b981c057> a d2sa:EvidenceAnnotation,
-        oa:Annotation;
-    oa:hasTarget <http://aers.data2semantics.org/resource/target/9a7e6f99e4d7e6b708e5a9c9b981c057> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/50> owl:sameAs <http://cid.oxfordjournals.org/content/38/12/1724.full> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/51> owl:sameAs <http://www.annals.org/content/131/9/641.1.full> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/52> owl:sameAs <http://cid.oxfordjournals.org/content/23/1/40.short> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/55> owl:sameAs <http://www.springerlink.com/content/7uxg8uybjry9hu61/fulltext.html> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/56> owl:sameAs <http://onlinelibrary.wiley.com/doi/10.1111/j.1600-0609.2004.00387.x/full> .
-
-<http://cid.oxfordjournals.org/content/52/4/e56.full/57> owl:sameAs <http://www.springerlink.com/content/f5754730675j1643/fulltext.html> .
-
-<http://aers.data2semantics.org/resource/level/A-III> rdfs:label "A-III" .
+<http://aers.data2semantics.org/resource/level/A-III> a d2sa:RecommendationLevel;
+    rdfs:label "A-III" .
 
