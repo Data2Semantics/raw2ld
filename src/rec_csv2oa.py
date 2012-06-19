@@ -6,10 +6,14 @@ Created on Jun 19, 2012
 
 import csv
 import hashlib
+import re
 from rdflib import ConjunctiveGraph, Namespace, URIRef, Literal, BNode, RDF, RDFS
 
 def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInReference):
 #    print rec, level, evSummary, referenceNr, recInReference, evInReference
+    
+    # Remove the recommendation number from the rec string (as these do not appear in the actual text)
+    rec = re.sub(r'(\d\.)+ (.*)',r'\2', rec)
     
     
     recHash = hashlib.md5(rec).hexdigest()
