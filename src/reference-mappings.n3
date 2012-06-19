@@ -1,0 +1,22 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+<http://cid.oxfordjournals.org/content/52/4/e56.full/47> owl:sameAs <http://www.annals.org/content/119/4/270.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/49> owl:sameAs <http://jcm.asm.org/content/45/11/3546.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/50> owl:sameAs <http://cid.oxfordjournals.org/content/38/12/1724.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/51> owl:sameAs <http://www.annals.org/content/131/9/641.1.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/52> owl:sameAs <http://cid.oxfordjournals.org/content/23/1/40.short>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/55> owl:sameAs <http://www.springerlink.com/content/7uxg8uybjry9hu61/fulltext.html>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/56> owl:sameAs <http://onlinelibrary.wiley.com/doi/10.1111/j.1600-0609.2004.00387.x/full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/57> owl:sameAs <http://www.springerlink.com/content/f5754730675j1643/fulltext.html>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/292> owl:sameAs <http://www.ejcancer.info/article/S0959-8049(06)00391-1/fulltext>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/2922010> owl:sameAs <http://www.ncbi.nlm.nih.gov/pubmed/21095116>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/293> owl:sameAs <http://jco.ascopubs.org/content/24/19/3187.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/294> owl:sameAs <http://www.jnccn.org/content/7/1/64.short>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/295> owl:sameAs <http://jco.ascopubs.org/content/24/19/2991.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/296> owl:sameAs <http://jco.ascopubs.org/content/26/2/290.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/297> owl:sameAs <http://jco.ascopubs.org/content/24/19/2975>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/298> owl:sameAs <http://onlinelibrary.wiley.com/doi/10.1002/cncr.21847/full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/299> owl:sameAs <http://www.croh-online.com/article/S1040-8428(09)00005-5/fulltext>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/301> owl:sameAs <http://www.annals.org/content/121/7/492.full>.
+<http://cid.oxfordjournals.org/content/52/4/e56.full/303> owl:sameAs <http://jnci.oxfordjournals.org/content/93/1/31.full>.
+

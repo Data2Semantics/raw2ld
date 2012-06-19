@@ -41,15 +41,30 @@ print "Loading annotations from file"
 
 # If LOAD_FROM_RDF is set, we will load a file containing Annotation Ontology annotations, and get all objects of the hasTopic relation
 # Otherwise, we read the URIs from a simple text file (one URI per line)
-LOAD_FROM_RDF = False
+LOAD_FROM_RDF = True
 bioportal_uris = set()
 
 if LOAD_FROM_RDF :
+    uris = set()
+    
     cg = ConjunctiveGraph()
-    cg.parse("../../data/output-all.rdf",format="n3")
+    cg.parse("/Users/hoekstra/projects/data2semantics/MockupEntityRecognizer/results/annotations.n3",format="n3")
     
     
-    for s,p,o in cg.triples((None, URIRef("http://purl.org/ao/core#hasTopic"), None)) :
+    for s,p,o in cg.triples((None, URIRef("http://www.w3.org/ns/openannotation/extension/hasSemanticTag"), None)) :
+        uo = unicode(o)
+        
+        m = re.search(r'http://p.bioontology.org/ontology/(.+)/(.+)$', uo)
+        
+        if not m:
+            # Find abbreviations and concept ids for OBO ontologies converted to OWL
+            m = re.search(r'http://purl.org/obo/owl/(.+)#(.+)$', uo)
+        
+        if m :
+            uris.add(uo)
+        
+    for s,p,o in cg.triples((None, URIRef("http://www.w3.org/2004/02/skos/core#exactMatch"), None)) :
+        bioportal_uris.add(unicode(s))
         bioportal_uris.add(unicode(o))
 else :
     bioportal_uris_file = open("../../data/hastopics.txt","r")
@@ -78,7 +93,7 @@ for bioportal_uri in bioportal_uris :
         # Example URI: http://purl.bioontology.org/ontology/MDR/10015919
         # "MDR" is the abbreviation of the ontology
         # "100159191" is the concept id
-        m = re.search(r'http://purl.bioontology.org/ontology/(.+)/(.+)$', bioportal_uri)
+        m = re.search(r'http://p.bioontology.org/ontology/(.+)/(.+)$', bioportal_uri)url
         
         if not m:
             # Find abbreviations and concept ids for OBO ontologies converted to OWL

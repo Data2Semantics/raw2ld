@@ -1,12 +1,12 @@
 
-links/country_links.nt
+links/*
 
-aers_data_files/AERS_ASCII_2011q2.ZIP
-
-links/drug_links.nt
-
-aers_data_files/AERS_ASCII_2011q2/README.doc
-
-links/diagnosis_links.nt
+aers_data_files/*
 
 src/bioportal_links.nt
+
+*.pyc
+
+.project
+
+.pydevproject
