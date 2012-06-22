@@ -91,9 +91,9 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
         if referenceNr :
             # The evidence summary cites an evidence source
             
-            referenceNr = referenceNr.strip('[]')
+            referenceNr = referenceNr.strip('[] ')
             
-            refSourceURI = DOCUMENT[snapshotTimestamp + "/" + referenceNr]
+            refSourceURI = DOCUMENT[referenceNr]
             
             
             if recInReference :   
