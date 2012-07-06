@@ -7,3 +7,9 @@ src/bioportal_links.nt
 src/output.n3
 dumps/*
 *.nt
+
+links/country_links.nt
+
+links/diagnosis_links.nt
+
+links/drug_links.nt
