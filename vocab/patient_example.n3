@@ -1,14 +1,14 @@
 @prefix patient: <http://www.data2semantics.org/ontology/patient/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix : <http://www.data2semantics.org/patient-example.owl#> .
+@prefix : <http://aers.data2semantics.org/resource/patient/> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.data2semantics.org/patient-example.owl> .
+@base <http://aers.data2semantics.org/resource/patient> .
 
 
-<http://www.data2semantics.org/patient-example.owl/jane_doe> a patient:Patient;
+<http://aers.data2semantics.org/resource/patient/jane_doe> a patient:Patient;
     rdfs:label "Jane Doe"@en;
     patient:hasAge 65;
     patient:hasDiagnosis <http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA>,
@@ -23,7 +23,7 @@
         <http://aers.data2semantics.org/resource/drug/FORADIL>;
     rdfs:comment "over 60, no previous fungal infection" .
 
-<http://www.data2semantics.org/patient-example.owl/jimmy_doe> a patient:Patient;
+<http://aers.data2semantics.org/resource/patient/jimmy_doe> a patient:Patient;
     rdfs:label "Jimmy Doe"@en;
     patient:hasAge 34;
     patient:hasDiagnosis <http://aers.data2semantics.org/resource/diagnosis/DEMYELINATING_POLYNEUROPATHY>,
@@ -41,7 +41,7 @@
         <http://aers.data2semantics.org/resource/drug/TOPOTECAN>;
     rdfs:comment "Under 60, inpatient" .
 
-<http://www.data2semantics.org/patient-example.owl/john_doe> a patient:Patient;
+<http://aers.data2semantics.org/resource/patient/john_doe> a patient:Patient;
     rdfs:label "John Doe"@en;
     patient:hasAge 67;
     patient:hasDiagnosis <http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA>,
@@ -58,7 +58,7 @@
         <http://aers.data2semantics.org/resource/drug/MERCAPTOPURINE>;
     rdfs:comment "over 60, matches all other criteria" .
 
-<http://www.data2semantics.org/patient-example.owl/katie_doe> a patient:Patient;
+<http://aers.data2semantics.org/resource/patient/katie_doe> a patient:Patient;
     rdfs:label "Katie Doe"@en;
     patient:hasAge 36;
     patient:hasDiagnosis <http://aers.data2semantics.org/resource/diagnosis/DIARRHOEA>,
@@ -73,7 +73,6 @@
         <http://aers.data2semantics.org/resource/drug/PROPAFENONE>,
         <http://aers.data2semantics.org/resource/drug/TOPOTECAN>;
     rdfs:comment "Under 60, inpatient, decreased systolic blood pressure" .
-
 
 
 
