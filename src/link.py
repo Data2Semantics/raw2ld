@@ -1,5 +1,5 @@
-from SPARQLWrapper import SPARQLWrapper, XML, JSON
-from time import time, sleep
+from SPARQLWrapper import SPARQLWrapper, JSON, XML
+from time import time
 import re
 from rdflib import ConjunctiveGraph, Namespace, URIRef, plugin, query
 from d2s.prov import Trace
@@ -11,23 +11,23 @@ plugin.register('sparql', query.Result,
 
 
 # Eculture
-FULL_SPARQL_ENDPOINT = "http://eculture2.cs.vu.nl:5021/sparql/"
+FULL_SPARQL_ENDPOINT = "http://eculture2.cs.vu.nl:5020/sparql/"
+# Local
+LOCAL_SPARQL_ENDPOINT = "http://localhost:8000/sparql/"
+
 # Local
 AERS_SPARQL_ENDPOINT = FULL_SPARQL_ENDPOINT
 #"http://localhost:8080/openrdf-sesame/repositories/hubble"
 
 
-aers_sqw = SPARQLWrapper(AERS_SPARQL_ENDPOINT)
-aers_sqw.setReturnFormat(JSON)
-aers_sqw.addCustomParameter('soft-limit','-1')
-
-full_sqw = SPARQLWrapper(FULL_SPARQL_ENDPOINT)
-full_sqw.setReturnFormat(JSON)
-full_sqw.addCustomParameter('soft-limit','-1')
+wrapper = SPARQLWrapper(AERS_SPARQL_ENDPOINT)
+wrapper.setReturnFormat(JSON)
+wrapper.addCustomParameter('soft-limit','-1')
 
 
-lld_sqw = SPARQLWrapper("http://linkedlifedata.com/sparql")
-lld_sqw.setReturnFormat(JSON)
+
+lld_wrapper = SPARQLWrapper("http://linkedlifedata.com/sparql")
+lld_wrapper.setReturnFormat(JSON)
 
 prefixes = """
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -52,6 +52,7 @@ AERS = Namespace("http://aers.data2semantics.org/resource/")
 DBPEDIA = Namespace("http://dbpedia.org/resource/")
 SIDER = Namespace("http://www4.wiwiss.fu-berlin.de/sider/resource/sider/")
 OWL = Namespace("http://www.w3.org/2002/07/owl#")
+SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
 
 
 
@@ -66,6 +67,8 @@ def slashURIToLabel(uri,regex):
 def doQuery(sparql, query, index, name='', labelFunction=None, regex=None):
     sparql.setQuery(query)
     print "Starting query {0}...".format(name)
+#    print query
+    
     tstart = time()
     res = sparql.query().convert()
     tend = time()
@@ -113,12 +116,13 @@ def addMatchesToGraph(matches):
     g.bind("dbpedia", "http://dbpedia.org/resource/")
     g.bind("owl", "http://www.w3.org/2002/07/owl#")
     g.bind("sider", "http://www4.wiwiss.fu-berlin.de/sider/resource/sider/")
+    g.bind("skos","http://www.w3.org/2004/02/skos/core#")
     print "Adding to graph..."
     for m in matches :
         for subj in m :
             for obj in m :
                 if subj != obj :
-                    g.add((URIRef(subj),OWL['sameAs'],URIRef(obj)))
+                    g.add((URIRef(subj),SKOS['exactMatch'],URIRef(obj)))
     print "... done"
     return g
     
@@ -229,6 +233,7 @@ sider_drug = prefixes + """
             ?resource   rdf:type        sider:drugs .
             ?resource   sider:drugName  ?label .
         }    
+        FILTER(?resource != <http://www4.wiwiss.fu-berlin.de/sider/resource/drugs/2232>)
     }
 """
 
@@ -301,17 +306,17 @@ drugbank_drug = prefixes + """
     }
 """
 
-drug_index = doQuery(aers_sqw, aers_drug, drug_index, 'AERS Drug Names')
+drug_index = doQuery(wrapper, aers_drug, drug_index, 'AERS Drug Names')
 
-drug_index = doQuery(full_sqw, ctcae, drug_index, 'CTCAE Drug Names')
+drug_index = doQuery(wrapper, ctcae, drug_index, 'CTCAE Drug Names')
 
-drug_index = doQuery(full_sqw, dbpedia_drug, drug_index, 'DBPedia Drug Names', 'slashURIToLabel', regex='http://dbpedia.org/resource/')
+drug_index = doQuery(wrapper, dbpedia_drug, drug_index, 'DBPedia Drug Names', 'slashURIToLabel', regex='http://dbpedia.org/resource/')
 
-drug_index = doQuery(full_sqw, sider_drug, drug_index, 'Sider Drug Names')
+drug_index = doQuery(wrapper, sider_drug, drug_index, 'Sider Drug Names')
 
-drug_index = doQuery(full_sqw, drugbank_drug, drug_index, 'Drugbank Drug Names')
+drug_index = doQuery(wrapper, drugbank_drug, drug_index, 'Drugbank Drug Names')
 
-drug_index = doQuery(lld_sqw, umls_drug, drug_index, 'UMLS Drug Names')
+drug_index = doQuery(lld_wrapper, umls_drug, drug_index, 'UMLS Drug Names')
 
 drug_matches = getMatches(drug_index)
     
@@ -323,15 +328,15 @@ print "Serializing to {0}...".format('drug_links.nt')
 drug_graph.serialize(drug_links_file, format = 'nt')
 print "... done"
 
-diagnosis_index = doQuery(aers_sqw, aers_diagnosis, diagnosis_index, 'AERS diagnosis')
+diagnosis_index = doQuery(wrapper, aers_diagnosis, diagnosis_index, 'AERS diagnosis')
 
-diagnosis_index = doQuery(full_sqw, sider_effect, diagnosis_index, 'Sider Effects')
+diagnosis_index = doQuery(wrapper, sider_effect, diagnosis_index, 'Sider Effects')
 
-diagnosis_index = doQuery(full_sqw, ctcae, diagnosis_index, 'CTCAE diagnosis Names')
+diagnosis_index = doQuery(wrapper, ctcae, diagnosis_index, 'CTCAE diagnosis Names')
 
-diagnosis_index = doQuery(lld_sqw, linkedct_condition, diagnosis_index, 'LinkedCT Conditions')
+diagnosis_index = doQuery(lld_wrapper, linkedct_condition, diagnosis_index, 'LinkedCT Conditions')
 
-diagnosis_index = doQuery(lld_sqw, umls_diagnosis, diagnosis_index, 'UMLS diagnosis')
+diagnosis_index = doQuery(lld_wrapper, umls_diagnosis, diagnosis_index, 'UMLS diagnosis')
 
 diagnosis_matches = getMatches(diagnosis_index)
 
@@ -343,9 +348,9 @@ print "Serializing to {0}...".format('diagnosis_links.nt')
 diagnosis_graph.serialize(diagnosis_links_file, format = 'nt')
 print "... done"
 
-country_index = doQuery(aers_sqw, aers_country, country_index, 'AERS Country Names')
+country_index = doQuery(wrapper, aers_country, country_index, 'AERS Country Names')
 
-country_index = doQuery(full_sqw, dbpedia_country, country_index, 'DBPedia Country Names', labelFunction='slashURIToLabel', regex='http://dbpedia.org/resource/')
+country_index = doQuery(wrapper, dbpedia_country, country_index, 'DBPedia Country Names', labelFunction='slashURIToLabel', regex='http://dbpedia.org/resource/')
 
 country_matches = getMatches(country_index)
     
