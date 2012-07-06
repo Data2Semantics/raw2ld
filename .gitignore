@@ -1,14 +1,9 @@
-
 links/*
-
 aers_data_files/*
-
 src/bioportal_links.nt
-
 *.pyc
-
 .project
-
 .pydevproject
 src/output.n3
 dumps/*
+*.nt
