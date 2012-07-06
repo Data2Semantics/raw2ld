@@ -1,6 +1,7 @@
 import httplib
 import json
 from rdflib import ConjunctiveGraph, URIRef, RDFS, Literal
+from SPARQLWrapper import SPARQLWrapper, JSON
 import re
 
 # Requirements for BioPortal connection
@@ -12,6 +13,10 @@ concept_query = "/bioportal/virtual/ontology/{}?conceptid={}&apikey={}"
 
 # linkedlifedata.com base uri
 lld_base = "http://linkedlifedata.com/resource/umls/id/{}"
+
+
+# endpoint to use
+sparql_endpoint = "http://localhost:8000/openrdf-sesame/repositories/d2smodule2"
 
 # ontology_map will store all known ontologies and their abbreviations
 ontology_map = {}
@@ -36,36 +41,68 @@ for ontology in data["success"]["data"][0]["list"][0]["ontologyBean"]:
 
 print "... done"
 
-print "Loading annotations from file"
+print "Loading annotations ..."
 # Load the annotations from file
 
-# If LOAD_FROM_RDF is set, we will load a file containing Annotation Ontology annotations, and get all objects of the hasTopic relation
+# If LOAD_FROM_RDF is set, we will load a file containing Open Annotation annotations, and get all objects of the hasTopic relation
 # Otherwise, we read the URIs from a simple text file (one URI per line)
-LOAD_FROM_RDF = True
+LOAD_FROM_RDF = False
+LOAD_FROM_SPARQL = True
 bioportal_uris = set()
 
 if LOAD_FROM_RDF :
-    uris = set()
+
     
     cg = ConjunctiveGraph()
-    cg.parse("/Users/hoekstra/projects/data2semantics/MockupEntityRecognizer/results/annotations.n3",format="n3")
-    
+    cg.parse("/Users/hoekstra/projects/data2semantics/MockupEntityRecognizer/annotations-first-list.n3",format="n3")
+    cg.parse("/Users/hoekstra/projects/data2semantics/MockupEntityRecognizer/annotations-second-list.n3",format="n3")
     
     for s,p,o in cg.triples((None, URIRef("http://www.w3.org/ns/openannotation/extension/hasSemanticTag"), None)) :
         uo = unicode(o)
         
-        m = re.search(r'http://p.bioontology.org/ontology/(.+)/(.+)$', uo)
+        m = re.search(r'http://purl.bioontology.org/ontology/(.+)/(.+)$', uo)
         
         if not m:
             # Find abbreviations and concept ids for OBO ontologies converted to OWL
             m = re.search(r'http://purl.org/obo/owl/(.+)#(.+)$', uo)
         
         if m :
-            uris.add(uo)
+            bioportal_uris.add(uo)
         
     for s,p,o in cg.triples((None, URIRef("http://www.w3.org/2004/02/skos/core#exactMatch"), None)) :
         bioportal_uris.add(unicode(s))
         bioportal_uris.add(unicode(o))
+elif LOAD_FROM_SPARQL :
+
+    
+    sw = SPARQLWrapper(sparql_endpoint)
+    query = """
+PREFIX oax:<http://www.w3.org/ns/openannotation/extension/>
+PREFIX skos:<http://www.w3.org/2004/02/skos/core#>
+
+SELECT DISTINCT ?tag WHERE {
+   ?x oax:hasSemanticTag ?tag .
+}"""
+    sw.setQuery(query)
+    sw.setReturnFormat(JSON)
+    results = sw.query().convert()
+    
+    for res in results["results"]["bindings"] :
+        tag = res["tag"]["value"]
+        
+        m = re.search(r'http://purl.bioontology.org/ontology/(.+)/(.+)$', tag)
+        
+        if not m:
+            # Find abbreviations and concept ids for OBO ontologies converted to OWL
+            m = re.search(r'http://purl.org/obo/owl/(.+)#(.+)$', tag)
+            
+        if m :
+            bioportal_uris.add(tag)
+            print tag
+    
+#        if "match" in res :
+#            bioportal_uris.add(res["match"]["value"])
+#            print res["match"]["value"]
 else :
     bioportal_uris_file = open("../../data/hastopics.txt","r")
     for line in bioportal_uris_file.readlines() :
@@ -88,12 +125,11 @@ for bioportal_uri in bioportal_uris :
     if bioportal_uri not in visited :
         counter = counter + 1
         visited.append(bioportal_uri)
-    
         
         # Example URI: http://purl.bioontology.org/ontology/MDR/10015919
         # "MDR" is the abbreviation of the ontology
         # "100159191" is the concept id
-        m = re.search(r'http://p.bioontology.org/ontology/(.+)/(.+)$', bioportal_uri)url
+        m = re.search(r'http://purl.bioontology.org/ontology/(.+)/(.+)$', bioportal_uri)
         
         if not m:
             # Find abbreviations and concept ids for OBO ontologies converted to OWL
@@ -131,12 +167,12 @@ for bioportal_uri in bioportal_uris :
                                 if type(umls_id) != list: 
                                     lld_uri = lld_base.format(umls_id)
                                     print "\t\t{}".format(lld_uri)
-                                    links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2002/07/owl#sameAs'),URIRef(lld_uri)))
+                                    links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2004/02/skos/core#exactMatch'),URIRef(lld_uri)))
                                 else :
                                     for id in umls_id :
                                         lld_uri = lld_base.format(id)
                                         print "\t\t{}".format(lld_uri)
-                                        links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2002/07/owl#sameAs'),URIRef(lld_uri)))
+                                        links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2004/02/skos/core#exactMatch'),URIRef(lld_uri)))
                             elif rel["string"] == "xref_EXACT SYNONYM":
                                 for entry in rel["list"]:
 #                                    print "Entry: {}".format(entry)
@@ -147,7 +183,7 @@ for bioportal_uri in bioportal_uris :
                                             if em :
                                                 lld_uri = lld_base.format(em.group(1))
                                                 print "\t\t{}".format(lld_uri)
-                                                links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2002/07/owl#sameAs'),URIRef(lld_uri)))
+                                                links_cg.add((URIRef(bioportal_uri),URIRef('http://www.w3.org/2004/02/skos/core#exactMatch'),URIRef(lld_uri)))
                                         
                                     
                         except KeyError:
