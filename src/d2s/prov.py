@@ -267,8 +267,8 @@ class Trace(object):
     
     
     
-    def serialize(self, file = 'out.ttl'):
-        f = open(file,"w")
+    def serialize(self, traceFile = 'out.ttl'):
+        f = open(traceFile,"w")
         return self.g.serialize(f, format='turtle')
     
 
