@@ -156,9 +156,9 @@ def addAnnotation(rec, level, evSummary, referenceNr, recInReference, evInRefere
                 
                 
 
-def readCSV():
-    print "Loading annotations from annotations-anita.csv"
-    recReader = csv.reader(open('annotations-anita.csv', 'r'), delimiter=',', quotechar='"')
+def readCSV(annotationsFile):
+    print "Loading annotations from "+annotationsFile
+    recReader = csv.reader(open(annotationsFile, 'r'), delimiter=',', quotechar='"')
     
     rec = None
     level = None
@@ -244,9 +244,15 @@ if __name__ == '__main__':
     cg.bind('d2sa', D2SA)
     cg.bind('swanrel',SWANREL)
     
+    annotationsBase = 'annotations-richard'
+#    annotationsBase = 'annotations-anita'
+    annotationsFile = annotationsBase + '.csv'
+    outputFile = annotationsBase + '.ttl'
     
+    readCSV(annotationsFile)
     
-    readCSV()
+    print "Done, now serializing to "+outputFile
     
-    cg.serialize(open('output.n3','w'), format='turtle')
-        
+    cg.serialize(open(outputFile,'w'), format='turtle')
+    
+    print "Done"
