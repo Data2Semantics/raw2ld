@@ -22,7 +22,7 @@ if __name__ == '__main__':
         g = res["g"]["value"]
         print "Graph: <{}>".format(g)
         
-        yn = raw_input("Delete this graph? (y/n): ")
+        yn = raw_input("Delete this graph? (y/n/q): ")
         
         if yn == "y" :
             command = ["curl", "-X", "DELETE", "{}/data/{}".format(SPARQL_BASE,g)]
@@ -30,6 +30,8 @@ if __name__ == '__main__':
             out = check_output(command)
             print out
             print "Done"
+        elif yn == "q":
+            quit()
         else :
             print "Skipping..."
     
