@@ -69,8 +69,8 @@ if __name__ == '__main__':
             continue
         
         print x1, x2
-        cg.add((URIRef(x1),SKOS["exactMatch"],URIRef(x2)))
-        cg.add((URIRef(x2),SKOS["exactMatch"],URIRef(x1)))
+        cg.add((URIRef(x1),SKOS["relatedMatch"],URIRef(x2)))
+        cg.add((URIRef(x2),SKOS["relatedMatch"],URIRef(x1)))
         
         
     out = open("transitivity_links.nt","w")
