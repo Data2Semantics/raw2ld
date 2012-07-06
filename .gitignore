@@ -11,3 +11,4 @@ src/bioportal_links.nt
 
 .pydevproject
 src/output.n3
+dumps/*
