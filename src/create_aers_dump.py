@@ -150,6 +150,22 @@ def createDump(t, dumpFile):
     t.execute(command, inputs=inputs, outputs=outputs)
     print "Done"
     
+    
+def import4store(t, dumpFile, graphURI):
+    import_script = "4s-import"
+    repository = "aers"
+    
+    
+    command = [import_script,repository,"-v","--model",graphURI,dumpFile]
+    inputs = [dumpFile]
+    outputs = [graphURI]
+    
+    print "Calling 4s-import (Sandbox)"
+    t.execute(command, inputs=inputs,outputs=outputs, sandbox=True)
+    print "Done"
+    
+
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -160,10 +176,12 @@ if __name__ == '__main__':
     group.add_argument("--updaterecent", help="Download only recent AERS reports from FDA website (the latest 4 quarters)",
                     action="store_true")
     parser.add_argument("--dumptordf", help="Dump MySQL database to RDF", action="store_true")
-    
+    parser.add_argument("--import4store", help="Create provenance information for importing to 4Store", action="store_true")
     args = parser.parse_args()
 
+
     trailFile='../dumps/provenance-trail-{}.ttl'.format(datetime.strftime(datetime.now(),'%Y-%m-%d'))
+    
     t = Trace(trailFile=trailFile,provns="http://aers.data2semantics.org/resource/prov/")
 
 
@@ -197,6 +215,10 @@ if __name__ == '__main__':
     else :
         print "Not dumping to RDF"
         
+    if args.import4store :
+        graphURI = 'http://aers.data2semantics.org/resource/resource/' + dumpFile.lstrip('./')
+        print "Importing dump file {} into 4Store graph {}".format(dumpFile, graphURI)
+        import4store(t, dumpFile, graphURI)
         
     t.serialize(trailFile)  
         
