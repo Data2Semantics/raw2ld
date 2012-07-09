@@ -28,9 +28,14 @@
 @prefix prvTypes: <http://purl.org/net/provenance/types#> .
 @prefix doap:     <http://usefulinc.com/ns/doap#> .
 @prefix void:     <http://rdfs.org/ns/void#> .
-@prefix aers2:	<http://aers.data2semantics.org/> .
-@prefix aers:	<http://eculture2.cs.vu.nl:5010/> .
+@prefix aers:			<http://aers.data2semantics.org/> .
 @prefix ir:       <http://www.ontologydesignpatterns.org/cp/owl/informationrealization.owl#> .
+@prefix d2sa:    <http://aers.data2semantics/vocab/annotation/> .
+@prefix prov:		<http://www.w3.org/ns/prov#> .
+@prefix frbr:  <http://purl.org/vocab/frbr/core#> .
+@prefix oa:      <http://www.w3.org/ns/openannotation/core/> .
+@prefix oax:     <http://www.w3.org/ns/openannotation/extensions/> .
+@prefix swanrel:  <http://purl.org/swan/2.0/discourse-relationships/> .
 
 # Server configuration section
 <> a conf:Configuration;
@@ -39,7 +44,7 @@
     # Homepage with description of the project for the link in the page header
     conf:projectHomepage <http://www.data2semantics.org>;
     # The Pubby root, where the webapp is running inside the servlet container.
-    conf:webBase <http://eculture2.cs.vu.nl:5010/>;
+    conf:webBase <http://aers.data2semantics.org/>;
     # URL of an RDF file whose prefix mapping is to be used by the
     # server; defaults to <>, which is *this* file.
     # conf:usePrefixesFrom <>;
@@ -48,12 +53,12 @@
     conf:defaultLanguage "en";
     # When the homepage of the server is accessed, this resource will
     # be shown.
-    conf:indexResource <http://aers.data2semantics.org/resource/reaction/FEBRILE_NEUTROPENIA>;
+    conf:indexResource <http://aers.data2semantics.org/resource/diagnosis/FEBRILE_NEUTROPENIA>;
 
 # Dataset configuration for AERS resources
 #
 # URIs in the SPARQL endpoint: http://aers.data2semantics.org/*
-# URIs on the Web:             http://eculture2.cs.vu.nl:5010/*
+# URIs on the Web:             http://aers.data2semantics.org/*
     conf:dataset [
         # SPARQL endpoint URL of the dataset
         conf:sparqlEndpoint <http://eculture2.cs.vu.nl:5020/sparql/>;
@@ -77,9 +82,9 @@
         # with about:metadata:metadata:
         # Examples for such properties are:
        meta:pubbyUser <http://aers.data2semantics.org>;
-       meta:pubbyOperator <http://www.few.vu.nl/~hoekstra>;
+       meta:pubbyOperator <http://www.rinkehoekstra.nl>;
        meta:endpointUser <http://eculture2.cs.vu.nl>;
-       meta:endpointOperator <http://www.few.vu.nl/~hoekstra>;
+       meta:endpointOperator <http://www.rinkehoekstra.nl>;
        meta:endpointDataset <http://aers.data2semantics.org>;
     ];
 
