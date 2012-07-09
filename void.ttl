@@ -1,0 +1,56 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix : <#> .
+
+## your dataset
+<http://aers.data2semantics.org/void.ttl#aers-ld> rdf:type void:Dataset ;
+ foaf:homepage <http://aers.data2semantics.org> ;
+ dcterms:title "AERS-LD" ;
+ dcterms:description "Linked Data version of the Adverse Event Reporting System of the FDA" ;
+ dcterms:source <http://www.fda.gov/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/default.htm> ;
+ void:sparqlEndpoint <http://aers.data2semantics.org/sparql/> ;
+ void:dataDump <http://aers.data2semantics.org/data/dump-of-2012-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/dump-of-2011-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/dump-of-2010-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/dump-of-2009-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/dump-of-2008-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/dump-of-2007-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/dump-of-2006-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/dump-of-2005-generated-on-2012-07-09.nt.gz, http://aers.data2semantics.org/data/provenance-trail-2012-07-09.ttl> ;
+ void:vocabulary <http://www.w3.org/ns/prov#> ;
+ void:vocabulary <http://www.w3.org/2004/02/skos/core#> ;
+ void:vocabulary <http://www.w3.org/2000/01/rdf-schema#> ;
+ void:exampleResource <http://aers.data2semantics.org/resource/diagnosis/FEBRILE_NEUTROPENIA> ;
+ void:subset :aers-dbpedia-exact, :aers-dbpedia-related, :aers-lld-exact, :aers-lld-related.
+
+## datasets you link to
+
+# interlinking to :DS1
+:DS1 rdf:type void:Dataset ;
+ foaf:homepage <http://linkedlifedata.com> ;
+ dcterms:title "DBPedia" ;
+ dcterms:description "Linked Data version of Wikipedia." ; 
+ void:exampleResource <http://dbpedia.org/resource/Ludwig_van_Beethoven> .
+
+:aers-dbpedia-exact rdf:type void:Linkset ;
+ void:linkPredicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+ void:target <http://aers.data2semantics.org/void.ttl#aers-ld> ;
+ void:target :DS1 .
+
+:aers-dbpedia-related rdf:type void:Linkset ;
+ void:linkPredicate <http://www.w3.org/2004/02/skos/core#relatedMatch> ;
+ void:target <http://aers.data2semantics.org/void.ttl#aers-ld> ;
+ void:target :DS1 .
+
+# interlinking to :DS2
+:DS2 rdf:type void:Dataset ;
+ foaf:homepage <http://linkedlifedata.com> ;
+ dcterms:title "DBPedia" ;
+ dcterms:description "Linked Data version of Wikipedia." ; 
+ void:exampleResource <http://dbpedia.org/resource/Ludwig_van_Beethoven> .
+
+:aers-lld-exact rdf:type void:Linkset ;
+ void:linkPredicate <http://www.w3.org/2004/02/skos/core#exactMatch> ;
+ void:target <http://aers.data2semantics.org/void.ttl#aers-ld> ;
+ void:target :DS1 .
+
+:aers-lld-related rdf:type void:Linkset ;
+ void:linkPredicate <http://www.w3.org/2004/02/skos/core#relatedMatch> ;
+ void:target <http://aers.data2semantics.org/void.ttl#aers-ld> ;
+ void:target :DS2 .
