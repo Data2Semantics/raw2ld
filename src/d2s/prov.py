@@ -50,7 +50,7 @@ class Trace(object):
         
         self.log.debug("Initialising namespaces")
         self.PROVO = Namespace("http://www.w3.org/ns/prov-o/")
-        self.D2S = Namespace("http://www.data2semantics.org/provenance-ontology/")
+        self.D2S = Namespace("http://aers.data2semantics.org/vocab/provenance/")
         self.FRBR = Namespace("http://purl.org/vocab/frbr/core#")
         self.TIME = Namespace("http://www.w3.org/2006/time#")
         self.PROVNS = Namespace(provns)
@@ -132,7 +132,7 @@ class Trace(object):
     
     
     
-    def execute(self, params = [], inputs = [], outputs = [], replace = None, logOutput = True):
+    def execute(self, params = [], inputs = [], outputs = [], replace = None, logOutput = True, sandbox=False):
         '''
         Calls a commandline script using subprocess.call, and captures relevant provenance information
             @param params - A list of strings used as arguments to the subprocess.call method
@@ -151,7 +151,12 @@ class Trace(object):
         
         # Execute the command specified in params
         self.log.debug("Executing {0}".format(params))
-        output = check_output(params)
+        
+        if not sandbox :
+            output = check_output(params)
+        else :
+            self.log.debug("Sandbox mode: command not executed, no actual output generated")
+            output = "Sandbox mode: command not executed, no actual output generated"
 #        self.log.debug("Output:\n{0}".format(output))
         
         # Optionally store the command stdout to a literal value
@@ -221,6 +226,7 @@ class Trace(object):
     def mintActivity(self, p):
         porig = p
         p = quote(p, safe='~/')
+        p = p.lstrip('./')
         commandURI = self.PROVNS["{0}_{1}".format(p, datetime.now().isoformat())]
         commandTypeURI = self.D2S[p.capitalize()]
         
@@ -251,8 +257,15 @@ class Trace(object):
         return time
         
     def mintExpression(self, p):
-        p = quote(p, safe='~/')
-        pExpressionURI = self.PROVNS["{0}_{1}".format(p, datetime.now().isoformat())]
+        
+        # If the parameter is a URI, just use it, but add a timestamp
+        if p.startsWith('http://') :
+            pExpressionURI = URIRef("{0}_{1}".format(p, datetime.now().isoformat()))
+        # Else mint a new URI within our own namespace
+        else :
+            p = quote(p, safe='~/')
+            p = p.lstrip('./')
+            pExpressionURI = self.PROVNS["{0}_{1}".format(p, datetime.now().isoformat())]
         
         # Add the Expression to the trail for its Work
         self.trail.setdefault(self.PROVNS[p], []).append(pExpressionURI) 
