@@ -49,14 +49,14 @@ class Trace(object):
         self.g = ConjunctiveGraph()
         
         self.log.debug("Initialising namespaces")
-        self.PROVO = Namespace("http://www.w3.org/ns/prov-o/")
+        self.PROV = Namespace("http://www.w3.org/ns/prov#")
         self.D2S = Namespace("http://aers.data2semantics.org/vocab/provenance/")
         self.FRBR = Namespace("http://purl.org/vocab/frbr/core#")
         self.TIME = Namespace("http://www.w3.org/2006/time#")
         self.PROVNS = Namespace(provns)
         
         self.log.debug("Binding namespace prefixes")
-        self.g.bind("prov-o", self.PROVO)
+        self.g.bind("prov", self.PROV)
         self.g.bind("d2sprov", self.D2S)
         self.g.bind("frbr", self.FRBR)
         self.g.bind("time", self.TIME)
@@ -121,7 +121,7 @@ class Trace(object):
         for row in activities.result:
             
             
-            self.trail.setdefault(self.PROVO['Activity'], []).append(row) 
+            self.trail.setdefault(self.PROV['Activity'], []).append(row) 
             
             self.log.debug("Activity: %s" % (row))
 
@@ -146,7 +146,7 @@ class Trace(object):
         
         # Get & set the starting time
         start = self.mintTime()
-        self.g.add((commandURI, self.PROVO['startedAt'], start))
+        self.g.add((commandURI, self.PROV['startedAt'], start))
         
         
         # Execute the command specified in params
@@ -166,7 +166,7 @@ class Trace(object):
             
         # Get & set the end time
         end = self.mintTime()
-        self.g.add((commandURI, self.PROVO['endedAt'], end))
+        self.g.add((commandURI, self.PROV['endedAt'], end))
 
         # Store all parameters in a new provo:Activity instance
         for p in params[1:] :
@@ -195,16 +195,16 @@ class Trace(object):
                 pExpressionURI = self.trail[p_work][-1]
                 self.log.debug("Found previous expression: {0}".format(pExpressionURI))
                 # And this means that the current Activity 'wasInformedBy' the process that generated the expression
-                for (subj,pred,activity) in self.g.triples((pExpressionURI,self.PROVO['wasGeneratedBy'],None)) :
+                for (subj,pred,activity) in self.g.triples((pExpressionURI,self.PROV['wasGeneratedBy'],None)) :
                     self.log.debug("Adding provo:wasInformedBy dependency between {0} and {1}".format(commandURI,activity))
-                    self.g.add((commandURI,self.PROVO['wasInformedBy'],activity))
+                    self.g.add((commandURI,self.PROV['wasInformedBy'],activity))
                 
             # Otherwise create a new expression
             else :
                 pExpressionURI = self.mintExpression(pclean)
                 self.log.debug("Minted new input expression: {0}".format(pExpressionURI))
                 
-            self.g.add((commandURI, self.PROVO['used'], pExpressionURI))
+            self.g.add((commandURI, self.PROV['used'], pExpressionURI))
         
         for p in outputs :
             # Optionally replace the 'replace' string with 'HIDDENVALUE' (useful for passwords)
@@ -216,8 +216,8 @@ class Trace(object):
             pExpressionURI = self.mintExpression(pclean)
             self.log.debug("Minted new output expression: {0}".format(pExpressionURI))
             
-            self.g.add((pExpressionURI, self.PROVO['wasGeneratedBy'], commandURI))
-            self.g.add((pExpressionURI, self.PROVO['wasGeneratedAt'], end))
+            self.g.add((pExpressionURI, self.PROV['wasGeneratedBy'], commandURI))
+            self.g.add((pExpressionURI, self.PROV['wasGeneratedAt'], end))
                 
         
         return
@@ -227,24 +227,25 @@ class Trace(object):
         porig = p
         p = quote(p, safe='~/')
         p = p.lstrip('./')
+        
         commandURI = self.PROVNS["{0}_{1}".format(p, datetime.now().isoformat())]
         commandTypeURI = self.D2S[p.capitalize()]
         
-        if self.PROVO['Activity'] in self.trail :
-            lastActivity = self.trail[self.PROVO['Activity']][-1]
+        if self.PROV['Activity'] in self.trail :
+            lastActivity = self.trail[self.PROV['Activity']][-1]
             self.log.debug("Adding provo:wasScheduledAfter dependency between {0} and {1}".format(commandURI, lastActivity))
-            self.g.add((commandURI, self.PROVO['wasScheduledAfter'], lastActivity))
+            self.g.add((commandURI, self.PROV['wasScheduledAfter'], lastActivity))
         
-        self.g.add((commandTypeURI, RDF.type, self.PROVO['Plan']))
-        self.g.add((commandURI, self.PROVO['hadPlan'], commandTypeURI))
-        self.g.add((commandURI, RDF.type, self.PROVO['Activity']))
+        self.g.add((commandTypeURI, RDF.type, self.PROV['Plan']))
+        self.g.add((commandURI, self.PROV['hadPlan'], commandTypeURI))
+        self.g.add((commandURI, RDF.type, self.PROV['Activity']))
         self.g.add((commandURI, self.D2S['shellCommand'], Literal(porig)))
         
         userURI = URIRef('http://{0}/{1}'.format(socket.gethostname(),os.getlogin()))
-        self.g.add((commandURI, self.PROVO['wasControlledBy'], userURI))
+        self.g.add((commandURI, self.PROV['wasControlledBy'], userURI))
         
         # Add the activity to the list of activities in the provenance trail
-        self.trail.setdefault(self.PROVO['Activity'], []).append(commandURI) 
+        self.trail.setdefault(self.PROV['Activity'], []).append(commandURI) 
         
         return commandURI
     
@@ -272,7 +273,7 @@ class Trace(object):
         
         self.g.add((self.PROVNS[p], RDF.type, self.FRBR['Work']))
         self.g.add((pExpressionURI, RDF.type, self.FRBR['Expression']))
-        self.g.add((pExpressionURI, RDF.type, self.PROVO['Entity']))
+        self.g.add((pExpressionURI, RDF.type, self.PROV['Entity']))
                 
         self.g.add((pExpressionURI, self.FRBR['realizationOf'], self.PROVNS[p]))
         
