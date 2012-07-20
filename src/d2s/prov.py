@@ -314,8 +314,8 @@ if __name__ == '__main__':
     parser.add_option("--prov-hide", type="string", dest="hidden", help="String to hide from provenance record (e.g. passwords)")
     (option,args) = parser.parse_args()
     
-    print option
-    print args
+#    print option
+#    print args
     
     if option.inputs:
         splitter = shlex.shlex(option.inputs, posix=True)

@@ -20,9 +20,9 @@ AERS_SPARQL_ENDPOINT = FULL_SPARQL_ENDPOINT
 #"http://localhost:8080/openrdf-sesame/repositories/hubble"
 
 
-wrapper = SPARQLWrapper(AERS_SPARQL_ENDPOINT)
-wrapper.setReturnFormat(JSON)
-wrapper.addCustomParameter('soft-limit','-1')
+aers_wrapper = SPARQLWrapper(AERS_SPARQL_ENDPOINT)
+aers_wrapper.setReturnFormat(JSON)
+aers_wrapper.addCustomParameter('soft-limit','-1')
 
 
 
@@ -306,15 +306,15 @@ drugbank_drug = prefixes + """
     }
 """
 
-drug_index = doQuery(wrapper, aers_drug, drug_index, 'AERS Drug Names')
+drug_index = doQuery(aers_wrapper, aers_drug, drug_index, 'AERS Drug Names')
 
-drug_index = doQuery(wrapper, ctcae, drug_index, 'CTCAE Drug Names')
+drug_index = doQuery(aers_wrapper, ctcae, drug_index, 'CTCAE Drug Names')
 
-drug_index = doQuery(wrapper, dbpedia_drug, drug_index, 'DBPedia Drug Names', 'slashURIToLabel', regex='http://dbpedia.org/resource/')
+drug_index = doQuery(aers_wrapper, dbpedia_drug, drug_index, 'DBPedia Drug Names', 'slashURIToLabel', regex='http://dbpedia.org/resource/')
 
-drug_index = doQuery(wrapper, sider_drug, drug_index, 'Sider Drug Names')
+drug_index = doQuery(aers_wrapper, sider_drug, drug_index, 'Sider Drug Names')
 
-drug_index = doQuery(wrapper, drugbank_drug, drug_index, 'Drugbank Drug Names')
+drug_index = doQuery(aers_wrapper, drugbank_drug, drug_index, 'Drugbank Drug Names')
 
 drug_index = doQuery(lld_wrapper, umls_drug, drug_index, 'UMLS Drug Names')
 
@@ -328,11 +328,11 @@ print "Serializing to {0}...".format('drug_links.nt')
 drug_graph.serialize(drug_links_file, format = 'nt')
 print "... done"
 
-diagnosis_index = doQuery(wrapper, aers_diagnosis, diagnosis_index, 'AERS diagnosis')
+diagnosis_index = doQuery(aers_wrapper, aers_diagnosis, diagnosis_index, 'AERS diagnosis')
 
-diagnosis_index = doQuery(wrapper, sider_effect, diagnosis_index, 'Sider Effects')
+diagnosis_index = doQuery(aers_wrapper, sider_effect, diagnosis_index, 'Sider Effects')
 
-diagnosis_index = doQuery(wrapper, ctcae, diagnosis_index, 'CTCAE diagnosis Names')
+diagnosis_index = doQuery(aers_wrapper, ctcae, diagnosis_index, 'CTCAE diagnosis Names')
 
 diagnosis_index = doQuery(lld_wrapper, linkedct_condition, diagnosis_index, 'LinkedCT Conditions')
 
@@ -348,9 +348,9 @@ print "Serializing to {0}...".format('diagnosis_links.nt')
 diagnosis_graph.serialize(diagnosis_links_file, format = 'nt')
 print "... done"
 
-country_index = doQuery(wrapper, aers_country, country_index, 'AERS Country Names')
+country_index = doQuery(aers_wrapper, aers_country, country_index, 'AERS Country Names')
 
-country_index = doQuery(wrapper, dbpedia_country, country_index, 'DBPedia Country Names', labelFunction='slashURIToLabel', regex='http://dbpedia.org/resource/')
+country_index = doQuery(aers_wrapper, dbpedia_country, country_index, 'DBPedia Country Names', labelFunction='slashURIToLabel', regex='http://dbpedia.org/resource/')
 
 country_matches = getMatches(country_index)
     
