@@ -8,7 +8,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON, XML
 from time import time
 import re
 from rdflib import ConjunctiveGraph, Namespace, URIRef, plugin, query
-from d2s.prov import Trace
+#from d2s.prov import Trace
 from queries import Queries
 import argparse
 import os.path
@@ -78,7 +78,7 @@ class Linker(object):
         
         return res
     
-    def createIndex(self, res, index, labelFunction=None, regex=None):
+    def createIndex(self, res, label_index = {}, reverse_uri_index = {}, labelFunction=None, regex=None):
         # Create Index
         for result in res["results"]["bindings"]:
             uri = result["resource"]["value"]
@@ -90,53 +90,89 @@ class Linker(object):
                 else :
                     exec 'label ='+labelFunction+'("'+result["label"]["value"]+'","'+regex+'").strip().lower()'
             
-            keylist = [s for s in re.split(r'\s+|\/|\+|\.|,|\(|\)|\[|\]|\'|\"|\-|\_|\\|\^',label) if s != '']
-            key = " ".join(keylist)
+#            keylist = [s for s in re.split(r'\s+|\/|\+|\D\.\D|,|\(|\)|\[|\]|\'|\"|\-|\_|\\|\^',label) if s != '']
+#            key = " ".join(keylist)
             
-            label_normalized = re.sub(r'\s+',' ',label).strip()
+#            print "In:  {}".format(label)
+            label_normalized = self.normalizeLabel(label)
+#            print "Out: {}".format(label_normalized)
             
-
-#            label_normalized =' '.join(self.unique_list(label_normalized.split(' ()[]^')))
-            label_normalized = re.sub(r'\\','',label_normalized)
-            label_normalized = re.sub(r'\s\/\s','\s',label_normalized)
-            label_normalized = re.sub(r'\^','',label_normalized)
-            label_normalized = re.sub(r'\,',' ',label_normalized)
-            label_normalized = re.sub(r'\.',' ',label_normalized)
-            
-            # Fix brackets
-            label_normalized = re.sub(r'\[','(',label_normalized)
-            label_normalized = re.sub(r'\]',')',label_normalized)
-            label_normalized = re.sub(r'\(\)','',label_normalized)
-            label_normalized = re.sub(r'\)\(',') (',label_normalized)
-            label_normalized = re.sub(r'(\w)\(',r'\1 (',label_normalized)
-            label_normalized = re.sub(r'\)(\w)',r'( \1',label_normalized)
-            label_normalized = re.sub(r'\((\w+)\(',r'(\1)',label_normalized)
-            
-            # Remove duplicates
-            label_normalized = re.sub(r'(\w+) \1',r'\1',label_normalized)
-            label_normalized = re.sub(r'(\w+)(.*?)\(\1\)',r'\1\2',label_normalized)
-            
-            # Rewrite /28374/ thingies
-            label_normalized = re.sub(r'\s?\/\s?(\d+?)\s?(\/|$)',r' /\1/',label_normalized)
             
             # Replace spaces with underscores
-            label_underscore = re.sub(r'\s+','_',label_normalized.strip())
-            uri_fragment_normalized = quote(label_underscore)
+            uri_normalized = re.sub(r'\.|\,',r'',label_normalized)
+            uri_normalized = re.sub(r'\s+','_',uri_normalized)
+            uri_normalized = quote(uri_normalized)
             
+            nuri = "http://aers.data2semantics.org/resource/drug/{}".format(uri_normalized)
             
+            if label_normalized != label :
+                print "Old: '{}'\nNew: '{}'".format(label, label_normalized)
+#                print "OldURI: {}\nNewURI: {}".format(uri,nuri)
             
-            nuri = "http://aers.data2semantics.org/resource/drug/{}".format(uri_fragment_normalized)
-            index.setdefault(key, []).append({"label": label, "uri": uri, "nuri": nuri})
+            label_index.setdefault(label_normalized,{})
+            label_index[label_normalized].setdefault('uri',nuri)
+            label_index[label_normalized].setdefault('resources', []).append({"label": label, "uri": uri})
+            
+            reverse_uri_index[uri] = nuri
         
-        return index
+        return label_index, reverse_uri_index
     
+    def normalizeLabel(self, label):
+        label_normalized = re.sub(r'\s+',' ',label).strip()
+
+        # Remove /12345678/ thingies
+        label_normalized = re.sub(r'\/\s?\d{8}\s?(\/|$)',r'',label_normalized)
+        
+        label_normalized = re.sub(r'\\','',label_normalized)
+        label_normalized = re.sub(r'\s\/\s',' ',label_normalized)
+        label_normalized = re.sub(r'\^','',label_normalized)
+        label_normalized = re.sub(r'\,$','',label_normalized)
+        label_normalized = re.sub(r'\s+\,',',',label_normalized)
+        label_normalized = re.sub(r'\,(\w)',r', \1',label_normalized)
+        
+        # Fix blockbrackets
+        label_normalized = re.sub(r'\[','(',label_normalized)
+        label_normalized = re.sub(r'\]',')',label_normalized)
+        # Fix other brackets
+        label_normalized = re.sub(r'\(\)','',label_normalized)
+        label_normalized = re.sub(r'\)\(',') (',label_normalized)
+        label_normalized = re.sub(r'(\w)\(',r'\1 (',label_normalized)
+        label_normalized = re.sub(r'\)(\w)',r'( \1',label_normalized)
+        label_normalized = re.sub(r'\((\w+)\(',r'(\1)',label_normalized)
+        label_normalized = re.sub(r'(\s|(\,\s*))\)',r')',label_normalized)
+        label_normalized = re.sub(r'^\((.*?)\)',r'\1',label_normalized)
+        
+        # Remove duplicates
+        label_normalized = re.sub(r'(\w{3,}) \1',r'\1',label_normalized)
+        label_normalized = re.sub(r'(\w{3,})(.*?)\(\1\)',r'\1\2',label_normalized)
+        label_normalized = re.sub(r'(\w{3,}(\s\w{3,})+)(.*?)\(\1\)',r'\1\3',label_normalized)
+        
+
+        
+        
+        # Also remove partial duplicates that were cut off at the end of the string
+        label_normalized = re.sub(r'(\w{3,})(.*?)\(\1$',r'\1\2',label_normalized)
+        
+        # Add missing brackets
+        label_normalized = re.sub(r'\(((\w|\s|\,)+)$',r'(\1)',label_normalized)
+        
+        label_normalized = re.sub(r'\s+',' ',label_normalized)
+        label_normalized = label_normalized.strip()
+            
+        return label_normalized
     
-    def crossLink(self, index):
-        narrowers = {}
+    def crossLink(self, label_index):
+        uri_narrowers = {}
 #        index = {"a": ["a"], "a b": ["a b"], "a b c": ["a b c"], "c": ["c"], "b c": ["b c"]}
         
-        for key in index :
-            lsplit = re.split(r'\s',key)
+        for current_label in label_index :
+            # Initialise the 'broaders' key in the dictionary as a list
+            label_index[current_label].setdefault('narrowers',[])
+            uri_narrowers.setdefault(label_index[current_label]['uri'],[])
+            # Split the label by space
+            lsplit = [s for s in re.split(r'\s+|\/|\+|,|\(|\)|\"',current_label) if (s != '' and len(s)>2)]
+
+#            print lsplit
             
 #            print "======================================"
             visited = []
@@ -146,14 +182,19 @@ class Linker(object):
                     for i in range(start,end):
                         if i+step <= end and not (i,i+step) in visited:
                             visited.append((i,i+step))
-                            l = " ".join(lsplit[i:i+step])
-#                            print "{} ({}-{}, {}): {} ({})".format(lsplit, i, i+step, step, l, start)
-#                            print "{}: {}".format(key, l)
-                            if l in index and (l != key) :
-                                narrowers[l] = index[key]
-#                                print "'{}' is broader than '{}'".format(l, key) 
+                            partial_label = " ".join(lsplit[i:i+step])
+                            
+                            # If the partial_label is a normalized label of an actual (known) resource
+                            # We add that known resource to the broaders of the resource with the current_label
+                            if partial_label in label_index and (partial_label != current_label) :
+
+                                label_index[current_label]['narrowers'].append({'label': partial_label, 'uri': label_index[partial_label]['uri']})
+                                uri_narrowers.setdefault(label_index[partial_label]['uri'],[]).append(label_index[current_label]['uri'])
+
+                                print "'{}' is narrower than '{}'".format(current_label, partial_label) 
+                                
         
-        return narrowers
+        return label_index, uri_narrowers
         
         
 
@@ -175,27 +216,37 @@ if __name__ == '__main__':
     
     if os.path.exists(drugResultsFile) :
         print "Loading from pickle"
-        results = pickle.load(open(drugResultsFile,"r"))
+        aers_drugs_results = pickle.load(open(drugResultsFile,"r"))
     else :
-        results = l.doQuery(l.aers_wrapper, q.aers_drug)
-        pickle.dump(results, open(drugResultsFile,"w"))
+        aers_drugs_results = l.doQuery(l.aers_wrapper, q.aers_drug)
+        pickle.dump(aers_drugs_results, open(drugResultsFile,"w"))
     
-    index = l.createIndex(results, {})
-    narrowers = l.crossLink(index)
-    
+    print "Creating index"
+    label_index, reverse_uri_index = l.createIndex(aers_drugs_results)
+    print "done"
+    print "Starting to crosslink"
+    label_index, uri_narrowers = l.crossLink(label_index)
+    print "done"
 #    pprint(index)
 #    pprint(narrowers)
     
     count = 0
-    for key in narrowers:
-        for k in index[key]:
-            for n in narrowers[key] :    
-                count += 1
-                print "{}\t->\t{} ({})".format(n["nuri"],k["nuri"],k["label"])
+    for key in label_index:
+        count += len(label_index[key]['narrowers'])
+#            print "{}\t->\t{} ({})".format(label_index[key]['uri'],n['uri'],n['label'])
+        
     
-    print "Results", len(results["results"]["bindings"])
-    print "Index", len(index)
-    print "Number of narrower relations", count
+    print "Results", len(aers_drugs_results["results"]["bindings"])
+    print "Index  ", len(label_index)
+    print "Delta  ", len(aers_drugs_results["results"]["bindings"]) - len(label_index)
+    print "Number of broader relations", count
     
+    reverseURIFile = "reverse_uri_index.pickle"
+    pickle.dump(reverse_uri_index, open(reverseURIFile,'w'))
     
+    indexFile = "aers_drugs_index.pickle"
+    pickle.dump(label_index, open(indexFile,'w'))
+
+    narrowersFile = "aers_drugs_narrowers.pickle"
+    pickle.dump(uri_narrowers, open(narrowersFile,'w'))
     
