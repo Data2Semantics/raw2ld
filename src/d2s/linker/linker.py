@@ -54,7 +54,7 @@ class Linker(object):
         
         return res
     
-    def index(self, res, label_index = {}, original_to_normalized_uri_index = {}, uri_index = {}, normalize = True, labelFunction=None, regex=None):
+    def index(self, res, label_index = {}, exact_index = {}, normalized_index = {}, uri_index = {}, normalize = True, prefix = '', labelFunction=None, regex=None):
         # Input is a SPARQL result set with two variables 'resource' and 'label'
         # We create an index where a normalised /label/ is key, and the value is a dictionary of the list of resources, and a normalised uri.
         for (uri,rawlabel) in res:
@@ -73,23 +73,25 @@ class Linker(object):
                 label_normalized, qname_normalized = self.normalize(label)
     
                 # Mint a URI using the QName
-                normalized_uri = "http://aers.data2semantics.org/resource/drug/{}".format(qname_normalized)
+                normalized_uri = prefix + qname_normalized
             else :
                 label_normalized = label
                 normalized_uri = uri
                         
-            # Add the the label as key to the index, setting the value to an empty dictionary (if not already set)
-            label_index.setdefault(label_normalized,{})
-            label_index[label_normalized].setdefault('uri',normalized_uri)
-            label_index[label_normalized].setdefault('resources', []).append({"label": label, "uri": uri, "normalized_uri": normalized_uri})
+            # Add the the label as key to the index, setting the value to an empty set (if not already set)
+            # Then add the UTF-8 encoded raw label
+            label_index.setdefault(label_normalized,set()).add(rawlabel)
+            
+            exact_index.setdefault(label_normalized,set()).add(normalized_uri)            
             
             uri_index.setdefault(normalized_uri,set()).add(label_normalized)
             
             if normalize:
                 # The original_to_normalized_uri_index gives for every original URI, the normalized URI.
-                original_to_normalized_uri_index[uri] = normalized_uri
+                normalized_index[uri] = normalized_uri
         
-        return label_index, uri_index, original_to_normalized_uri_index
+        # @todo check return format
+        return label_index, exact_index, normalized_index, uri_index
 
     
     def normalize(self, label):
@@ -147,44 +149,25 @@ class Linker(object):
             
         return label_normalized, qname_normalized
     
-    def related(self, label_index, uri_index, related_index={}):
-        for label_normalized in label_index :
-            normalized_uri = label_index[label_normalized]['uri']
+    def related(self, exact_index, related_index={}):
+        for current_label in exact_index :
+            for resource in exact_index[current_label] :
+                related_index.setdefault(resource,set()).update([r for r in exact_index[current_label]])
             
-            # Add all related URI's for the label_normalized to the related resources of the normalized_uri
-            related_index.setdefault(normalized_uri,set()).update([s['normalized_uri'] for s in label_index[label_normalized]['resources']])
-                
-            # Add the normalized_uri to all the related resources for every label listed in the resources of the label_normalized
-            # And add all uri's associated with the 'related uri' to the related_index of the normalized_uri
-            for resource in label_index[label_normalized]['resources'] :
-                related_index.setdefault(resource['normalized_uri'], set()).add(normalized_uri)
-                
-                for l in uri_index[resource['normalized_uri']] :
-                    related_index[normalized_uri].update([s['normalized_uri'] for s in label_index[l]['resources']])
-                
         return related_index
     
     
     
-    def broader(self, label_index):
+    def broader(self, exact_index):
         # This dictionary will map a URI (the key) to a list of URIs of concepts that are /more general/ than the key.
         uri_broaders = {}
         # Count the number of narrower relations found
         count = 0
         
-        for current_label in label_index :
-            # Initialise the 'narrowers' key in the dictionary as a list
-            label_index[current_label].setdefault('broaders',[])
-            
-            uri_broaders.setdefault(label_index[current_label]['uri'], [])
-
-            
+        for current_label in exact_index :
             # Turn the label into a list of words
             label_as_words = [s for s in re.split(r'\s+|\/|\+|,|\(|\)|\"',current_label) if (s != '' and len(s)>2)]
 
-
-
-            
             # Look for other labels that match from 1 to 4 consecutive words in the current label.
             for word_range in range(1,4) :
                 # Start at the first word, then check for all words in the label_as_words list. 
@@ -197,17 +180,14 @@ class Linker(object):
                         
                         # If the partial_label is a normalized label of an actual (known) resource
                         # We add that known resource to the broaders of the resource with the current_label
-                        if partial_label in label_index and (partial_label != current_label) :
-
-                            label_index[current_label]['broaders'].append({'label': partial_label, 'uri': label_index[partial_label]['uri']})
-                            uri_broaders.setdefault(label_index[current_label]['uri'],[]).append(label_index[partial_label]['uri'])
-
-                            # print "'{}' is narrower than '{}'".format(current_label, partial_label) 
+                        if partial_label in exact_index and (partial_label != current_label) :
+                            for resource in exact_index[current_label]:
+                                uri_broaders.setdefault(resource,set()).update(exact_index[partial_label])
                             
                             count += 1
                                 
         
-        return label_index, uri_broaders, count
+        return uri_broaders, count
         
         
 
@@ -245,12 +225,14 @@ class Linker(object):
         indexFile = config['labelindex']
         broaderFile = config['broader']
         uriFile = config['uriindex']
+        exactFile = config['exact']
+        
         
 
         
         label_index = {}
         normalized_index = {}
-
+        exact_index = {}
         results_count = 0
         print "Building Index"
         for q in config['queries'] :
@@ -259,6 +241,10 @@ class Linker(object):
             query = "SELECT DISTINCT ?resource ?label WHERE {\n"+q['pattern']+"}"
             normalize = q['normalize']
             endpoint = q['endpoint']
+            if normalize:
+                prefix = q['prefix']
+            else:
+                prefix = ''
             
             print "Running {} on {} (Normalize is {})".format(name, endpoint, normalize)
 
@@ -274,16 +260,16 @@ class Linker(object):
             results_count += len(results)
             
             print "Indexing {}".format(name)
-            label_index, uri_index, normalized_index = self.index(results, label_index, normalized_index, normalize=normalize, labelFunction=labelFunction, regex=regex)
+            label_index, exact_index, normalized_index, uri_index = self.index(results, label_index, exact_index, normalized_index, normalize=normalize, prefix=prefix, labelFunction=labelFunction, regex=regex)
             print "done"
         print "Index phase complete"
         
         print "Creating related index"
-        related_index = self.related(label_index, uri_index)
+        related_index = self.related(exact_index)
         print "done"
         
         print "Creating broader index"
-        label_index, uri_broaders, count = self.broader(label_index)
+        uri_broaders, count = self.broader(exact_index)
         print "done"
         
         print "Results", results_count
@@ -293,6 +279,8 @@ class Linker(object):
         
         print "Dumping to {}".format(normalizedFile)
         pickle.dump(normalized_index, open(normalizedFile, 'w'))
+        print "Dumping to {}".format(exactFile)
+        pickle.dump(exact_index, open(exactFile, 'w'))
         print "Dumping to {}".format(relatedFile)
         pickle.dump(related_index, open(relatedFile, 'w'))
         print "Dumping to {}".format(indexFile)
