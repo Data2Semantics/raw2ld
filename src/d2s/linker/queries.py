@@ -28,13 +28,23 @@ class Queries(object):
         PREFIX ctcae: <http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl#>
     """
 
-    
-    aers_drug = prefixes + """
-    SELECT DISTINCT ?resource ?label WHERE {
-        ?resource   rdf:type    aers-vocab:Drug .
-        ?resource   rdfs:label  ?label .
-    } 
-    """
+
+#    aers_drug = prefixes + """
+#    SELECT DISTINCT ?resource ?label WHERE {
+#        ?resource   rdf:type    aers-vocab:Drug .
+#        ?resource   rdfs:label  ?label . 
+#    } 
+#    """
+#    
+#    aers_drug_related = prefixes + """
+#    SELECT DISTINCT ?resource ?label WHERE {
+#        ?resource   rdf:type    aers-vocab:Drug .
+#        { ?resource   rdfs:label  ?label . }
+#        UNION 
+#        { ?resource skos:relatedMatch ?relresource .
+#          ?relresource rdfs:label ?label .}
+#    } 
+#    """
 
     aers_country = prefixes + """
         SELECT DISTINCT ?resource ?label WHERE {
@@ -44,18 +54,18 @@ class Queries(object):
     """
     
     
-    aers_diagnosis = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            {
-                ?resource   rdf:type    aers-vocab:Diagnosis . 
-                ?resource   rdfs:label  ?label .
-            }
-            UNION
-            {   ?resource   rdf:type    aers-vocab:Reaction . 
-                ?resource   rdfs:label  ?label .
-            }
-        } 
-    """
+#    aers_diagnosis = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            {
+#                ?resource   rdf:type    aers-vocab:Diagnosis . 
+#                ?resource   rdfs:label  ?label .
+#            }
+#            UNION
+#            {   ?resource   rdf:type    aers-vocab:Reaction . 
+#                ?resource   rdfs:label  ?label .
+#            }
+#        } 
+#    """
     
     ctcae = prefixes + """
         SELECT DISTINCT ?resource ?label WHERE {
@@ -65,39 +75,39 @@ class Queries(object):
     """
     
     
-    dbpedia_drug = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            {
-                ?resource   rdf:type    dbpedia-owl:Drug .
-                ?resource   rdfs:label  ?label .
-            } 
-            UNION
-            {
-                ?resource   rdf:type    dbpedia-owl:Drug .
-                ?label      dbpedia-owl:wikiPageRedirects ?resource .
-            }
-            UNION
-            {
-                ?resource   rdf:type    dbpedia-owl:ChemicalCompound .
-                ?resource   rdfs:label  ?label .
-            } 
-            UNION
-            {
-                ?resource   rdf:type    dbpedia-owl:ChemicalCompound .
-                ?label      dbpedia-owl:wikiPageRedirects ?resource .
-            } 
-            UNION
-            {
-                ?resource   rdf:type    dbpedia-owl:ChemicalSubstance .
-                ?resource   rdfs:label  ?label .
-            } 
-            UNION
-            {
-                ?resource   rdf:type    dbpedia-owl:ChemicalSubstance .
-                ?label      dbpedia-owl:wikiPageRedirects ?resource .
-            }
-        } 
-    """
+#    dbpedia_drug = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            {
+#                ?resource   rdf:type    dbpedia-owl:Drug .
+#                ?resource   rdfs:label  ?label .
+#            } 
+#            UNION
+#            {
+#                ?resource   rdf:type    dbpedia-owl:Drug .
+#                ?label      dbpedia-owl:wikiPageRedirects ?resource .
+#            }
+#            UNION
+#            {
+#                ?resource   rdf:type    dbpedia-owl:ChemicalCompound .
+#                ?resource   rdfs:label  ?label .
+#            } 
+#            UNION
+#            {
+#                ?resource   rdf:type    dbpedia-owl:ChemicalCompound .
+#                ?label      dbpedia-owl:wikiPageRedirects ?resource .
+#            } 
+#            UNION
+#            {
+#                ?resource   rdf:type    dbpedia-owl:ChemicalSubstance .
+#                ?resource   rdfs:label  ?label .
+#            } 
+#            UNION
+#            {
+#                ?resource   rdf:type    dbpedia-owl:ChemicalSubstance .
+#                ?label      dbpedia-owl:wikiPageRedirects ?resource .
+#            }
+#        } 
+#    """
     
     dbpedia_country = prefixes + """
         SELECT DISTINCT ?resource ?label WHERE {
@@ -113,89 +123,89 @@ class Queries(object):
         } 
     """
     
-    sider_drug = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            {
-                ?resource   rdf:type    sider:drugs .
-                ?resource   rdfs:label  ?label .
-            }
-            UNION
-            {
-                ?resource   rdf:type        sider:drugs .
-                ?resource   sider:drugName  ?label .
-            }    
-            FILTER(?resource != <http://www4.wiwiss.fu-berlin.de/sider/resource/drugs/2232>)
-        }
-    """
+#    sider_drug = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            {
+#                ?resource   rdf:type    sider:drugs .
+#                ?resource   rdfs:label  ?label .
+#            }
+#            UNION
+#            {
+#                ?resource   rdf:type        sider:drugs .
+#                ?resource   sider:drugName  ?label .
+#            }    
+#            FILTER(?resource != <http://www4.wiwiss.fu-berlin.de/sider/resource/drugs/2232>)
+#        }
+#    """
     
-    sider_effect = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            {
-                ?resource   rdf:type    sider:side_effects .
-                ?resource   rdfs:label  ?label .
-            }
-            UNION
-            {
-                ?resource   rdf:type              sider:side_effects .
-                ?resource   sider:sideEffectName  ?label .
-            }    
-        }
-    """
+#    sider_effect = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            {
+#                ?resource   rdf:type    sider:side_effects .
+#                ?resource   rdfs:label  ?label .
+#            }
+#            UNION
+#            {
+#                ?resource   rdf:type              sider:side_effects .
+#                ?resource   sider:sideEffectName  ?label .
+#            }    
+#        }
+#    """
     
-    linkedct_condition = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            ?resource   rdf:type            ct:condition .
-            ?resource   ct:condition_name   ?label .
-        }
-    """
+#    linkedct_condition = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            ?resource   rdf:type            ct:condition .
+#            ?resource   ct:condition_name   ?label .
+#        }
+#    """
     
-    umls_drug = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            { 
-                ?resource   calbc:hasCorrelation       calbc-group:CHEM .
-                ?resource   skos-xl:prefLabel   ?prefLabel .
-                ?prefLabel  skos-xl:literalForm ?label . 
-            }
-            UNION
-            { 
-                ?resource   calbc:hasCorrelation       calbc-group:CHEM .
-                ?resource   skos-xl:altLabel   ?altLabel .
-                ?altLabel   skos-xl:literalForm ?label .        
-            }
-        }"""
+#    umls_drug = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            { 
+#                ?resource   calbc:hasCorrelation       calbc-group:CHEM .
+#                ?resource   skos-xl:prefLabel   ?prefLabel .
+#                ?prefLabel  skos-xl:literalForm ?label . 
+#            }
+#            UNION
+#            { 
+#                ?resource   calbc:hasCorrelation       calbc-group:CHEM .
+#                ?resource   skos-xl:altLabel   ?altLabel .
+#                ?altLabel   skos-xl:literalForm ?label .        
+#            }
+#        }"""
         
-    umls_diagnosis = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            { 
-                ?resource   calbc:hasCorrelation       calbc-group:DISO .
-                ?resource   skos-xl:prefLabel   ?prefLabel .
-                ?prefLabel  skos-xl:literalForm ?label . 
-            }
-            UNION
-            { 
-                ?resource   calbc:hasCorrelation       calbc-group:DISO .
-                ?resource   skos-xl:altLabel   ?altLabel .
-                ?altLabel   skos-xl:literalForm ?label .        
-            }
-        }
-    """
+#    umls_diagnosis = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            { 
+#                ?resource   calbc:hasCorrelation       calbc-group:DISO .
+#                ?resource   skos-xl:prefLabel   ?prefLabel .
+#                ?prefLabel  skos-xl:literalForm ?label . 
+#            }
+#            UNION
+#            { 
+#                ?resource   calbc:hasCorrelation       calbc-group:DISO .
+#                ?resource   skos-xl:altLabel   ?altLabel .
+#                ?altLabel   skos-xl:literalForm ?label .        
+#            }
+#        }
+#    """
     
-    drugbank_drug = prefixes + """
-        SELECT DISTINCT ?resource ?label WHERE {
-            ?resource   rdf:type    drugbank:drugs .
-            {
-                ?resource   drugbank:brandName  ?label .
-            }
-            UNION
-            {
-                ?resource   drugbank:synonym  ?label .
-            }
-            UNION
-            {
-                ?resource   rdfs:label  ?label .
-            }        
-        }
-    """
+#    drugbank_drug = prefixes + """
+#        SELECT DISTINCT ?resource ?label WHERE {
+#            ?resource   rdf:type    drugbank:drugs .
+#            {
+#                ?resource   drugbank:brandName  ?label .
+#            }
+#            UNION
+#            {
+#                ?resource   drugbank:synonym  ?label .
+#            }
+#            UNION
+#            {
+#                ?resource   rdfs:label  ?label .
+#            }        
+#        }
+#    """
 
     def __init__(self):
         '''
