@@ -9,7 +9,6 @@ dumps/*
 *.nt
 indexdir/*
 links/country_links.nt
-
 links/diagnosis_links.nt
-
 links/drug_links.nt
+*.pickle

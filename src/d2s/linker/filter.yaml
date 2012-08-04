@@ -1,0 +1,37 @@
+input : ../../../../aers_research/all_ae_vs_drug.tsv 
+output: ../../../../aers_research/katoyama_aers_dbpedia_drugbank.tsv
+crosstable: ../../../../aers_research/katoyama_aers_dbpedia_drugbank_crosstable.tsv
+header: True
+# maxIterations : 5000
+test : False
+replacement: other
+
+regex:
+  match: http://aers.data2semantics.org/resource/(drug|diagnosis)/(.*)$
+  replace : "\\2"
+  
+left: 
+  prefix : http://aers.data2semantics.org/resource/drug/ 
+  strings:
+    - 5-FU 
+    - CAPECITABINE 
+  urimap : drug_normalized.pickle
+  broadermap : drug_broader.pickle
+  relatedmap : drug_related.pickle
+    
+right: 
+  prefix: http://aers.data2semantics.org/resource/diagnosis/ 
+  strings: 
+    - FEBRILE_NEUTROPENIA 
+    - NEUTROPENIA 
+    - LEUKOPENIA 
+    - VOMITING 
+    - THROMBOCYTOPENIA 
+    - DIARRHOEA 
+    - NAUSEA 
+    - STOMATITIS 
+    - PALMAR-PLANTAR_ERYTHRODYSAESTHESIA_SYNDROME # Hand-Foot Syndrome
+  urimap : diag_normalized.pickle
+  broadermap: diag_broader.pickle
+  relatedmap: diag_related.pickle
+  

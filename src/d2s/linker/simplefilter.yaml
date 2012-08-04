@@ -1,0 +1,30 @@
+# This filter does not use normalized labels, nor narrower & broader information
+
+input : ../../../../aers_research/all_ae_vs_drug.tsv 
+output: ../../../../aers_research/katoyama_dirty.tsv
+header: True
+# maxIterations : 500000
+test : False
+replacement: other
+
+regex:
+  match: http://aers.data2semantics.org/resource/(drug|diagnosis)/(.*)$
+  replace : "\\2"
+  
+left: 
+  prefix : http://aers.data2semantics.org/resource/drug/ 
+  strings:
+    - 5-FU 
+    - CAPECITABINE 
+    
+right: 
+  prefix: http://aers.data2semantics.org/resource/diagnosis/ 
+  strings: 
+    - FEBRILE_NEUTROPENIA 
+    - NEUTROPENIA 
+    - LEUKOPENIA 
+    - VOMITING 
+    - THROMBOCYTOPENIA 
+    - DIARRHOEA 
+    - NAUSEA 
+    - STOMATITIS 
