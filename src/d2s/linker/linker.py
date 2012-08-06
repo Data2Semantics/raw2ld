@@ -149,11 +149,15 @@ class Linker(object):
             
         return label_normalized, qname_normalized
     
-    def related(self, exact_index, related_index={}):
+    def related(self, exact_index, uri_index, related_index={}):
         for current_label in exact_index :
             for resource in exact_index[current_label] :
-                related_index.setdefault(resource,set()).update([r for r in exact_index[current_label]])
-            
+                for r in exact_index[current_label] :
+                    related_index.setdefault(resource,set()).add(r)
+                    r_labels = uri_index[r]
+                    for r_label in r_labels :
+                        related_index[resource].update([rr for rr in exact_index[r_label]])
+                
         return related_index
     
     
@@ -269,7 +273,7 @@ class Linker(object):
         print "Index phase complete"
         
         print "Creating related index"
-        related_index = self.related(exact_index)
+        related_index = self.related(exact_index, uri_index)
         print "done"
         
         print "Creating broader index"
