@@ -315,7 +315,7 @@ class Linker(object):
         w.writerow(["Distinct labels    ", len(label_index)])
         w.writerow(["Delta (labels)     ", results_count - len(label_index)])
         w.writerow(["Distinct URIs      ", len(uri_index)])
-        w.writerow(["Delta (uris)       ", results_count - len(label_index)])
+        w.writerow(["Delta (uris)       ", results_count - len(uri_index)])
         w.writerow(["Broader relations  ", count])
         w.writerow(["URIs with broader  ", len(broader_index)])
         w.writerow(['',''])
