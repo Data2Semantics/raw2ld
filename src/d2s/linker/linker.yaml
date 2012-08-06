@@ -123,7 +123,7 @@ diagnosis:
   labelindex:   diag_label_index.pickle
   broader:      diag_broader.pickle
   related:      diag_related.pickle
-  uriindex:     drug_uri_index.pickle
+  uriindex:     diag_uri_index.pickle
   exact:        diag_exact.pickle
   queries:
     - name:     AERS Diagnoses
