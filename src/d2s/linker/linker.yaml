@@ -25,6 +25,7 @@ drug:
   related:      drug_related.pickle
   uriindex:     drug_uri_index.pickle
   exact:        drug_exact.pickle
+  report:       drug_report.csv
   queries:
     - name:   UMLS Drugs
       results: umls_drug_results.pickle
@@ -125,6 +126,7 @@ diagnosis:
   related:      diag_related.pickle
   uriindex:     diag_uri_index.pickle
   exact:        diag_exact.pickle
+  report:       diag_report.csv
   queries:
     - name:     AERS Diagnoses
       results:  aers_diag_results.pickle

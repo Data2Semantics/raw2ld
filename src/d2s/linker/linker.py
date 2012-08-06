@@ -15,6 +15,8 @@ import os.path
 import pickle
 from urllib import quote, unquote
 import yaml
+from datetime import datetime
+from csv import writer
 
 plugin.register('sparql', query.Processor,
                'rdfextras.sparql.processor', 'Processor')
@@ -249,8 +251,9 @@ class Linker(object):
         uriFile = config['uriindex']
         exactFile = config['exact']
         
+        reportFile = config['report']
         
-
+        
         
         label_index = {}
         normalized_index = {}
@@ -305,11 +308,18 @@ class Linker(object):
         broader_index, count = self.broader(exact_index)
         print "done"
         
-        print "Results", results_count
-        print "Index  ", len(label_index)
-        print "Delta  ", results_count - len(label_index)
-        print "Number of narrower relations", count
+        w = writer(open(reportFile,'a+'))
         
+        w.writerow(['Run', datetime.now().strftime("%Y-%m-%d %H:%M")])
+        w.writerow(["Results (uri,label)", results_count])
+        w.writerow(["Distinct labels    ", len(label_index)])
+        w.writerow(["Delta (labels)     ", results_count - len(label_index)])
+        w.writerow(["Distinct URIs      ", len(uri_index)])
+        w.writerow(["Delta (uris)       ", results_count - len(label_index)])
+        w.writerow(["Broader relations  ", count])
+        w.writerow(["URIs with broader  ", len(broader_index)])
+        w.writerow(['',''])
+
         print "Dumping to {}".format(normalizedFile)
         pickle.dump(normalized_index, open(normalizedFile, 'w'))
         print "Dumping to {}".format(exactFile)
