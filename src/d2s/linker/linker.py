@@ -154,14 +154,17 @@ class Linker(object):
         # ... and for each of these resources, get their labels, and find the related resources.
         for current_uri in uri_index :
             for label in uri_index[current_uri] :
-                related_uris = exact_index[label]
-                # Get all URIs with that label, and add them to the related_index for the current URI
-                related_index.setdefault(current_uri,set()).update(related_uris)
-                
-                # For every related uri, get its labels, and add all URIs with that label to the related index.
-                for related_uri in related_uris :
-                    for r_label in uri_index[related_uri]:
-                        related_index[current_uri].update(exact_index[r_label])
+                if label in exact_index: 
+                    related_uris = exact_index[label]
+                    # Get all URIs with that label, and add them to the related_index for the current URI
+                    related_index.setdefault(current_uri,set()).update(related_uris)
+                    
+                    # For every related uri, get its labels, and add all URIs with that label to the related index.
+                    for related_uri in related_uris :
+                        if related_uri in uri_index :
+                            for r_label in uri_index[related_uri]:
+                                if r_label in exact_index :
+                                    related_index[current_uri].update(exact_index[r_label])
                          
         return related_index
     
@@ -205,6 +208,8 @@ class Linker(object):
         for key in index:
             if len(index[key]) != 0 :
                 newindex[key] = index[key]
+        
+        return newindex
                 
                 
     
