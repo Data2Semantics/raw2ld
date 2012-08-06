@@ -26,12 +26,13 @@ def matchBroader(i, strings, urimap, broadermap, relatedmap, match, replace, tes
         # Add it to the list of candidates
         candidates = [normalized_uri]
         
-        # Get all broader URIs for the normalized uri 
-        candidates.extend(broadermap[normalized_uri])
+        if normalized_uri in broadermap: 
+            # Get all broader URIs for the normalized uri 
+            candidates.extend(broadermap[normalized_uri])
         
-        # Get all related URIs for the normalized uri
-        candidates.extend(relatedmap[normalized_uri])
-#        print "\n", normalized_uri, relatedmap[normalized_uri]
+        if normalized_uri in relatedmap: 
+            # Get all related URIs for the normalized uri
+            candidates.extend(relatedmap[normalized_uri])
         
         # Check for each of these URIs whether they are to be kept, or to be replaced
         # The result is a list that (hopefully) contains the current URI, or one of its broader concepts
