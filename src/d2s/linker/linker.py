@@ -165,6 +165,10 @@ class Linker(object):
         count = 0
         
         for current_label in exact_index :
+            # Initialize an entry in the uri_broaders index for all uris related to the current label
+            for resource in exact_index[current_label] :
+                uri_broaders.setdefault(resource,set())
+            
             # Turn the label into a list of words
             label_as_words = [s for s in re.split(r'\s+|\/|\+|,|\(|\)|\"',current_label) if (s != '' and len(s)>2)]
 
@@ -182,7 +186,7 @@ class Linker(object):
                         # We add that known resource to the broaders of the resource with the current_label
                         if partial_label in exact_index and (partial_label != current_label) :
                             for resource in exact_index[current_label]:
-                                uri_broaders.setdefault(resource,set()).update(exact_index[partial_label])
+                                uri_broaders[resource].update(exact_index[partial_label])
                             
                             count += 1
                                 
