@@ -78,19 +78,19 @@ class Linker(object):
                 label_normalized = label
                 normalized_uri = uri
                         
-            # Add the the label as key to the index, setting the value to an empty set (if not already set)
-            # Then add the UTF-8 encoded raw label
+            # label_index maps normalized labels to their raw labels (provenance)
             label_index.setdefault(label_normalized,set()).add(rawlabel)
             
+            # exact_index maps normalized labels to sets of uris of resources that have that same label
             exact_index.setdefault(label_normalized,set()).add(normalized_uri)            
             
+            # uri index does the converse, it maps uris to all of their labels.
             uri_index.setdefault(normalized_uri,set()).add(label_normalized)
             
             if normalize:
-                # The original_to_normalized_uri_index gives for every original URI, the normalized URI.
+                # The normalized_index gives for every original URI, the normalized URI.
                 normalized_index[uri] = normalized_uri
         
-        # @todo check return format
         return label_index, exact_index, normalized_index, uri_index
 
     
@@ -150,29 +150,30 @@ class Linker(object):
         return label_normalized, qname_normalized
     
     def related(self, exact_index, uri_index, related_index={}):
-        for current_label in exact_index :
-            for resource in exact_index[current_label] :
-                for r in exact_index[current_label] :
-                    related_index.setdefault(resource,set()).add(r)
-                    r_labels = uri_index[r]
-                    for r_label in r_labels :
-                        related_index[resource].update([rr for rr in exact_index[r_label]])
+        # For every URI in the uri_index, get all its labels, find the related resources in the exact_index,
+        # ... and for each of these resources, get their labels, and find the related resources.
+        for current_uri in uri_index :
+            for label in uri_index[current_uri] :
+                related_uris = exact_index[label]
+                # Get all URIs with that label, and add them to the related_index for the current URI
+                related_index.setdefault(current_uri,set()).update(related_uris)
                 
+                # For every related uri, get its labels, and add all URIs with that label to the related index.
+                for related_uri in related_uris :
+                    for r_label in uri_index[related_uri]:
+                        related_index[current_uri].update(exact_index[r_label])
+                         
         return related_index
     
     
     
     def broader(self, exact_index):
         # This dictionary will map a URI (the key) to a list of URIs of concepts that are /more general/ than the key.
-        uri_broaders = {}
+        broader_index = {}
         # Count the number of narrower relations found
         count = 0
         
         for current_label in exact_index :
-            # Initialize an entry in the uri_broaders index for all uris related to the current label
-            for resource in exact_index[current_label] :
-                uri_broaders.setdefault(resource,set())
-            
             # Turn the label into a list of words
             label_as_words = [s for s in re.split(r'\s+|\/|\+|,|\(|\)|\"',current_label) if (s != '' and len(s)>2)]
 
@@ -190,15 +191,23 @@ class Linker(object):
                         # We add that known resource to the broaders of the resource with the current_label
                         if partial_label in exact_index and (partial_label != current_label) :
                             for resource in exact_index[current_label]:
-                                uri_broaders[resource].update(exact_index[partial_label])
+                                broader_index.setdefault(resource,set()).update(exact_index[partial_label])
                             
                             count += 1
                                 
         
-        return uri_broaders, count
+        return broader_index, count
         
-        
-
+    
+    def prune(self, index):
+        # Remove all empty entries from an index
+        newindex = {}
+        for key in index:
+            if len(index[key]) != 0 :
+                newindex[key] = index[key]
+                
+                
+    
 
     def getResults(self, endpoint, query, resultsFile):
         results = []
@@ -272,12 +281,23 @@ class Linker(object):
             print "done"
         print "Index phase complete"
         
+        print "Pruning indexes"
+        print "Label index"
+        label_index = self.prune(label_index)
+        print "Exact index"
+        exact_index = self.prune(exact_index)
+        print "Normalized index"
+        normalized_index = self.prune(normalized_index)
+        print "URI index"
+        uri_index = self.prune(uri_index)
+        print "done"
+        
         print "Creating related index"
         related_index = self.related(exact_index, uri_index)
         print "done"
         
         print "Creating broader index"
-        uri_broaders, count = self.broader(exact_index)
+        broader_index, count = self.broader(exact_index)
         print "done"
         
         print "Results", results_count
@@ -296,7 +316,7 @@ class Linker(object):
         print "Dumping to {}".format(uriFile)
         pickle.dump(uri_index, open(uriFile, 'w'))
         print "Dumping to {}".format(broaderFile)
-        pickle.dump(uri_broaders, open(broaderFile, 'w'))
+        pickle.dump(broader_index, open(broaderFile, 'w'))
         
     
     def slashURIToLabel(self, uri,regex):
