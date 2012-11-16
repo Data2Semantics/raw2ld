@@ -369,7 +369,10 @@ if __name__ == '__main__':
     if args.diagnosis :
         l.do(config['diagnosis'])
         
-    print "DONE!"
+    if args.country :
+        l.do(config['country'])
+        
+    print "Done!"
 
 
 

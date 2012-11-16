@@ -1,0 +1,32 @@
+# Do not forget trailing slashes for directories and paths!
+
+provomatic: /Users/hoekstra/projects/data2semantics/provomatic/src/
+
+fda:
+  url: http://www.fda.gov
+  locations:
+    all:
+      - /Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm083765.htm
+      - /Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm
+    recent:
+      - /Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm
+  download: /downloads/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/
+  
+
+mysql:
+  path: /usr/local/mysql/bin/
+  user: root
+  pass: visstick
+
+
+d2rq:
+  path: /Users/hoekstra/projects/srv/d2rq-0.8/
+  mapping: /Users/hoekstra/projects/data2semantics/raw2ld/d2r_mapping_aers.n3
+
+
+output:
+  base: /Users/hoekstra/projects/data2semantics/raw2ld/aersld_convert_output/
+  temp: /tmp/
+  aers_data_dir: aers_data/
+  aers_data_mask: aers_data/AERS_ASCII_20{}q?/ascii/*.TXT
+  

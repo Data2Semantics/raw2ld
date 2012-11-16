@@ -91,7 +91,7 @@ def cleanStrings(prefix, strings, urimap):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Filter a two-column TSV file")
-    parser.add_argument('config', type=str, help="The YAML configuration file")
+    parser.add_argument('config', type=str, help="The YAML configuration file", default='filter.yaml')
     
     
     args = parser.parse_args()

@@ -1,13 +1,16 @@
 import glob
 import os
 from datetime import datetime
-from d2s.prov import Trace
 import argparse
 import httplib
 import re
 import urllib
 from zipfile import ZipFile
 #import shlex
+import yaml
+import requests
+import sys
+import logging
 
 FDA_SITE = "www.fda.gov"
     
@@ -32,32 +35,18 @@ DUMP_RDF_MAPPING = '../d2r_mapping_aers.n3'
 
 tables = ['demo', 'drug', 'indi', 'outc', 'reac', 'ther']
 
-def downloadAERS(t, downloadAll = False):
-
-    
-    if downloadAll :
-        locations = ALL_LOCATIONS
-    else :
-        locations = RECENT_LOCATIONS
-    
-    conn = httplib.HTTPConnection(FDA_SITE)
-    
+def download(t, locations, fda_base, download_location, aers_data_path):
     files = []
     
     for loc in locations :
-        conn.request("GET", loc)
+        url = fda_base + loc
+        data = requests.get(url).content
     
-        r = conn.getresponse()
-        print r.status, r.reason
-    
-        data = r.read()
-    
-        for m in re.finditer(r'href="'+ DOWNLOAD_LOC +'((UCM|ucm)\d+\.zip)">(AERS_ASCII_\d\d\d\dq\d\.ZIP)', data) :
-            # print m.group(1), m.group(3)
-            url = "http://{0}{1}{2}".format(FDA_SITE,DOWNLOAD_LOC,m.group(1))
-            target_file = TARGET_PATH + m.group(3)
+        for m in re.finditer(r'href="'+ download_location +'((UCM|ucm)\d+\.zip)">(AERS_ASCII_\d\d\d\dq\d\.ZIP)', data) :
+            url = "{0}{1}{2}".format(fda_base,download_location,m.group(1))
+            target_file = aers_data_path + m.group(3)
             files.append(target_file)
-            print "Starting download of {0}...".format(m.group(3))
+            log.info("Starting download of {0}...".format(m.group(3)))
             # print url
             if not(os.path.exists(target_file)) :
                 command = ["curl",url,"-o",target_file]
@@ -67,14 +56,14 @@ def downloadAERS(t, downloadAll = False):
                 t.execute(command,inputs=inputs,outputs=outputs)
             
             else :
-                print "{0} already exists!".format(target_file)
-            print "Done"
+                log.warning("{0} already exists!".format(target_file))
+            log.debug("Done")
     
-    print "All done downloading"
+    log.info("All done downloading")
     
     for f in files :
         extract_path = f.rstrip('.ZIP')
-        print "Extracting {0} to {1}".format(f, extract_path)
+        log.info("Extracting {0} to {1}".format(f, extract_path))
         if not(os.path.exists(extract_path)) :
             command = ["unzip",f,"-d",extract_path]
             inputs = [f]
@@ -83,75 +72,72 @@ def downloadAERS(t, downloadAll = False):
             t.execute(command, inputs=inputs, outputs=outputs)
             
         else :
-            print "{0} already exists!".format(extract_path)
-        print "Done"
+            log.warning("{0} already exists!".format(extract_path))
+        log.debug("Done")
         
-    print "All done extracting"
+    log.info("All done extracting")
 
 
-def importToMySQL(t, year):
+def mysql_import(t, year, aers_data_mask, mysql_path, mysql_user, mysql_pass, temp_path):
 
     
-    print "Will proceed to import all data from year {}".format(year)
+    log.info("Will proceed to import all data from year {}".format(year))
     
     # Copy all AERS data files to /tmp
-    print "Copying AERS data files from {0} to /tmp...".format(MASK_TO_AERS_DATA.format(year))
-    for f in glob.glob(MASK_TO_AERS_DATA.format(year)) :
+    log.info("Copying AERS data files from {0} to /tmp...".format(aers_data_mask.format(year)))
+    for f in glob.glob(aers_data_mask.format(year)) :
         (fpath,fname) = os.path.split(f)
-        fnew = '/tmp/'+fname
+        fnew = '{}{}'.format(temp_path,fname)
         t.execute(['cp','-v',f,fnew],inputs=[f],outputs=[fnew])
-    print "... done"
+    log.debug("... done")
     
     
     
-    print "Checking consistency of data files"
+    log.info("Checking consistency of data files")
     for ftype in tables :
-        files = glob.glob('/tmp/{0}{1}Q1.TXT'.format(ftype.upper(),year))
+        files = glob.glob('{0}{1}{2}Q1.TXT'.format(temp_path, ftype.upper(), year))
         for f in files :
-            t.execute(['python','check_files.py',f,f+'.checked'], inputs=[f], outputs=[f+'.checked'])
+            if not os.path.exists(f+'.checked'):
+                t.execute(['python','check_files.py',f,f+'.checked'], inputs=[f], outputs=[f+'.checked'])
+            else :
+                log.info("{} already exists. {} has already been checked.".format(f+'.checked',f))
         
-    
-    
     
     for tab in tables :
         files = glob.glob('/tmp/{0}{1}Q1.TXT.checked'.format(tab.upper(),year))
-        print "Truncating table {0} ...".format(tab)
-        trunc_command = ['{0}/mysql'.format(MYSQL_PATH),'-u',USER,'-p{0}'.format(PASS),'aers','-e','TRUNCATE TABLE aers.{0};'.format(tab)]
+        log.info("Truncating table {0} ...".format(tab))
+        trunc_command = ['{0}mysql'.format(mysql_path),'-u',mysql_user,'-p{0}'.format(mysql_pass),'aers','-e','TRUNCATE TABLE aers.{0};'.format(tab)]
         t.execute(trunc_command, inputs=['aers.{0}'.format(tab)],outputs=['aers.{0}'.format(tab)],replace=PASS)
-        print "... done"
+        log.debug("... done")
         
         for f in files :
-            print "Importing from {0} into {1} ...".format(f, tab)
-            command = ['{0}/mysql'.format(MYSQL_PATH),'-u',USER,'-p{0}'.format(PASS),'aers','-e',"LOAD DATA INFILE '{0}' REPLACE INTO TABLE aers.{1} FIELDS TERMINATED BY '$';".format(f,tab)]
-            t.execute(command, inputs=[f,'aers.{0}'.format(tab)], outputs=['aers.{0}'.format(tab)], replace=PASS)
-            print "... done"
+            log.info("Importing from {0} into {1} ...".format(f, tab))
+            command = ['{0}mysql'.format(mysql_path),'-u',mysql_user,'-p{0}'.format(mysql_pass),'aers','-e',"LOAD DATA INFILE '{0}' REPLACE INTO TABLE aers.{1} FIELDS TERMINATED BY '$';".format(f,tab)]
+            t.execute(command, inputs=[f,'aers.{0}'.format(tab)], outputs=['aers.{0}'.format(tab)], replace=mysql_pass)
+            log.debug("... done")
     
-    print "DONE!"     
+    log.info("MySQL import completed")     
     
 
 
-def createDump(t, dumpFile):
-    dump_script = DUMP_RDF_PATH+DUMP_RDF_COMMAND
-    
-    
-    
-    command = [dump_script,'-m',DUMP_RDF_MAPPING,'-o',dumpFile]
+def dump(t, dumpFile, dump_script, dump_rdf_mapping, dump_file):
+    command = [dump_script,'-m',dump_rdf_mapping,'-o',dump_file]
     inputs = []
     outputs = []
     
     for tab in tables :
         inputs.append('aers.{}'.format(tab))
     
-    inputs.append(DUMP_RDF_MAPPING)
+    inputs.append(dump_rdf_mapping)
     
     outputs.append(dumpFile)
     
-    print "Calling rdf-dump script in {}".format(dump_script)
+    log.info("Calling rdf-dump script in {}".format(dump_script))
     t.execute(command, inputs=inputs, outputs=outputs)
-    print "Done"
+    log.debug("Done")
     
     
-def import4store(t, dumpFile, graphURI):
+def fourstore_import(t, dumpFile, graphURI):
     import_script = "4s-import"
     repository = "aers"
     
@@ -167,8 +153,27 @@ def import4store(t, dumpFile, graphURI):
 
 
 
+
+
+## GLOBAL SETTINGS
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.DEBUG)
+
+logHandler = logging.StreamHandler()
+logHandler.setLevel(logging.DEBUG)
+
+logFormatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logHandler.setFormatter(logFormatter)
+
+log.addHandler(logHandler)
+
+
+
 if __name__ == '__main__':
+    log.debug("Parsing command line arguments")
     parser = argparse.ArgumentParser()
+    parser.add_argument("--config", help="The YAML configuration file to use", default='config.yaml')
     parser.add_argument("--year", help="The reporting year to convert to RDF")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("--updateall", help="Download all AERS reports from FDA website",
@@ -177,50 +182,116 @@ if __name__ == '__main__':
                     action="store_true")
     parser.add_argument("--dumptordf", help="Dump MySQL database to RDF", action="store_true")
     parser.add_argument("--import4store", help="Create provenance information for importing to 4Store", action="store_true")
+    parser.add_argument("--trailfile", help="Specify existing Prov-O-Matic trailfile to append to")
     args = parser.parse_args()
 
+    # Load configuration file
+    log.debug("Loading configuration file from {}".format(args.config))
+    config = yaml.load(open(args.config, "r"))
 
-    trailFile='../dumps/provenance-trail-{}.ttl'.format(datetime.strftime(datetime.now(),'%Y-%m-%d'))
+
+
+    # Set the base directory for conversion output
+    output_base = config['output']['base']
+    log.debug("Output base directory is {}".format(output_base))
+              
+    if not os.path.exists(output_base):
+        log.info("Creating {} for output".format(output_base))
+        os.makedirs(output_base)
+  
+  
+  
+    ## PROV-O-MATIC
     
+    log.debug("Initializing Prov-O-Matic")
+    # Add Prov-O-Matic to the python path
+    sys.path.append(config['provomatic'])
+    
+    # Import Prov-O-Matic
+    from provomatic.prov import Trace
+    
+    # Create a Prov-O-Matic instance
+    if args.trailfile :
+        trailFile = args.trailfile
+    else :
+        trailFile = '{}provenance-trail-{}.ttl'.format(output_base, datetime.strftime(datetime.now(),'%Y-%m-%d'))
+        
     t = Trace(trailFile=trailFile,provns="http://aers.data2semantics.org/resource/prov/")
 
+    
+    ## AERS DOWNLOAD
+
+    # Set locations for AERS downloads
+    fda_base = config['fda']['url']
+    download_location = config['fda']['download']
+    aers_data_path = output_base + config['output']['aers_data_dir']
+    aers_data_mask = output_base + config['output']['aers_data_mask']
+    
+    if not os.path.exists(aers_data_path) :
+        log.info("Creating {} for downloaded AERS data files".format(aers_data_path))
+        os.makedirs(aers_data_path)
 
     if args.updateall :
-        print "Downloading all AERS reports"
-        downloadAERS(t, True)
-    elif args.updaterecent :
-        print "Downloading the four most recent AERS reports"
-        downloadAERS(t, False)
+        log.info("Downloading all AERS reports")
+        locations = config['fda']['locations']['all']
+        download(t, locations, fda_base, download_location, aers_data_path)
+    elif args.updaterecent:
+        log.info("Downloading the four most recent AERS reports")
+        locations = config['fda']['locations']['recent']
+        download(t, locations, fda_base, download_location, aers_data_path)
     else :
-        print "Not downloading any AERS reports"
-    
+        log.info("Not downloading any AERS reports")
 
+    
+    
+    ## MYSQL IMPORT
+    
+    log.info("Initializing MySQL Import")
+    
+    mysql_path = config['mysql']['path']
+    mysql_user = config['mysql']['user']
+    mysql_pass = config['mysql']['pass']
+    temp_path = config['output']['temp']
     
     if args.year :
         if len(args.year) == 2 :
             year = args.year
         else :
-            print "Using only the last two digits of {}".format(args.year)
+            log.warning("Using only the last two digits of {}".format(args.year))
             year = args.year[-2:]
         
-        print "Uploading AERS reports from year {} to MySQL".format(year)
-        importToMySQL(t, year)
-    else :
-        print "Not uploading any AERS reports to MySQL"
+        log.info("Uploading AERS reports from year {} to MySQL".format(year))
         
-    if args.dumptordf :
-        dumpFile='../dumps/dump-of-20{}-generated-on-{}.nt'.format(year, datetime.strftime(datetime.now(),'%Y-%m-%d'))
-        print "Dumping contents of MySQL to {}".format(dumpFile)
-        createDump(t, dumpFile)
+        mysql_import(t, year, aers_data_mask, mysql_path, mysql_user, mysql_pass, temp_path)
     else :
-        print "Not dumping to RDF"
+        log.warning("Not uploading any AERS reports to MySQL")
+        
+       
+    ## RDF DUMP   
+    
+    dump_script = config['d2rq']['path'] + 'dump-rdf'
+    dump_rdf_mapping = config['d2rq']['mapping']
+    
+    if args.dumptordf and args.year:
+        dump_file ='{}/dump-of-20{}-generated-on-{}.nt'.format(output_base, year, datetime.strftime(datetime.now(),'%Y-%m-%d'))
+        log.info("Dumping contents of MySQL to {}".format(dump_file))
+        dump(t, dump_file, dump_script, dump_rdf_mapping, dump_file)
+    else :
+        log.warning("Not dumping to RDF")
+
+    ## 4STORE IMPORT
         
     if args.import4store :
-        graphURI = 'http://aers.data2semantics.org/resource/resource/' + dumpFile.lstrip('./')
-        print "Importing dump file {} into 4Store graph {}".format(dumpFile, graphURI)
-        import4store(t, dumpFile, graphURI)
-        
+        graphURI = 'http://aers.data2semantics.org/resource/resource/' + dump_file.lstrip('./')
+        log.info("Importing dump file {} into 4Store graph {}".format(dump_file, graphURI))
+        fourstore_import(t, dump_file, graphURI)
+    else :
+        log.warning("Not importing into 4Store")
+
+    log.info("Serializing Prov-O-Matic trail to {}".format(trailFile))        
     t.serialize(trailFile)  
+    
+    log.info("Done!")
         
     
  
