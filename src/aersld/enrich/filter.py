@@ -9,7 +9,6 @@ from csv import reader, writer
 import pickle
 import copy
 import yaml 
-import sys
 
 
 
