@@ -18,6 +18,9 @@ prefixes: |
         PREFIX ctcae: <http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl#>
 
 
+output:
+  base: /Users/hoekstra/projects/data2semantics/raw2ld/aersld_enrich_output/
+
 drug:
   normalized:   drug_normalized.pickle
   labelindex:   drug_label_index.pickle
