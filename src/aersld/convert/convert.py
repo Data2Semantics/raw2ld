@@ -2,36 +2,11 @@ import glob
 import os
 from datetime import datetime
 import argparse
-import httplib
 import re
-import urllib
-from zipfile import ZipFile
-#import shlex
 import yaml
 import requests
 import sys
 import logging
-
-FDA_SITE = "www.fda.gov"
-    
-# All reports:
-ALL_LOCATIONS = ["/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm083765.htm", "/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm"]
-
-# Only latest year (for testing purposes):
-RECENT_LOCATIONS = ["/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/ucm082193.htm"]
-
-
-DOWNLOAD_LOC = "/downloads/Drugs/GuidanceComplianceRegulatoryInformation/Surveillance/AdverseDrugEffects/"
-TARGET_PATH = "../aers_data_files/"
-
-MASK_TO_AERS_DATA = '../aers_data_files/aers_ascii_20{}q1/ascii/*.TXT'
-MYSQL_PATH = '/usr/local/mysql/bin'
-USER = 'root'
-PASS = 'visstick'
-
-DUMP_RDF_PATH = '../../../srv/d2rq-0.8/'
-DUMP_RDF_COMMAND = 'dump-rdf'
-DUMP_RDF_MAPPING = '../d2r_mapping_aers.n3'
 
 tables = ['demo', 'drug', 'indi', 'outc', 'reac', 'ther']
 
@@ -107,7 +82,7 @@ def mysql_import(t, year, aers_data_mask, mysql_path, mysql_user, mysql_pass, te
         files = glob.glob('/tmp/{0}{1}Q1.TXT.checked'.format(tab.upper(),year))
         log.info("Truncating table {0} ...".format(tab))
         trunc_command = ['{0}mysql'.format(mysql_path),'-u',mysql_user,'-p{0}'.format(mysql_pass),'aers','-e','TRUNCATE TABLE aers.{0};'.format(tab)]
-        t.execute(trunc_command, inputs=['aers.{0}'.format(tab)],outputs=['aers.{0}'.format(tab)],replace=PASS)
+        t.execute(trunc_command, inputs=['aers.{0}'.format(tab)],outputs=['aers.{0}'.format(tab)],replace=mysql_pass)
         log.debug("... done")
         
         for f in files :
