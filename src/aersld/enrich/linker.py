@@ -4,12 +4,9 @@ Created on Jul 17, 2012
 @author: hoekstra
 '''
 
-from SPARQLWrapper import SPARQLWrapper, JSON, XML
+from SPARQLWrapper import SPARQLWrapper, JSON
 from time import time
 import re
-from rdflib import ConjunctiveGraph, Namespace, URIRef, plugin, query
-#from d2s.prov import Trace
-from queries import Queries
 import argparse
 import os.path
 import pickle
@@ -17,21 +14,19 @@ from urllib import quote, unquote
 import yaml
 from datetime import datetime
 from csv import writer
-
-plugin.register('sparql', query.Processor,
-               'rdfextras.sparql.processor', 'Processor')
-plugin.register('sparql', query.Result,
-               'rdfextras.sparql.query', 'SPARQLQueryResult')
-
+import logging
 
 
 
 class Linker(object):
-    
 
     
-    def __init__(self, prefixes):
+    def __init__(self, prefixes, output_base, log):
         self.prefixes = prefixes
+        self.output_base = output_base
+        
+        self.log = log
+        
         return
     
 
@@ -45,14 +40,14 @@ class Linker(object):
         sparql.setReturnFormat(JSON)
         sparql.addCustomParameter('soft-limit', '-1')
         sparql.setQuery(self.prefixes+"\n\n"+query)
-        print "Starting query {0}...".format(name)
+        self.log.info("Starting query {0}...".format(name))
 
         tstart = time()
         res = sparql.query().convert()
         tend = time()
-        print "... done ({0}us)".format(tend-tstart)
+        self.log.debug("... done ({0}us)".format(tend-tstart))
         resultsno = len(res["results"]["bindings"])
-        print "Query returned {0} results.".format(resultsno)
+        self.log.info("Query returned {0} results.".format(resultsno))
         
         return res
     
@@ -220,38 +215,36 @@ class Linker(object):
         results = []
         
         if os.path.exists(resultsFile):
-            print "Loading from {}".format(resultsFile)
+            self.log.info("Loading from {}".format(resultsFile))
             results = pickle.load(open(resultsFile, "r"))
-            print "done"
+            self.log.debug("done")
         else:
-            print "SPARQL Query:"
-            print query
+            self.log.debug("SPARQL Query:\n{}".format(query))
             sparql_results = self.doQuery(endpoint, query)
             
             for res in sparql_results["results"]["bindings"] :
                 try :
                     results.append((res["resource"]["value"],res["label"]["value"]))
                 except :
-                    print "SPARQL Query should return two variables 'resource' and 'label'"
+                    self.log.error("SPARQL Query should return two variables 'resource' and 'label'")
                     quit()
             
-            print "Dumping results to {}".format(resultsFile)
+            self.log.info("Dumping results to {}".format(resultsFile))
             pickle.dump(results, open(resultsFile, "w"))
-            print "done"
+            self.log.debug("done")
         return results
     
     
     
     def do(self, config):
-        print "Starting"
-        normalizedFile = config['normalized']
-        relatedFile = config['related']
-        indexFile = config['labelindex']
-        broaderFile = config['broader']
-        uriFile = config['uriindex']
-        exactFile = config['exact']
-        
-        reportFile = config['report']
+        self.log.info("Starting")
+        normalizedFile = self.output_base + config['normalized']
+        relatedFile = self.output_base + config['related']
+        indexFile = self.output_base + config['labelindex']
+        broaderFile = self.output_base + config['broader']
+        uriFile = self.output_base + config['uriindex']
+        exactFile = self.output_base + config['exact']
+        reportFile = self.output_base + config['report']
         
         
         
@@ -259,10 +252,11 @@ class Linker(object):
         normalized_index = {}
         exact_index = {}
         results_count = 0
-        print "Building Index"
+        
+        self.log.info("Building Index")
         for q in config['queries'] :
             name = q['name']
-            resultsFile = q['results']
+            resultsFile = self.output_base + q['results']
             query = "SELECT DISTINCT ?resource ?label WHERE {\n"+q['pattern']+"}"
             normalize = q['normalize']
             endpoint = q['endpoint']
@@ -271,12 +265,12 @@ class Linker(object):
             else:
                 prefix = ''
             
-            print "Running {} on {} (Normalize is {})".format(name, endpoint, normalize)
+            self.log.info("Running {} on {} (Normalize is {})".format(name, endpoint, normalize))
 
             if 'labelfunction' in q and 'regex' in q:
                 labelFunction = q['labelfunction']
                 regex = q['regex']
-                print "Using label function {} with regex {}".format(labelFunction, regex)
+                self.log.info("Using label function {} with regex {}".format(labelFunction, regex))
             else:
                 labelFunction = None
                 regex = None
@@ -284,29 +278,27 @@ class Linker(object):
             results = self.getResults(endpoint, query, resultsFile)
             results_count += len(results)
             
-            print "Indexing {}".format(name)
+            self.log.info("Indexing {}".format(name))
             label_index, exact_index, normalized_index, uri_index = self.index(results, label_index, exact_index, normalized_index, normalize=normalize, prefix=prefix, labelFunction=labelFunction, regex=regex)
-            print "done"
-        print "Index phase complete"
+            self.log.debug("done")
+        self.log.info("Index phase complete")
         
-        print "Pruning indexes"
-        print "Label index"
+        self.log.info("Pruning label index")
         label_index = self.prune(label_index)
-        print "Exact index"
+        self.log.info("Pruning exact matches index")
         exact_index = self.prune(exact_index)
-        print "Normalized index"
+        self.log.info("Pruning normalized index")
         normalized_index = self.prune(normalized_index)
-        print "URI index"
+        self.log.info("Pruning URI index")
         uri_index = self.prune(uri_index)
-        print "done"
         
-        print "Creating related index"
+        self.log.info("Creating related index")
         related_index = self.related(exact_index, uri_index)
-        print "done"
+        self.log.debug("done")
         
-        print "Creating broader index"
+        self.log.info("Creating broader index")
         broader_index, count = self.broader(exact_index)
-        print "done"
+        self.log.debug("done")
         
         w = writer(open(reportFile,'a+'))
         
@@ -320,17 +312,17 @@ class Linker(object):
         w.writerow(["URIs with broader  ", len(broader_index)])
         w.writerow(['',''])
 
-        print "Dumping to {}".format(normalizedFile)
+        self.log.info("Dumping to {}".format(normalizedFile))
         pickle.dump(normalized_index, open(normalizedFile, 'w'))
-        print "Dumping to {}".format(exactFile)
+        self.log.info("Dumping to {}".format(exactFile))
         pickle.dump(exact_index, open(exactFile, 'w'))
-        print "Dumping to {}".format(relatedFile)
+        self.log.info("Dumping to {}".format(relatedFile))
         pickle.dump(related_index, open(relatedFile, 'w'))
-        print "Dumping to {}".format(indexFile)
+        self.log.info("Dumping to {}".format(indexFile))
         pickle.dump(label_index, open(indexFile, 'w'))
-        print "Dumping to {}".format(uriFile)
+        self.log.info("Dumping to {}".format(uriFile))
         pickle.dump(uri_index, open(uriFile, 'w'))
-        print "Dumping to {}".format(broaderFile)
+        self.log.info("Dumping to {}".format(broaderFile))
         pickle.dump(broader_index, open(broaderFile, 'w'))
         
     
@@ -346,23 +338,47 @@ class Linker(object):
 
 
 
+
+
+
 if __name__ == '__main__':
+    ## GLOBAL SETTINGS
+    log = logging.getLogger(__name__)
+    log.setLevel(logging.DEBUG)
+    
+    logHandler = logging.StreamHandler()
+    logHandler.setLevel(logging.DEBUG)
+    
+    logFormatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    logHandler.setFormatter(logFormatter)
+    
+    log.addHandler(logHandler)
+    
     parser = argparse.ArgumentParser()
-    parser.add_argument("config", help="YAML Configuration file")
+    parser.add_argument("--config", help="YAML Configuration file", default="linker.yaml")
     parser.add_argument("--drug", help="Link drugs", action="store_true")
     parser.add_argument("--diagnosis", help="Link diagnoses", action="store_true")
     parser.add_argument("--country", help="Link countries", action="store_true")
 
     args = parser.parse_args()
     
+    log.info("Loading config file from {}".format(args.config))
     config = yaml.load(open(args.config, "r"))
+
+    # Set the base directory for conversion output
+    output_base = config['output']['base']
+    log.debug("Output base directory is {}".format(output_base))
+              
+    if not os.path.exists(output_base):
+        log.info("Creating {} for output".format(output_base))
+        os.makedirs(output_base)
     
     
         
-    l = Linker(config['prefixes'])
+    log.info("Initializing linker")
+    l = Linker(config['prefixes'],output_base, log)
 
-    
-    
+
     if args.drug :
         l.do(config['drug'])
         
@@ -372,7 +388,7 @@ if __name__ == '__main__':
     if args.country :
         l.do(config['country'])
         
-    print "Done!"
+    self.log.info("Done!")
 
 
 
