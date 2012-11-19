@@ -6,10 +6,16 @@ Created on Jul 6, 2012
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 from subprocess import check_output
+import argparse
 
-SPARQL_BASE = "http://eculture2.cs.vu.nl:5020"
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("endpoint", nargs='?', help="The URL of the sparql endpoint (without /sparql suffix)", default='http://eculture2.cs.vu.nl:5020')
+    args = parser.parse_args()
+    
+    SPARQL_BASE = args.endpoint
+    
     sw = SPARQLWrapper('{}/sparql/'.format(SPARQL_BASE))
     query = "SELECT DISTINCT ?g WHERE { GRAPH ?g {?s ?p ?o}}"
     
