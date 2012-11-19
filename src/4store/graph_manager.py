@@ -7,6 +7,20 @@ Created on Jul 6, 2012
 from SPARQLWrapper import SPARQLWrapper, JSON
 from subprocess import check_output
 import argparse
+import logging
+
+## GLOBAL SETTINGS
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.DEBUG)
+
+logHandler = logging.StreamHandler()
+logHandler.setLevel(logging.DEBUG)
+
+logFormatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logHandler.setFormatter(logFormatter)
+
+log.addHandler(logHandler)
 
 
 if __name__ == '__main__':
@@ -15,6 +29,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     SPARQL_BASE = args.endpoint
+    log.info('Using {} as 4Store location.'.format(SPARQL_BASE))
     
     sw = SPARQLWrapper('{}/sparql/'.format(SPARQL_BASE))
     query = "SELECT DISTINCT ?g WHERE { GRAPH ?g {?s ?p ?o}}"
@@ -26,21 +41,21 @@ if __name__ == '__main__':
     
     for res in results["results"]["bindings"] :
         g = res["g"]["value"]
-        print "Graph: <{}>".format(g)
+        log.info("Graph: <{}>".format(g))
         
         yn = raw_input("Delete this graph? (y/n/q): ")
         
         if yn == "y" :
             command = ["curl", "-X", "DELETE", "{}/data/{}".format(SPARQL_BASE,g)]
-            print "Deleting graph <{}>".format(g)
+            log.info("Deleting graph <{}>".format(g))
             out = check_output(command)
             print out
-            print "Done"
+            log.debug("Done")
         elif yn == "q":
             quit()
         else :
-            print "Skipping..."
+            log.info("Skipping...")
     
-    print "Finished!"
+    log.info("Finished!")
             
         
