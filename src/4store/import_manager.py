@@ -26,14 +26,16 @@ log.addHandler(logHandler)
 
 
 
-SPARQL_BASE = "http://eculture2.cs.vu.nl:5020"
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument("endpoint", nargs='?', help="The URL of the sparql endpoint (without /sparql suffix)", default='http://ops.few.vu.nl:8080')
     parser.add_argument("--list", help="Skip interactive mode, just list the commands", action="store_true")
 #    parser.add_argument("--curl", help="Use curl to upload the triples, instead of using 4s-import", action="store_true")
 #    parser.add_argument("--prov-trail", help="Location of the provenance trail file, if it has not already been loaded to the 4store instance")
     args = parser.parse_args()
+    
+    SPARQL_BASE = args.endpoint
     
     sw = SPARQLWrapper('{}/sparql/'.format(SPARQL_BASE))
     query = """PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
