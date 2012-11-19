@@ -8,7 +8,20 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from subprocess import check_output
 import argparse
 import re
+import logging
 
+## GLOBAL SETTINGS
+
+log = logging.getLogger(__name__)
+log.setLevel(logging.DEBUG)
+
+logHandler = logging.StreamHandler()
+logHandler.setLevel(logging.DEBUG)
+
+logFormatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logHandler.setFormatter(logFormatter)
+
+log.addHandler(logHandler)
 
 
 
@@ -18,6 +31,8 @@ SPARQL_BASE = "http://eculture2.cs.vu.nl:5020"
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("--list", help="Skip interactive mode, just list the commands", action="store_true")
+#    parser.add_argument("--curl", help="Use curl to upload the triples, instead of using 4s-import", action="store_true")
+#    parser.add_argument("--prov-trail", help="Location of the provenance trail file, if it has not already been loaded to the 4store instance")
     args = parser.parse_args()
     
     sw = SPARQLWrapper('{}/sparql/'.format(SPARQL_BASE))
@@ -51,22 +66,22 @@ WHERE {
         
         fileName = re.search(".*/(.*?)\.nt", f).group(1) + ".nt"
         
+        log.info("Graph: <{}>\nFile: {}".format(g, fileName))
         if args.list :
-            print "4s-import aers -v --model {} {}".format(g,fileName)
+            log.info("4s-import aers -v --model {} {}".format(g,fileName))
         else :
-            print "Graph: <{}>\nFile: {}".format(g, fileName)
-            
             yn = raw_input("Upload this graph? (y/n/q): ")
             
             if yn == "y" :
-                command = ["4s-import", "aers","-v", "--model", g, fileName]
-                print "Importing into graph <{}>".format(g)
+                log.info("Importing into graph <{}>".format(g))
+                log.info("Using 4s-import to load data locally")
+                command = ["4s-import", "aersld","-v", "--model", g, fileName]
                 out = check_output(command)
-                print out
-                print "Done"
+                log.debug(out)
+                log.debug("Done")
             elif yn == "q":
                 quit()
             else :
-                print "Skipping..."
+                log.info("Skipping...")
     
-    print "Finished!"
+    log.info("Finished!")
