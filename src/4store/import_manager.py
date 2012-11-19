@@ -32,12 +32,15 @@ if __name__ == '__main__':
     parser.add_argument("endpoint", nargs='?', help="The URL of the sparql endpoint (without /sparql suffix)", default='http://ops.few.vu.nl:8080')
     parser.add_argument("kb", nargs='?', help="The name of the 4Store knowledge base (backend)", default="aersld")
     parser.add_argument("--list", help="Skip interactive mode, just list the commands", action="store_true")
+    parser.add_argument("--quiet", help="Don't ask, jus do!", action="store_true")
+    parser.add_argument("--format", help="RDF Format as understood by 4store", default="ntriples")
 #    parser.add_argument("--curl", help="Use curl to upload the triples, instead of using 4s-import", action="store_true")
 #    parser.add_argument("--prov-trail", help="Location of the provenance trail file, if it has not already been loaded to the 4store instance")
     args = parser.parse_args()
     
     SPARQL_BASE = args.endpoint
     KB = args.kb
+    FORMAT = args.format
     
     sw = SPARQLWrapper('{}/sparql/'.format(SPARQL_BASE))
     query = """PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -72,9 +75,12 @@ WHERE {
         
         log.info("Graph: <{}>\nFile: {}".format(g, fileName))
         if args.list :
-            log.info("4s-import {} -v --model {} {}".format(KB,g,fileName))
+            log.info("4s-import {} -v --format {} --model {} {}".format(KB,FORMAT,g,fileName))
         else :
-            yn = raw_input("Upload this graph? (y/n/q): ")
+            if args.quiet :
+                yn = "y"
+            else :
+                yn = raw_input("Upload this graph? (y/n/q): ")
             
             if yn == "y" :
                 log.info("Importing into graph <{}>".format(g))
