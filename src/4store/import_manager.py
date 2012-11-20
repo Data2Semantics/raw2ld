@@ -5,7 +5,7 @@ Created on Jul 13, 2012
 '''
 
 from SPARQLWrapper import SPARQLWrapper, JSON
-from subprocess import check_output
+from subprocess import call
 import argparse
 import re
 import logging
@@ -85,8 +85,8 @@ WHERE {
             if yn == "y" :
                 log.info("Importing into graph <{}>".format(g))
                 log.info("Using 4s-import to load data locally")
-                command = ["4s-import", KB ,"-v", "--model", g, fileName]
-                out = check_output(command)
+                command = ["4s-import", KB ,"-v", "--format", FORMAT, "--model", g, fileName]
+                out = call(command)
                 log.debug(out)
                 log.debug("Done")
             elif yn == "q":
