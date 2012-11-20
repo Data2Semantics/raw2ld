@@ -30,10 +30,12 @@ log.addHandler(logHandler)
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("endpoint", nargs='?', help="The URL of the sparql endpoint (without /sparql suffix)", default='http://ops.few.vu.nl:8080')
-    parser.add_argument("kb", nargs='?', help="The name of the 4Store knowledge base (backend)", default="aersld")
+    parser.add_argument("kb", nargs='?', help="The name of the 4Store knowledge base (backend)", default="data2semantics")
     parser.add_argument("--list", help="Skip interactive mode, just list the commands", action="store_true")
     parser.add_argument("--quiet", help="Don't ask, jus do!", action="store_true")
     parser.add_argument("--format", help="RDF Format as understood by 4store", default="ntriples")
+    parser.add_argument("--virtuoso", help="List virtuoso load commands", action="store_true")
+    parser.add_argument("--basedir", help="Base dir for virtuoso loader", default="/home/hoekstra/aers/data/dumps/")
 #    parser.add_argument("--curl", help="Use curl to upload the triples, instead of using 4s-import", action="store_true")
 #    parser.add_argument("--prov-trail", help="Location of the provenance trail file, if it has not already been loaded to the 4store instance")
     args = parser.parse_args()
@@ -41,6 +43,14 @@ if __name__ == '__main__':
     SPARQL_BASE = args.endpoint
     KB = args.kb
     FORMAT = args.format
+    BASE_DIR = args.basedir
+    
+    log.debug("Will use {} to retrieve provenance informaiton".format(SPARQL_BASE))
+    log.debug("Will load files in {} format to the {} 4store knowledge base".format(FORMAT, KB))
+    if args.quiet:
+        log.debug("Running in quiet mode")
+    if args.list:
+        log.debug("Running in list mode, not actually doing anything")
     
     sw = SPARQLWrapper('{}/sparql/'.format(SPARQL_BASE))
     query = """PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -67,6 +77,7 @@ WHERE {
     
     results = sw.query().convert()
 
+    list = []
     for res in results["results"]["bindings"] :
         g = res["g"]["value"]
         f = res["f"]["value"]
@@ -74,8 +85,14 @@ WHERE {
         fileName = re.search(".*/(.*?)\.nt", f).group(1) + ".nt"
         
         log.info("Graph: <{}>\nFile: {}".format(g, fileName))
-        if args.list :
-            log.info("4s-import {} -v --format {} --model {} {}".format(KB,FORMAT,g,fileName))
+        if args.virtuoso :
+            commandstring = "ld_dir('{}','{}','{}');".format(BASE_DIR,fileName,g)
+            log.info(commandstring)
+            list.append(commandstring)
+        elif args.list :
+            commandstring = "4s-import {} -v --format {} --model {} {}".format(KB,FORMAT,g,fileName)
+            log.info(commandstring)
+            list.append(commandstring)
         else :
             if args.quiet :
                 yn = "y"
@@ -93,5 +110,9 @@ WHERE {
                 quit()
             else :
                 log.info("Skipping...")
+    
+    if args.list or args.virtuoso:
+        for c in list:
+            print c
     
     log.info("Finished!")
