@@ -5,6 +5,7 @@ Created on Jul 17, 2012
 '''
 
 from SPARQLWrapper import SPARQLWrapper, JSON
+from rdflib import ConjunctiveGraph, Namespace, URIRef
 from time import time
 import re
 import argparse
@@ -35,34 +36,20 @@ class Linker(object):
         [ulist.append(x) for x in l if x not in ulist]
         return ulist
             
-    def doQuery(self, endpoint, query, name=''):
-        sparql = SPARQLWrapper(endpoint)
-        sparql.setReturnFormat(JSON)
-        sparql.addCustomParameter('soft-limit', '-1')
-        sparql.setQuery(self.prefixes+"\n\n"+query)
-        self.log.info("Starting query {0}...".format(name))
 
-        tstart = time()
-        res = sparql.query().convert()
-        tend = time()
-        self.log.debug("... done ({0}us)".format(tend-tstart))
-        resultsno = len(res["results"]["bindings"])
-        self.log.info("Query returned {0} results.".format(resultsno))
-        
-        return res
     
     def index(self, res, label_index = {}, exact_index = {}, normalized_index = {}, uri_index = {}, normalize = True, prefix = '', labelFunction=None, regex=None):
         # Input is a SPARQL result set with two variables 'resource' and 'label'
         # We create an index where a normalised /label/ is key, and the value is a dictionary of the list of resources, and a normalised uri.
+        
+        
         for (uri,rawlabel) in res:
-            rawlabel = rawlabel.encode('utf-8').strip().lower()
-            if labelFunction == None :
-                label = rawlabel
-            else :
+            label = rawlabel.encode('utf-8').strip().lower()
+            if labelFunction != None :
                 if regex == None :
-                    exec 'label = self.'+labelFunction+'("'+rawlabel+'")'
+                    exec 'label = self.'+labelFunction+'("'+label+'")'
                 else :
-                    exec 'label = self.'+labelFunction+'("'+rawlabel+'","'+regex+'")'
+                    exec 'label = self.'+labelFunction+'("'+label+'","'+regex+'")'
             
 
             if normalize :
@@ -71,6 +58,10 @@ class Linker(object):
     
                 # Mint a URI using the QName
                 normalized_uri = prefix + qname_normalized
+                
+                if self.log.level == logging.DEBUG :
+                    if label != label_normalized :
+                        self.log.debug("{} => {}".format(rawlabel,label_normalized))
             else :
                 label_normalized = label
                 normalized_uri = uri
@@ -190,8 +181,8 @@ class Linker(object):
                         # If the partial_label is a normalized label of an actual (known) resource
                         # We add that known resource to the broaders of the resource with the current_label
                         if partial_label in exact_index and (partial_label != current_label) :
-                            for resource in exact_index[current_label]:
-                                broader_index.setdefault(resource,set()).update(exact_index[partial_label])
+                            for uri in exact_index[current_label]:
+                                broader_index.setdefault(uri,set()).update(exact_index[partial_label])
                             
                             count += 1
                                 
@@ -235,6 +226,22 @@ class Linker(object):
         return results
     
     
+    def doQuery(self, endpoint, query, name=''):
+        sparql = SPARQLWrapper(endpoint)
+        sparql.setReturnFormat(JSON)
+        sparql.addCustomParameter('soft-limit', '-1')
+        sparql.setQuery(self.prefixes+"\n\n"+query)
+        self.log.info("Starting query {0}...".format(name))
+
+        tstart = time()
+        res = sparql.query().convert()
+        tend = time()
+        self.log.debug("... done ({0}us)".format(tend-tstart))
+        resultsno = len(res["results"]["bindings"])
+        self.log.info("Query returned {0} results.".format(resultsno))
+        
+        return res
+    
     
     def do(self, config):
         self.log.info("Starting")
@@ -245,6 +252,7 @@ class Linker(object):
         uriFile = self.output_base + config['uriindex']
         exactFile = self.output_base + config['exact']
         reportFile = self.output_base + config['report']
+        rdfFile = self.output_base + config['rdf']
         
         
         
@@ -260,6 +268,7 @@ class Linker(object):
             query = "SELECT DISTINCT ?resource ?label WHERE {\n"+q['pattern']+"}"
             normalize = q['normalize']
             endpoint = q['endpoint']
+            
             if normalize:
                 prefix = q['prefix']
             else:
@@ -281,6 +290,9 @@ class Linker(object):
             self.log.info("Indexing {}".format(name))
             label_index, exact_index, normalized_index, uri_index = self.index(results, label_index, exact_index, normalized_index, normalize=normalize, prefix=prefix, labelFunction=labelFunction, regex=regex)
             self.log.debug("done")
+            
+            
+        
         self.log.info("Index phase complete")
         
         self.log.info("Pruning label index")
@@ -312,18 +324,53 @@ class Linker(object):
         w.writerow(["URIs with broader  ", len(broader_index)])
         w.writerow(['',''])
 
-        self.log.info("Dumping to {}".format(normalizedFile))
-        pickle.dump(normalized_index, open(normalizedFile, 'w'))
-        self.log.info("Dumping to {}".format(exactFile))
-        pickle.dump(exact_index, open(exactFile, 'w'))
-        self.log.info("Dumping to {}".format(relatedFile))
-        pickle.dump(related_index, open(relatedFile, 'w'))
-        self.log.info("Dumping to {}".format(indexFile))
-        pickle.dump(label_index, open(indexFile, 'w'))
-        self.log.info("Dumping to {}".format(uriFile))
-        pickle.dump(uri_index, open(uriFile, 'w'))
-        self.log.info("Dumping to {}".format(broaderFile))
-        pickle.dump(broader_index, open(broaderFile, 'w'))
+#        self.log.info("Dumping to {}".format(normalizedFile))
+#        pickle.dump(normalized_index, open(normalizedFile, 'w'))
+#        self.log.info("Dumping to {}".format(exactFile))
+#        pickle.dump(exact_index, open(exactFile, 'w'))
+#        self.log.info("Dumping to {}".format(relatedFile))
+#        pickle.dump(related_index, open(relatedFile, 'w'))
+#        self.log.info("Dumping to {}".format(indexFile))
+#        pickle.dump(label_index, open(indexFile, 'w'))
+#        self.log.info("Dumping to {}".format(uriFile))
+#        pickle.dump(uri_index, open(uriFile, 'w'))
+#        self.log.info("Dumping to {}".format(broaderFile))
+#        pickle.dump(broader_index, open(broaderFile, 'w'))
+        
+        
+        
+        SKOS = Namespace('http://www.w3.org/2004/02/skos/core#')
+        PROV = Namespace('http://www.w3.org/ns/prov#')
+
+        out_graph_file = open(rdfFile,'w')
+
+        self.log.info('Serializing to {}'.format(rdfFile))
+        self.log.info('Minting prov:wasRevisionOf relations between normalized URIs and original URIs')
+        
+        # This is a 1:1 mapping
+        for original_uri,normalized_uri in normalized_index.iteritems():
+            out_graph_file.write('<{}> <{}> <{}> .\n'.format(normalized_uri,PROV['wasRevisionOf'],original_uri))
+        
+        self.log.info('Minting skos:exactMatch relations between URIs that share the same labels')      
+        
+        # This is a 1:n mapping
+        for uri, related_uris in related_index.iteritems():
+            for related_uri in related_uris:
+                out_graph_file.write('<{}> <{}> <{}> .\n'.format(uri,SKOS['exactMatch'],related_uri))
+                out_graph_file.write('<{}> <{}> <{}> .\n'.format(related_uri,SKOS['exactMatch'],uri))          
+                
+        self.log.info('Minting skos:broadMatch and skos:narrowMatch relations between URIs that have overlapping labels')
+        
+        # This is a 1:n mapping
+        for narrower_uri,broader_uris in broader_index.iteritems():
+            for broader_uri in broader_uris:
+                out_graph_file.write('<{}> <{}> <{}> .\n'.format(narrower_uri,SKOS['broadMatch'],broader_uri))
+                out_graph_file.write('<{}> <{}> <{}> .\n'.format(broader_uri,SKOS['narrowMatch'],narrower_uri))
+                
+        out_graph_file.close()
+
+        self.log.debug('Done')
+        
         
     
     def slashURIToLabel(self, uri,regex):
@@ -344,10 +391,10 @@ class Linker(object):
 if __name__ == '__main__':
     ## GLOBAL SETTINGS
     log = logging.getLogger(__name__)
-    log.setLevel(logging.DEBUG)
+    log.setLevel(logging.INFO)
     
     logHandler = logging.StreamHandler()
-    logHandler.setLevel(logging.DEBUG)
+    logHandler.setLevel(logging.INFO)
     
     logFormatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     logHandler.setFormatter(logFormatter)

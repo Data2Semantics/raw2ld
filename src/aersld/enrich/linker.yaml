@@ -29,6 +29,7 @@ drug:
   uriindex:     drug_uri_index.pickle
   exact:        drug_exact.pickle
   report:       drug_report.csv
+  rdf:          drug_mappings.nt
   queries:
     - name:   UMLS Drugs
       results: umls_drug_results.pickle
@@ -52,7 +53,7 @@ drug:
         ?resource   rdfs:label  ?label .
       normalize: True
       prefix:    http://aers.data2semantics.org/resource/drug/
-      endpoint: http://eculture2.cs.vu.nl:5020/sparql/
+      endpoint: http://aers.data2semantics.org/sparql/
     - name :    Drugbank Drugs
       results:  drugbank_drug_results.pickle
       pattern:  |
@@ -69,7 +70,7 @@ drug:
             ?resource   rdfs:label  ?label .
         }
       normalize: False
-      endpoint: http://eculture2.cs.vu.nl:5020/sparql/
+      endpoint: http://aers.data2semantics.org/sparql/
     - name :    DBPedia Drugs
       results:  dbpedia_drug_results.pickle
       pattern:  |
@@ -103,7 +104,7 @@ drug:
             ?label      dbpedia-owl:wikiPageRedirects ?resource .
         }
       normalize: False
-      endpoint: http://eculture2.cs.vu.nl:5020/sparql/
+      endpoint: http://aers.data2semantics.org/sparql/
       labelfunction: slashURIToLabel 
       regex: http://dbpedia.org/resource/
     - name:       Sider Drugs
@@ -119,7 +120,7 @@ drug:
         }    
         FILTER(?resource != <http://www4.wiwiss.fu-berlin.de/sider/resource/drugs/2232>)
       normalize:  False
-      endpoint:   http://eculture2.cs.vu.nl:5020/sparql/
+      endpoint:   http://aers.data2semantics.org/sparql/
       
       
 diagnosis:
@@ -130,6 +131,7 @@ diagnosis:
   uriindex:     diag_uri_index.pickle
   exact:        diag_exact.pickle
   report:       diag_report.csv
+  rdf:          diag_mappings.nt
   queries:
     - name:     AERS Diagnoses
       results:  aers_diag_results.pickle
@@ -144,7 +146,7 @@ diagnosis:
         }
       normalize:  True
       prefix:     http://aers.data2semantics.org/resource/diagnosis/
-      endpoint:   http://eculture2.cs.vu.nl:5020/sparql/
+      endpoint:   http://aers.data2semantics.org/sparql/
     - name:       Sider Effects
       results:    sider_diag_results.pickle
       pattern:    |
@@ -157,7 +159,7 @@ diagnosis:
             ?resource   sider:sideEffectName  ?label .
         }
       normalize:  False
-      endpoint:   http://eculture2.cs.vu.nl:5020/sparql/
+      endpoint:   http://aers.data2semantics.org/sparql/
     - name:       LinkedCT Condition
       results:    linkedct_diag_results.pickle
       pattern:    |
@@ -186,5 +188,5 @@ diagnosis:
         ?resource   rdf:type    owl:Class .
         ?resource   rdfs:label  ?label .
       normalize:  False
-      endpoint:   http://eculture2.cs.vu.nl:5020/sparql/
+      endpoint:   http://aers.data2semantics.org/sparql/
 

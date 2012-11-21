@@ -35,7 +35,7 @@ if __name__ == '__main__':
     parser.add_argument("--quiet", help="Don't ask, jus do!", action="store_true")
     parser.add_argument("--format", help="RDF Format as understood by 4store", default="ntriples")
     parser.add_argument("--virtuoso", help="List virtuoso load commands", action="store_true")
-    parser.add_argument("--basedir", help="Base dir for virtuoso loader", default="/home/hoekstra/aers/data/dumps/")
+    parser.add_argument("--basedir", help="Base dir for virtuoso loader, ignored otherwise", default="/home/hoekstra/aers/data/dumps/")
 #    parser.add_argument("--curl", help="Use curl to upload the triples, instead of using 4s-import", action="store_true")
 #    parser.add_argument("--prov-trail", help="Location of the provenance trail file, if it has not already been loaded to the 4store instance")
     args = parser.parse_args()
