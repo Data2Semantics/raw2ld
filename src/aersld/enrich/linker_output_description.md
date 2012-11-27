@@ -1,6 +1,7 @@
 # Description of `linker.py` output
+
 =author=
-	Rinke HOekstra
+	Rinke Hoekstra
 =date=
 	21 November 2012
 

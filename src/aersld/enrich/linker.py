@@ -75,8 +75,8 @@ class Linker(object):
             # uri index does the converse, it maps uris to all of their labels.
             uri_index.setdefault(normalized_uri,set()).add(label_normalized)
             
-            if normalize:
-                # The normalized_index gives for every original URI, the normalized URI.
+            if normalize and uri != normalized_uri:
+                # The normalized_index gives for every original URI, the normalized URI (if they differ, that is).
                 normalized_index[uri] = normalized_uri
         
         return label_index, exact_index, normalized_index, uri_index
@@ -128,11 +128,14 @@ class Linker(object):
         label_normalized = re.sub(r'\s+',' ',label_normalized)
         label_normalized = label_normalized.strip().encode('utf-8')
             
-        # Replace spaces with underscores
+        # Replace spaces with underscores for the qname
         qname_normalized = re.sub(r'\.|\,',r'',label_normalized)
         qname_normalized = re.sub(r'\s+','_',qname_normalized)
         
-        qname_normalized = quote(qname_normalized)
+        # Be sure to at least replace hashes with underscores
+        qname_normalized = re.sub(r'\#','_',qname_normalized)
+        
+        # qname_normalized = quote(qname_normalized)
 
             
         return label_normalized, qname_normalized
@@ -347,25 +350,46 @@ class Linker(object):
         self.log.info('Serializing to {}'.format(rdfFile))
         self.log.info('Minting prov:wasRevisionOf relations between normalized URIs and original URIs')
         
+        inverse_normalized_index = {}
+        
         # This is a 1:1 mapping
         for original_uri,normalized_uri in normalized_index.iteritems():
-            out_graph_file.write('<{}> <{}> <{}> .\n'.format(normalized_uri,PROV['wasRevisionOf'],original_uri))
+            inverse_normalized_index.setdefault(normalized_uri,set()).add(original_uri)
+            
+            if original_uri != normalized_uri:
+                out_graph_file.write('<{}> <{}> <{}> .\n'.format(normalized_uri,PROV['wasRevisionOf'],original_uri))
         
-        self.log.info('Minting skos:exactMatch relations between URIs that share the same labels')      
+        self.log.info('Minting skos:exactMatch and skos:closeMatch relations between URIs that share the same labels')      
         
         # This is a 1:n mapping
         for uri, related_uris in related_index.iteritems():
             for related_uri in related_uris:
-                out_graph_file.write('<{}> <{}> <{}> .\n'.format(uri,SKOS['exactMatch'],related_uri))
-                out_graph_file.write('<{}> <{}> <{}> .\n'.format(related_uri,SKOS['exactMatch'],uri))          
+                if related_uri != uri :
+                    out_graph_file.write('<{}> <{}> <{}> .\n'.format(uri,SKOS['exactMatch'],related_uri))
+                    out_graph_file.write('<{}> <{}> <{}> .\n'.format(related_uri,SKOS['exactMatch'],uri)) 
+                    
+                    if related_uri in inverse_normalized_index:
+                        original_related_uris = inverse_normalized_index[related_uri]
+                        for oru in original_related_uris :
+                            if normalized_index[oru] != uri :
+                                out_graph_file.write('<{}> <{}> <{}> .\n'.format(uri,SKOS['closeMatch'],oru))
+                                out_graph_file.write('<{}> <{}> <{}> .\n'.format(oru,SKOS['closeMatch'],uri)) 
+                    
+                    if uri in inverse_normalized_index:
+                        original_uris = inverse_normalized_index[uri]
+                        for ou in original_uris :       
+                            if normalized_index[ou] != related_uri :    
+                                out_graph_file.write('<{}> <{}> <{}> .\n'.format(ou,SKOS['closeMatch'],related_uri))
+                                out_graph_file.write('<{}> <{}> <{}> .\n'.format(related_uri,SKOS['closeMatch'],ou)) 
                 
         self.log.info('Minting skos:broadMatch and skos:narrowMatch relations between URIs that have overlapping labels')
         
         # This is a 1:n mapping
         for narrower_uri,broader_uris in broader_index.iteritems():
             for broader_uri in broader_uris:
-                out_graph_file.write('<{}> <{}> <{}> .\n'.format(narrower_uri,SKOS['broadMatch'],broader_uri))
-                out_graph_file.write('<{}> <{}> <{}> .\n'.format(broader_uri,SKOS['narrowMatch'],narrower_uri))
+                if narrower_uri != broader_uri :
+                    out_graph_file.write('<{}> <{}> <{}> .\n'.format(narrower_uri,SKOS['broadMatch'],broader_uri))
+                    out_graph_file.write('<{}> <{}> <{}> .\n'.format(broader_uri,SKOS['narrowMatch'],narrower_uri))
                 
         out_graph_file.close()
 
