@@ -1,0 +1,14 @@
+annotations-anita.ttl;http://aers.data2semantics.org/resource/graph/annotations
+annotations-richard.ttl;http://aers.data2semantics.org/resource/graph/annotations
+annotations-first-list.n3;http://aers.data2semantics.org/resource/graph/annotations
+annotations-second-list.n3;http://aers.data2semantics.org/resource/graph/annotations
+patients.nt;http://aers.data2semantics.org/resource/graph/patients
+dbpedia_3.7.owl;http://dbpedia.org
+instance_types_en.nt;http://dbpedia.org
+labels_en.nt;http://dbpedia.org
+redirects_en.nt;http://dbpedia.org
+nci_thesaurus.owl;http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl
+CTCAE_4.03_2010-06-14_v4.03.owl;http://ncicb.nci.nih.gov/xml/owl/EVS/ctcae.owl
+diseasome_dump.nt;http://www4.wiwiss.fu-berlin.de/diseasome
+drugbank_dump.nt;http://www4.wiwiss.fu-berlin.de/drugbank
+sider_dump.nt;http://www4.wiwiss.fu-berlin.de/sider
